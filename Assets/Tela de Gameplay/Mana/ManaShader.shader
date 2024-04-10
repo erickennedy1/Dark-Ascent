@@ -4,7 +4,7 @@ Shader "Custom/UnlitSpriteWaterShader"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Amplitude ("Amplitude da Onda", Float) = 0.05
-        _Frequencia ("Frequência da Onda", Float) = 2.0
+        _Frequencia ("Frequencia da Onda", Float) = 2.0
         _HeightThreshold ("Altura Inicial da Onda", Float) = 0.5
     }
     SubShader

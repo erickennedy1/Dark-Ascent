@@ -87,6 +87,15 @@ public class PlayerMana : MonoBehaviour
         {
             float manaPercentage = (float)currentMana / maxMana;
             manaSprite.size = new Vector2(originalSize.x, originalSize.y * manaPercentage);
+
+            UpdateWaveFrequency(manaPercentage);
         }
+    }
+
+    void UpdateWaveFrequency(float manaPercentage)
+    {
+        float newFrequency = manaPercentage >= 1f ? 0f : 1f;
+
+        manaSprite.material.SetFloat("_Frequencia", newFrequency);
     }
 }
