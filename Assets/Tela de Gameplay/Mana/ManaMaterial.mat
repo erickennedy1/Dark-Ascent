@@ -51,6 +51,12 @@ Material:
     - _PhaseOffset: 0.5
     - _SecondaryAmplitude: 0.1
     - _SecondaryFrequency: 2
+    - _SmoothHeight: 0.1
+    - _WaterLevel: 0.273
+    - _WaveAmplitude: 2
+    - _WaveFrequency: 2
+    - _WaveRange: 0.2
+    - _WaveSpeed: 2
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
