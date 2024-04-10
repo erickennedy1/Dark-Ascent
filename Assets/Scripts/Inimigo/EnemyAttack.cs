@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [Header("Configura��es de ataque")]
+    [Header("Configurações de ataque")]
     public int damageAmount = 2;
     public float attackCooldown = 2f;
     public float attackRange = 1.5f;
