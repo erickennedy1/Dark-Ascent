@@ -6,6 +6,8 @@ public class Room : MonoBehaviour
     //Variables
     public int width, height, offset, x, y;
     public string doorsDirection, type;
+
+    public MinimapIcon minimapIcon;
     public bool isKnown = false; //Usado pelo minimapa, para identificar salas conhecias (Que se sabe da existencia)
     public bool isClear = false; //Identifica se a sala foi explorada
     public bool hasBattle = false; //Identifica salas com batalha
@@ -24,6 +26,7 @@ public class Room : MonoBehaviour
             return;
         }
         RoomController.instance.RegisterRoom(this);
+        minimapIcon = GetComponentInChildren<MinimapIcon>();
     }
 
     //Chamado quando todas as salas forem carregadas
@@ -146,13 +149,23 @@ public class Room : MonoBehaviour
     public void OnKnow()
     {
         isKnown = true;
-        GetComponentInChildren<MinimapIcon>().Onknow();
+        minimapIcon.Onknow();
     }
 
     public void OnClear()
     {
         isClear = true;
-        GetComponentInChildren<MinimapIcon>().OnClear();
+        minimapIcon.OnClear();
+    }
+
+    public void OnLeave()
+    {
+        minimapIcon.OnLeaveRoom();
+    }
+
+    public void OnEnterRoom()
+    {
+        minimapIcon.OnEnterRoom();
     }
 
     void OnTriggerEnter2D(Collider2D other) {

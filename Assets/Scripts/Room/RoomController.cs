@@ -170,8 +170,9 @@ public class RoomController : MonoBehaviour
     public void OnPlayerEnterRoom(Room room)
     {
         CameraController.instance.currentRoom = room;
+        if(currentRoom != null)
+            currentRoom.OnLeave();
         currentRoom = room;
-
         if(updateRooms){
             UpdateMinimap(room);
         }
@@ -183,6 +184,9 @@ public class RoomController : MonoBehaviour
             room.OnKnow();
         if(!room.isClear)
             room.OnClear();
+        
+        room.OnEnterRoom();
+
         //Defini como conhecido todas as salas próximas
         List<Room> nearRooms = new List<Room>
         {
