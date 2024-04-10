@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [Header("Configurações de ataque")]
+    [Header("Configuraï¿½ï¿½es de ataque")]
     public int damageAmount = 2;
     public float attackCooldown = 2f;
     public float attackRange = 1.5f;
@@ -16,6 +16,7 @@ public class EnemyAttack : MonoBehaviour
     {
         lastAttackTime = -attackCooldown;
         animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
