@@ -1,56 +1,72 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyAttack : MonoBehaviour
 {
     [Header("Configurações de ataque")]
     public int damageAmount = 2;
     public float attackCooldown = 2f;
-    public float attackRange = 1.5f;
-    public Transform player;
+    public float RangeAttackStart = 1.5f;
+    public float AttackRange = 1f;
+    public float dashSpeed = 10f;
 
-    private float lastAttackTime;
+
+    private Transform player;
     private Animator animator;
-    private bool isAttacking = false;
+    private bool isReadyToAttack = true;
+    private Rigidbody2D rb;
 
     private void Start()
     {
-        lastAttackTime = -attackCooldown;
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if (!isAttacking && Vector2.Distance(transform.position, player.position) <= attackRange && Time.time - lastAttackTime > attackCooldown)
+        if (isReadyToAttack && Vector2.Distance(transform.position, player.position) <= RangeAttackStart)
         {
-            isAttacking = true;
-            animator.SetTrigger("Ataque");
+            StartCoroutine(PerformAttack());
         }
+    }
+
+    private IEnumerator PerformAttack()
+    {
+        isReadyToAttack = false; 
+        animator.SetTrigger("Ataque"); 
+
+        yield return new WaitForSeconds(attackCooldown);
+
+        isReadyToAttack = true; 
     }
 
     public void CauseDamage()
     {
-        if (Vector2.Distance(transform.position, player.position) <= attackRange)
+        if (Vector2.Distance(transform.position, player.position) <= AttackRange)
         {
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damageAmount);
-                lastAttackTime = Time.time;
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void DashTowardsPlayer()
     {
-        if (other.CompareTag("Player") && !isAttacking)
-        {
-            lastAttackTime = -attackCooldown;
-        }
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb.velocity = direction * dashSpeed;
+        Invoke("StopDash", 0.2f);
+    }
+
+    private void StopDash()
+    {
+        rb.velocity = Vector2.zero;
     }
 
     public void OnAttackAnimationEnd()
     {
-        isAttacking = false;
+
     }
 }
