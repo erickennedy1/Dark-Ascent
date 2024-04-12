@@ -11114,6 +11114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vida e Mana
       objectReference: {fileID: 0}
+    - target: {fileID: 3306313723009790700, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5307414226318590541, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.66
