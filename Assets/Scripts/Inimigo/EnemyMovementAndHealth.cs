@@ -1,13 +1,12 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System.Collections;
 
 public class EnemyMovementAndHealth : MonoBehaviour
 {
-    [Header("Configurações de movimentação")]
+    [Header("Configurações de movimento")]
     public float speed = 3f;
     public float followDistance = 5f;
-    public float attackDistance = 2f;
 
     [Header("Configurações de vida")]
     public int maxHealth = 100;
@@ -16,13 +15,15 @@ public class EnemyMovementAndHealth : MonoBehaviour
     public float knockbackDistance = 0.5f;
     public float knockbackDuration = 0.2f;
 
-    [Header("UI de Vida")]
+    [Header("Elementos UI da vida")]
     public static bool useHealthSlider = true;
     public Slider healthSlider;
 
     private Transform player;
     private int currentHealth;
     private bool isKnockedBack = false;
+
+    // Referencias de outros scripts
     private Animator animator;
     private DamageFeedback damageFeedback;
 
@@ -30,75 +31,75 @@ public class EnemyMovementAndHealth : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentHealth = maxHealth;
-        damageFeedback = GetComponent<DamageFeedback>();
         animator = GetComponent<Animator>();
+        damageFeedback = GetComponent<DamageFeedback>();
+        InitializeHealthSlider();
+    }
 
-        if (useHealthSlider)
+    void Update()
+    {
+        UpdateHealthSliderVisibility();
+        if (!PlayerIsAvailable() || isKnockedBack) return;
+        ProcessPlayerInteraction();
+    }
+
+    private void InitializeHealthSlider()
+    {
+        if (useHealthSlider && healthSlider != null)
         {
-            if (healthSlider != null)
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+        }
+    }
+
+    private void UpdateHealthSliderVisibility()
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.gameObject.SetActive(useHealthSlider);
+            if (useHealthSlider)
             {
-                healthSlider.maxValue = maxHealth;
                 healthSlider.value = currentHealth;
             }
         }
     }
 
-    private void Update()
+    private bool PlayerIsAvailable()
     {
-        if (useHealthSlider == false)
-        {
-            healthSlider.gameObject.SetActive(false);
-        }
-        else
-        {
-            healthSlider.gameObject.SetActive(true);
-            healthSlider.value = currentHealth;
-        }
+        return player != null;
+    }
 
-        if (player == null || isKnockedBack)
-            return;
-
+    private void ProcessPlayerInteraction()
+    {
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
         if (distanceToPlayer <= followDistance)
         {
             MoveTowardsPlayer();
-
         }
     }
 
-    void MoveTowardsPlayer()
+    private void MoveTowardsPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        if (player.position.x > transform.position.x)
-        {
-            transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        }
-        else
-        {
-            transform.localScale = new Vector3(-0.8f, 0.8f, 0.8f);
-        }
+        AdjustFacingDirection();
     }
 
+    private void AdjustFacingDirection()
+    {
+        transform.localScale = new Vector3((player.position.x > transform.position.x ? 1 : -1) * 0.8f, 0.8f, 0.8f);
+    }
 
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
         if (damageFeedback != null)
-        {
             damageFeedback.TakeDamage();
-        }
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
         else
-        {
             StartCoroutine(ApplyKnockback());
-        }
     }
 
     private IEnumerator ApplyKnockback()
@@ -111,7 +112,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
         while (elapsedTime < knockbackDuration)
         {
-            transform.position = Vector3.Lerp(startingPosition, targetPosition, (elapsedTime / knockbackDuration));
+            transform.position = Vector3.Lerp(startingPosition, targetPosition, elapsedTime / knockbackDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -126,7 +127,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
     public void ToggleEnemyHealthSliders(bool enable)
     {
-        EnemyMovementAndHealth.useHealthSlider = enable;
+        useHealthSlider = enable;
         EnemyMovementAndHealth[] allEnemies = FindObjectsOfType<EnemyMovementAndHealth>();
         foreach (var enemy in allEnemies)
         {
