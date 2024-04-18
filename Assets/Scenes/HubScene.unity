@@ -307,7 +307,27 @@ PrefabInstance:
     - target: {fileID: 1868116986395670757, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
       propertyPath: manaSprite
       value: 
-      objectReference: {fileID: 1562400833}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1868116986395670757, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
+      propertyPath: manaBarSprite
+      value: 
+      objectReference: {fileID: 1568642351}
+    - target: {fileID: 1868116986395670757, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
+      propertyPath: AnimacaoDaMana
+      value: 
+      objectReference: {fileID: 1401228593}
+    - target: {fileID: 1868116986395670757, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
+      propertyPath: manaWaveSprite
+      value: 
+      objectReference: {fileID: 1401228593}
+    - target: {fileID: 1868116986395670757, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
+      propertyPath: ManaCompletaSprite
+      value: 
+      objectReference: {fileID: 1568642351}
+    - target: {fileID: 1868116986395670757, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
+      propertyPath: manaChangeDuration
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2630450637063067456, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
       propertyPath: m_BodyType
       value: 0
@@ -410,7 +430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1295853447
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -580,9 +600,14 @@ Transform:
   - {fileID: 1657152860}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1562400833 stripped
+--- !u!212 &1401228593 stripped
 SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3306313723009790700, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5951735529002815561, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+  m_PrefabInstance: {fileID: 7332306846220838107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1568642351 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6253063312401976127, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
   m_PrefabInstance: {fileID: 7332306846220838107}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1657152859
@@ -11148,9 +11173,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vida e Mana
       objectReference: {fileID: 0}
+    - target: {fileID: 3306313723009790700, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6f0c238e9d6fd9944a8e8b0934329d4d, type: 3}
+    - target: {fileID: 3306313723009790700, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386582150116264602, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5307414226318590541, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.66
+      value: -2.16
       objectReference: {fileID: 0}
     - target: {fileID: 5307414226318590541, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
       propertyPath: m_LocalPosition.y
