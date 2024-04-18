@@ -25,6 +25,8 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
+        DrawAttackRange();  // Desenha o círculo de alcance de ataque
+
         if (isReadyToAttack && Vector2.Distance(transform.position, player.position) <= RangeAttackStart)
         {
             StartCoroutine(PerformAttack());
@@ -68,5 +70,33 @@ public class EnemyAttack : MonoBehaviour
     public void OnAttackAnimationEnd()
     {
 
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
+    }
+
+    void DrawAttackRange()
+    {
+        float theta = 0;
+        float x = AttackRange * Mathf.Cos(theta);
+        float y = AttackRange * Mathf.Sin(theta);
+        Vector3 pos = transform.position + new Vector3(x, y, 0);
+        Vector3 newPos = pos;
+        Vector3 lastPos = pos;
+
+        for (theta = 0.1f; theta < Mathf.PI * 2; theta += 0.1f)
+        {
+            x = AttackRange * Mathf.Cos(theta);
+            y = AttackRange * Mathf.Sin(theta);
+            newPos = transform.position + new Vector3(x, y, 0);
+            Debug.DrawLine(lastPos, newPos, Color.red, 0.02f, false);
+            lastPos = newPos;
+        }
+
+        // Conecta o último ponto ao primeiro
+        Debug.DrawLine(lastPos, pos, Color.red, 0.02f, false);
     }
 }

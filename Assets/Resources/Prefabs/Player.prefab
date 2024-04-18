@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 4727333211600134630}
   - component: {fileID: 5237238524658403088}
   - component: {fileID: 4443047421659294804}
-  - component: {fileID: 4893073078822508193}
   - component: {fileID: 1868116986395670757}
   - component: {fileID: 2478444963847583075}
   - component: {fileID: 5763386167319399332}
+  - component: {fileID: 4893073078822508193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -288,21 +288,6 @@ MonoBehaviour:
   maxHealth: 5
   healthIconPrefab: {fileID: 0}
   healthPanel: {fileID: 0}
---- !u!114 &4893073078822508193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8010347466936256562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b362dc4afb7140841b1826804feae81e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 2100000, guid: e66e25f2cc564844ba5e6ffeb1f1ffb5, type: 2}
-  damageMaterial: {fileID: 2100000, guid: 2121ef269c480e14a870c6032d994bce, type: 2}
-  damageDuration: 0.2
 --- !u!114 &1868116986395670757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +341,21 @@ MonoBehaviour:
   specialAttackRange: 3
   attackParticules: 0.2
   specialAttackManaCost: 30
+--- !u!114 &4893073078822508193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8010347466936256562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b362dc4afb7140841b1826804feae81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: e66e25f2cc564844ba5e6ffeb1f1ffb5, type: 2}
+  damageMaterial: {fileID: 2100000, guid: 2121ef269c480e14a870c6032d994bce, type: 2}
+  damageDuration: 0.2
 --- !u!1 &9021660373676790823
 GameObject:
   m_ObjectHideFlags: 0
