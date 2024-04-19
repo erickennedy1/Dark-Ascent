@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DataFlorest2
   m_EditorClassIdentifier: 
   numberOfCrawlers: 3
-  roomsMin: 8
-  roomsMax: 10
+  roomsMin: 6
+  roomsMax: 8
   isBossLevel: 1
