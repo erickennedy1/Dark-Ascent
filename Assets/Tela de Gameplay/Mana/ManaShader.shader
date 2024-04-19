@@ -6,6 +6,8 @@ Shader "Custom/UnlitSpriteWaterShader"
         _Amplitude ("Amplitude da Onda", Float) = 0.05
         _Frequencia ("Frequencia da Onda", Float) = 2.0
         _HeightThreshold ("Altura Inicial da Onda", Float) = 0.5
+        _WaveSharpness ("Sharpness da Onda", Float) = 2.0
+        _Phase ("Fase da Onda", Float) = 0.0
     }
     SubShader
     {
@@ -42,16 +44,18 @@ Shader "Custom/UnlitSpriteWaterShader"
             float _Amplitude;
             float _Frequencia;
             float _HeightThreshold;
+            float _WaveSharpness;
+            float _Phase;
 
             v2f vert(appdata_t v)
             {
                 v2f o;
                 o.uv = v.uv;
 
-                float heightAboveThreshold = v.vertex.y - _HeightThreshold;
+                float heightAboveThreshold = saturate((v.vertex.y - _HeightThreshold) * _WaveSharpness);
                 if(heightAboveThreshold > 0)
                 {
-                    float wave = sin(_Time.y * _Frequencia + v.vertex.x) * _Amplitude * heightAboveThreshold;
+                    float wave = sin(_Time.y * _Frequencia + v.vertex.x + _Phase) * _Amplitude * heightAboveThreshold;
                     v.vertex.y += wave;
                 }
 
@@ -62,6 +66,7 @@ Shader "Custom/UnlitSpriteWaterShader"
             fixed4 frag(v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
+                col.rgb = smoothstep(0.2, 0.8, col.rgb); // Suaviza a cor para reduzir serrilhado
                 return col;
             }
             ENDCG

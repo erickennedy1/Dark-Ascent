@@ -13,12 +13,14 @@ public class PlayerMana : MonoBehaviour
     [Header("Animação de Mana")]
     public float manaChangeDuration = 1.5f;
 
-    [Header("Componente")]
-    public SpriteRenderer manaSprite;
+    [Header("Componentes de UI")]
+    public SpriteRenderer ManaCompletaSprite;
+    public SpriteRenderer AnimacaoDaMana;
 
     private float lastManaUseTime;
     private Vector2 originalSize;
-    private Vector3 originalPosition;
+    private Vector3 originalBarPosition;
+    private Vector3 originalWavePosition;
 
     private Coroutine manaChangeCoroutine;
 
@@ -26,10 +28,11 @@ public class PlayerMana : MonoBehaviour
     {
         currentMana = maxMana;
         targetMana = maxMana;
-        if (manaSprite != null)
+        if (ManaCompletaSprite != null && AnimacaoDaMana != null)
         {
-            originalSize = manaSprite.size;
-            originalPosition = manaSprite.transform.position;
+            originalSize = ManaCompletaSprite.size;
+            originalBarPosition = ManaCompletaSprite.transform.position;
+            originalWavePosition = AnimacaoDaMana.transform.position;
         }
         UpdateManaUI();
     }
@@ -83,19 +86,15 @@ public class PlayerMana : MonoBehaviour
 
     void UpdateManaUI()
     {
-        if (manaSprite != null)
+        if (ManaCompletaSprite != null && AnimacaoDaMana != null)
         {
             float manaPercentage = (float)currentMana / maxMana;
-            manaSprite.size = new Vector2(originalSize.x, originalSize.y * manaPercentage);
+            float heightChange = originalSize.y * manaPercentage;
 
-            UpdateWaveFrequency(manaPercentage);
+            ManaCompletaSprite.size = new Vector2(originalSize.x, heightChange);
+
+            AnimacaoDaMana.size = new Vector2(originalSize.x, heightChange);
+            AnimacaoDaMana.transform.position = new Vector3(AnimacaoDaMana.transform.position.x, originalWavePosition.y - (originalSize.y - heightChange) / 2, originalWavePosition.z);
         }
-    }
-
-    void UpdateWaveFrequency(float manaPercentage)
-    {
-        float newFrequency = manaPercentage >= 1f ? 0f : 1f;
-
-        manaSprite.material.SetFloat("_Frequencia", newFrequency);
     }
 }
