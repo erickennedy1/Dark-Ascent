@@ -11,7 +11,7 @@ public class Door : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player")
         {
-            RoomController.instance.OnPlayerTouchDoor(transform.parent.gameObject.GetComponent<Room>(), type);
+            RoomController.instance.OnPlayerTouchDoor(transform.parent.parent.gameObject.GetComponent<Room>(), type);
         }
         
     }

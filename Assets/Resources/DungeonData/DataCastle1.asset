@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DataCastle1
   m_EditorClassIdentifier: 
   numberOfCrawlers: 3
-  roomsMin: 10
-  roomsMax: 12
+  roomsMin: 9
+  roomsMax: 11
   isBossLevel: 0

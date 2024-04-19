@@ -14,11 +14,6 @@ public class Room : MonoBehaviour
 
     //Methods
     void Start(){
-        //Define tamanho
-        width = 18;
-        height = 10;
-        offset = 2;
-
         //Verifica se RoomController existe
         if(RoomController.instance == null)
         {
@@ -41,7 +36,8 @@ public class Room : MonoBehaviour
     private void UpdateByType(){
         if(type == "Empty")
         {
-            RandomTilemapEmpty();
+            // RandomTilemapEmpty();
+            Instantiate(Resources.Load("Prefabs/Tilemaps/Generic0", typeof(GameObject)), transform);
             if(hasBattle){
                 gameObject.GetComponentInChildren<SpawnEnemiesController>().SpawnEnemies();
             }
@@ -90,52 +86,22 @@ public class Room : MonoBehaviour
 
     //Retira Doors desconexas
     private void RemoveUnconnectDoors(){
-        Door[] doors = GetComponentsInChildren<Door>();
-        foreach(Door door in doors)
-        {
-            switch(door.type){
-                case Door.DoorType.top:
-                    if(doorsDirection[0]=='0')
-                    {
-                        door.gameObject.SetActive(false);
-                        Instantiate(Resources.Load("Prefabs/Walls/TopWall", typeof(GameObject)), transform);
-                    }else
-                    {
-                        Instantiate(Resources.Load("Prefabs/Walls/TopWallDoor", typeof(GameObject)), transform);
-                    }
-                    break;
-                case Door.DoorType.right:
-                    if(doorsDirection[1]=='0')
-                    {
-                        door.gameObject.SetActive(false);
-                        Instantiate(Resources.Load("Prefabs/Walls/RightWall", typeof(GameObject)), transform);
-                    }else
-                    {
-                        Instantiate(Resources.Load("Prefabs/Walls/RightWallDoor", typeof(GameObject)), transform);
-                    }                    
-                    break;
-                case Door.DoorType.bottom:
-                    if(doorsDirection[2]=='0')
-                    {
-                        door.gameObject.SetActive(false);
-                        Instantiate(Resources.Load("Prefabs/Walls/BottomWall", typeof(GameObject)), transform);
-                    }else
-                    {
-                        Instantiate(Resources.Load("Prefabs/Walls/BottomWallDoor", typeof(GameObject)), transform);
-                    }  
-                    break;
-                case Door.DoorType.left:
-                    if(doorsDirection[3]=='0')
-                    {
-                        door.gameObject.SetActive(false);
-                        Instantiate(Resources.Load("Prefabs/Walls/LeftWall", typeof(GameObject)), transform);
-                    }else
-                    {
-                        Instantiate(Resources.Load("Prefabs/Walls/LeftWallDoor", typeof(GameObject)), transform);
-                    }
-                    break;
-            }
-        }
+        if(doorsDirection[0]=='0')
+            Instantiate(Resources.Load("Prefabs/Walls/TopWall", typeof(GameObject)), transform);
+        else
+            Instantiate(Resources.Load("Prefabs/Walls/TopWallDoor", typeof(GameObject)), transform);
+        if(doorsDirection[1]=='0')
+            Instantiate(Resources.Load("Prefabs/Walls/RightWall", typeof(GameObject)), transform);
+        else
+            Instantiate(Resources.Load("Prefabs/Walls/RightWallDoor", typeof(GameObject)), transform);
+        if(doorsDirection[2]=='0')
+            Instantiate(Resources.Load("Prefabs/Walls/BottomWall", typeof(GameObject)), transform);
+        else
+            Instantiate(Resources.Load("Prefabs/Walls/BottomWallDoor", typeof(GameObject)), transform);
+        if(doorsDirection[3]=='0')
+            Instantiate(Resources.Load("Prefabs/Walls/LeftWall", typeof(GameObject)), transform);
+        else
+            Instantiate(Resources.Load("Prefabs/Walls/LeftWallDoor", typeof(GameObject)), transform);
     }
 
     public Vector2 GetRoomCenter(){

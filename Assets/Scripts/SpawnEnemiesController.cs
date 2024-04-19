@@ -6,12 +6,12 @@ public class SpawnEnemiesController : MonoBehaviour
     public List<GameObject> enemyPrefab; // Referência ao prefab do inimigo
     public Collider2D spawnArea = null; // Collider que define a área de spawn
     public LayerMask forbiddenAreaLayer; // Camada dos obstáculos para detecção de colisão
-    public int MaxEnemies = 5; // Número total de inimigos
+    public int MaxEnemies = 3; // Número total de inimigos
     private int currentEnemies = 0;
 
     void Start()
     {
-        spawnArea = GetComponentInParent<Collider2D>();
+        spawnArea = GetComponent<Collider2D>();
     }
 
     public void SpawnEnemies()

@@ -207,7 +207,7 @@ public class RoomController : MonoBehaviour
     {
         Room nextRoom = null;
         Vector3 position = Vector3.zero;
-        float offset = 1.5f;
+        float offset = 2.5f;
         switch(direction)
         {
             case Door.DoorType.top:

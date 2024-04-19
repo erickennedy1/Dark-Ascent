@@ -44,16 +44,13 @@ TagManager:
   - name: Minimap
     uniqueID: 3176658519
     locked: 0
-  - name: Ground
+  - name: Background
     uniqueID: 3744422517
-    locked: 0
-  - name: Obstacle
-    uniqueID: 1688760641
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Door
+  - name: HighObjects
     uniqueID: 3094463201
     locked: 0
   - name: UI

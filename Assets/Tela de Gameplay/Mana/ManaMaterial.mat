@@ -42,6 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Amplitude: 0.1
+    - _EdgeSoftness: 0.9
     - _EnableExternalAlpha: 0
     - _Frequencia: 2.5
     - _Frequency: 2
