@@ -3,14 +3,13 @@ using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("Componentes")]
-    public Animator animator;
+    private Animator animator;
     private GameObject sparksAnimationObject;
 
     [Header("Configurações de ataque")]
     public int damageAmount = 10;
-    public float attackRange = 2f;
-    public float attackParticules = 0.5f;
+    private float attackRange = 2f;
+    private float attackParticules = 0.5f;
 
 
     private bool canAttack = true;
@@ -23,13 +22,13 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         specialAttackScript = GetComponent<AtaqueEspecial00>();
 
         Transform sparksTransform = transform.Find("Efeito de ataque");
-        if (sparksTransform != null)
-        {
-            sparksAnimationObject = sparksTransform.gameObject;
-        }
+
+        sparksAnimationObject = sparksTransform.gameObject;
+
     }
 
     void Update()

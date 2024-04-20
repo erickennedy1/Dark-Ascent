@@ -1,29 +1,23 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class EnemyMovementAndHealth : MonoBehaviour
 {
     [Header("Configurações de movimento")]
     public float speed = 3f;
-    public float followDistance = 5f;
+    private float followDistance = 10f;
 
     [Header("Configurações de vida")]
     public int maxHealth = 100;
 
     [Header("Configurações de knockback")]
-    public float knockbackDistance = 0.5f;
-    public float knockbackDuration = 0.2f;
-
-    [Header("Elementos UI da vida")]
-    public static bool useHealthSlider = true;
-    public Slider healthSlider;
+    private float knockbackDistance = 0.5f;
+    private float knockbackDuration = 0.2f;
 
     private Transform player;
     private int currentHealth;
     private bool isKnockedBack = false;
 
-    // Referencias de outros scripts
     private Animator animator;
     private DamageFeedback damageFeedback;
 
@@ -33,35 +27,12 @@ public class EnemyMovementAndHealth : MonoBehaviour
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         damageFeedback = GetComponent<DamageFeedback>();
-        InitializeHealthSlider();
     }
 
     void Update()
     {
-        UpdateHealthSliderVisibility();
         if (!PlayerIsAvailable() || isKnockedBack) return;
         ProcessPlayerInteraction();
-    }
-
-    private void InitializeHealthSlider()
-    {
-        if (useHealthSlider && healthSlider != null)
-        {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
-        }
-    }
-
-    private void UpdateHealthSliderVisibility()
-    {
-        if (healthSlider != null)
-        {
-            healthSlider.gameObject.SetActive(useHealthSlider);
-            if (useHealthSlider)
-            {
-                healthSlider.value = currentHealth;
-            }
-        }
     }
 
     private bool PlayerIsAvailable()
@@ -123,18 +94,5 @@ public class EnemyMovementAndHealth : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
-    }
-
-    public void ToggleEnemyHealthSliders(bool enable)
-    {
-        useHealthSlider = enable;
-        EnemyMovementAndHealth[] allEnemies = FindObjectsOfType<EnemyMovementAndHealth>();
-        foreach (var enemy in allEnemies)
-        {
-            if (enemy.healthSlider != null)
-            {
-                enemy.healthSlider.gameObject.SetActive(enable);
-            }
-        }
     }
 }

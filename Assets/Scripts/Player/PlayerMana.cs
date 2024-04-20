@@ -7,15 +7,11 @@ public class PlayerMana : MonoBehaviour
     public int maxMana = 100;
     public int currentMana;
     private int targetMana;
-    public float manaRegenRate = 5f;
-    public float manaRegenCooldown = 5f;
 
-    [Header("Animação de Mana")]
-    public float manaChangeDuration = 1.5f;
+    private float manaChangeDuration = 1.5f;
 
-    [Header("Componentes de UI")]
-    public SpriteRenderer ManaCompletaSprite;
-    public SpriteRenderer AnimacaoDaMana;
+    private SpriteRenderer ManaCompletaSprite;
+    private SpriteRenderer AnimacaoDaMana;
 
     private float lastManaUseTime;
     private Vector2 originalSize;
@@ -26,8 +22,12 @@ public class PlayerMana : MonoBehaviour
 
     void Start()
     {
+        ManaCompletaSprite = GameObject.Find("ManaCompleta").GetComponent<SpriteRenderer>();
+        AnimacaoDaMana = GameObject.Find("Animação da Mana").GetComponent<SpriteRenderer>();
+
         currentMana = maxMana;
         targetMana = maxMana;
+
         if (ManaCompletaSprite != null && AnimacaoDaMana != null)
         {
             originalSize = ManaCompletaSprite.size;
@@ -47,15 +47,6 @@ public class PlayerMana : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    private void RegenerateMana()
-    {
-        if (Time.time - lastManaUseTime >= manaRegenCooldown && targetMana < maxMana)
-        {
-            targetMana = Mathf.Min(targetMana + Mathf.FloorToInt(manaRegenRate * Time.deltaTime), maxMana);
-            StartManaChangeCoroutine();
-        }
     }
 
     private void StartManaChangeCoroutine()
