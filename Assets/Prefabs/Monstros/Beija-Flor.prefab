@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4539822727186748258}
   - component: {fileID: 2583633197612269825}
   - component: {fileID: 7433621147483186568}
-  - component: {fileID: 466962755468487649}
   - component: {fileID: 4626182440287027328}
+  - component: {fileID: 466962755468487649}
   m_Layer: 3
   m_Name: Beija-Flor
   m_TagString: Enemy
@@ -291,9 +291,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  attackCooldown: 3
-  attackRange: 2
-  player: {fileID: 0}
+--- !u!114 &4626182440287027328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892823940603291626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca0dbe047042e341bccd939b5df3656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  maxHealth: 2
 --- !u!114 &466962755468487649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,26 +319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: e66e25f2cc564844ba5e6ffeb1f1ffb5, type: 2}
   damageMaterial: {fileID: 2100000, guid: 2121ef269c480e14a870c6032d994bce, type: 2}
-  damageDuration: 0.2
---- !u!114 &4626182440287027328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892823940603291626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dca0dbe047042e341bccd939b5df3656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  followDistance: 4
-  attackDistance: 2
-  maxHealth: 2
-  knockbackDistance: 0.5
-  knockbackDuration: 0.2
-  healthSlider: {fileID: 1511354324404964394}
 --- !u!1 &3799177650893580924
 GameObject:
   m_ObjectHideFlags: 0

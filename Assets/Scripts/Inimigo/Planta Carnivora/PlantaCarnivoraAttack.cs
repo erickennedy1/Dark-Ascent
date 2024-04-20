@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlantaCarnivoraAttack : MonoBehaviour
 {
     [Header("Configurações de ataque")]
-    public float shootingRange = 10f;
-    public float attackCooldown = 2f;
-    public float attackDelay = 0.5f;
-    public float comboDelay = 5f;
+    private float shootingRange = 10f;
+    private float attackCooldown = 5f;
+    private float attackDelay = 0.15f;
+    private float comboDelay = 5f;
 
     [Header("Componentes")]
     public GameObject projectilePrefab;
