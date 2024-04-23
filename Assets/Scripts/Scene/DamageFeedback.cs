@@ -7,8 +7,7 @@ public class DamageFeedback : MonoBehaviour
     public Material defaultMaterial;
     [Header("Material p quando sofrer dano")]
     public Material damageMaterial;
-    [Header("Duração do feedback")]
-    public float damageDuration = 0.2f; 
+    private float damageDuration = 0.2f; 
     private SpriteRenderer spriteRenderer;
 
     void Awake()

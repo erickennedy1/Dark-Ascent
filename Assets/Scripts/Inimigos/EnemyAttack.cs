@@ -4,11 +4,11 @@ using System.Collections;
 public class EnemyAttack : MonoBehaviour
 {
     [Header("Configurações de ataque")]
-    public int damageAmount = 2;
-    public float attackCooldown = 2f;
-    public float RangeAttackStart = 1.5f;
-    public float AttackRange = 1f;
-    public float dashSpeed = 10f;
+    public int damageAmount = 1;
+    private float attackCooldown = 3f;
+    private float RangeAttackStart = 4f;
+    private float AttackRange = 2.5f;
+    private float dashSpeed = 15f;
 
 
     private Transform player;

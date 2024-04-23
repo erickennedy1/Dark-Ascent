@@ -6,14 +6,19 @@ public class PlayerHealth : MonoBehaviour
     [Header("Configurações de vida")]
     public int maxHealth = 5;
 
-    [Header("Componentes")]
-    public GameObject healthIconPrefab;
-    public GameObject healthPanel;
-
+    private GameObject healthIconPrefab;
+    private GameObject healthPanel;
     private int currentHealth;
 
     void Awake()
     {
+        healthPanel = GameObject.Find("LayoutHP");
+
+        if (healthPanel.transform.childCount > 0)
+        {
+            healthIconPrefab = healthPanel.transform.GetChild(0).gameObject;
+        }
+
         currentHealth = maxHealth;
         for (int i = 1; i < maxHealth; i++)
         {
@@ -44,33 +49,7 @@ public class PlayerHealth : MonoBehaviour
         for (int i = 0; i < healthPanel.transform.childCount; i++)
         {
             GameObject icon = healthPanel.transform.GetChild(i).gameObject;
-            if (i >= currentHealth)
-            {
-                Animator iconAnimator = icon.GetComponent<Animator>();
-                if (iconAnimator != null)
-                {
-
-                    iconAnimator.SetTrigger("Destroy");
-
-                    StartCoroutine(RemoveHealthIconAfterDelay(icon, 0.25f));
-                }
-                else
-                {
-                    icon.SetActive(false);
-                }
-            }
-            else
-            {
-                icon.SetActive(true);
-            }
+            icon.SetActive(i < currentHealth);
         }
-    }
-
-    IEnumerator RemoveHealthIconAfterDelay(GameObject icon, float delay)
-    {
-
-        yield return new WaitForSeconds(delay);
-
-        icon.SetActive(false);
     }
 }

@@ -5,21 +5,34 @@ public class PlayerMovement : MonoBehaviour
     [Header("Configurações de movimento")]
     public float moveSpeed = 5f;
 
-    [Header("Componentes")]
-    public Rigidbody2D rb;
-    public Animator animator;
-
     private Vector2 movement;
     private float lastHorizontal = 0f;
     private float lastVertical = -1f;
 
     private PlayerAttack playerAttack;
+    private Rigidbody2D rb;
+    private Animator animator;
 
     void Start()
     {
         playerAttack = GetComponent<PlayerAttack>();
+        rb = GetComponent<Rigidbody2D>(); 
+        animator = GetComponent<Animator>(); 
     }
 
+    private void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+
+        if (objs.Length > 1)
+        {
+            Debug.Log("Destroy, Player > 1: " + objs.Length);
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(this);
+    }
     void FixedUpdate()
     {
         HandleMovementInput();
@@ -45,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetFloat("LastHorizontal", playerAttack.lastAttackHorizontal);
                 animator.SetFloat("LastVertical", playerAttack.lastAttackVertical);
-                playerAttack.justAttacked = false; 
+                playerAttack.justAttacked = false;
             }
         }
         else
