@@ -10714,10 +10714,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planta-Carnivora
       objectReference: {fileID: 0}
-    - target: {fileID: 914420857723619269, guid: f0f67356759d37343a73dd75169f8484, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4303380804600855200, guid: f0f67356759d37343a73dd75169f8484, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.0004444
@@ -11080,18 +11076,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vida e Mana
       objectReference: {fileID: 0}
-    - target: {fileID: 3306313723009790700, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6f0c238e9d6fd9944a8e8b0934329d4d, type: 3}
-    - target: {fileID: 3306313723009790700, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3386582150116264602, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5307414226318590541, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.16
@@ -11131,26 +11115,6 @@ PrefabInstance:
     - target: {fileID: 5307414226318590541, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8035682347654052890, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8035682347654052890, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8035682347654052890, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8035682347654052890, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8384603284632313522, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
