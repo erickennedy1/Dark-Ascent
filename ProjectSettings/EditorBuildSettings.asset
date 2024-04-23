@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/HubScene.unity
     guid: 60823486cba8ce342aacaec8d518eb31
   - enabled: 1
-    path: Assets/Assets Eric/Scenes/Menu.unity
+    path: Assets/Scenes/Menu.unity
     guid: ff5baf7f10ce5aa41b93b73a04b64d5d
   - enabled: 1
-    path: Assets/Assets Eric/Scenes/Fase 00.unity
+    path: Assets/Scenes/Teste/Fase 00.unity
     guid: 91547240bc5e8d6478783a8af266dca2
   - enabled: 1
     path: Assets/Scenes/EmptyRoom.unity

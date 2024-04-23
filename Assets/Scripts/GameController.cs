@@ -1,10 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+
+    [Tooltip("Lista de Nomes dos níveis - Começando pelo Hub")]
+    public List<string> worldNames = new();
     public string currentWorldName;
+    public int currentWorldLevel;
     public int currentLevel;
 
     private Player player;
@@ -29,7 +34,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        currentWorldName = "Hub";
+        currentWorldLevel = 0;
         currentLevel = 0;
         FindPlayer();
     }
@@ -37,7 +42,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         //Se a cena atual não for Hub
-        if(currentWorldName != "Hub")
+        if(currentWorldLevel != 0)
         {
             //Evitar o erro do GameController Tentar encontrar a CameraController antes de ser carregada
             if(CameraController.instance != null)
@@ -51,27 +56,22 @@ public class GameController : MonoBehaviour
         }
         //Se a cena atual for Hub
         else
-        {
             //Podem ser criados condições para que não se mova no hub
             isGamePaused = false;
-        }
 
         //Caso o jogo estaja pausado
         if(isGamePaused)
-        {
             player.canMove = false;
-        }else
-        {
+        else
             player.canMove = true;
-        }
     }
 
     public void NextLevel()
     {
         //Se a cena atual for Hub
-        if(currentWorldName == "Hub")
+        if(currentWorldLevel == 0)
         {
-            currentWorldName = "Florest";
+            currentWorldLevel = 1;
             currentLevel = 1;
         }
         //Se a cena atual não for o Hub
@@ -82,29 +82,29 @@ public class GameController : MonoBehaviour
 
             //Próximo nível
             currentLevel++;
-
             //Se o nível for 2 passa para o próximo cenário
             if(currentLevel > 2)
             {
-                if(currentWorldName == "Florest")
+                if(currentWorldLevel+1 < worldNames.Count)
                 {
                     currentLevel = 1;
-                    currentWorldName = "Castle";
-                }else if(currentWorldName == "Castle")
-                {
-                    currentWorldName = "Hub";
+                    currentWorldLevel++;
+                }else{
+                    currentWorldLevel = 0;
                     currentLevel = 0;
+                    currentWorldName = worldNames[currentWorldLevel];
                     SceneManager.LoadScene("HubScene");
                     FindPlayer();
                     player.ResetPlayer();
                     return;
-                }
+                }                
             }  
         }
 
+        currentWorldName = worldNames[currentWorldLevel];
         //Carrega o próximo nível
         SceneManager.LoadScene("Dungeon");
-        Debug.Log("Dungeon Loaded.");
+        Debug.Log("Dungeon Loaded");
     }
 
     private void FindPlayer()

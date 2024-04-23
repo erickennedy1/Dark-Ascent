@@ -604,10 +604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a15d453de42a041affa72bb8fc30fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab:
-  - {fileID: 6911856425157177866, guid: 96717abf49854da46bd81f9ac5c7b779, type: 3}
-  - {fileID: 8700882966280614026, guid: 08738052acd4ad245800b1c785617f4d, type: 3}
-  spawnArea: {fileID: 0}
+  enemiesList: {fileID: 11400000, guid: 38d01385da83b6b488736dfb80510523, type: 2}
+  spawnArea: {fileID: 1498573471}
   forbiddenAreaLayer:
     serializedVersion: 2
     m_Bits: 256
