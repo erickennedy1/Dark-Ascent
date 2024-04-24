@@ -621,6 +621,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vida_e_Mana
       objectReference: {fileID: 0}
+    - target: {fileID: 2746442230552140619, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746442230552140619, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746442230552140619, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746442230552140619, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5307414226318590541, guid: f7c72b2bfa90c284f949311cca34bc97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.66
@@ -5067,6 +5083,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4303380804600855200, guid: 08d5c97ad80ef324c9d43ceafaeaf8a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595146431109816294, guid: 08d5c97ad80ef324c9d43ceafaeaf8a8, type: 3}
+      propertyPath: knockbackBool
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

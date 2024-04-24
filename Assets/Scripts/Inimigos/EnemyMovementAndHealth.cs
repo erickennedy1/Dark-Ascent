@@ -17,6 +17,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
     private Transform player;
     private int currentHealth;
     private bool isKnockedBack = false;
+    public bool knockbackBool = true;
 
     private Animator animator;
     private DamageFeedback damageFeedback;
@@ -70,7 +71,10 @@ public class EnemyMovementAndHealth : MonoBehaviour
         if (currentHealth <= 0)
             Die();
         else
+            if(knockbackBool)
+        {
             StartCoroutine(ApplyKnockback());
+        }       
     }
 
     private IEnumerator ApplyKnockback()

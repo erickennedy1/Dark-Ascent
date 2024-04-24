@@ -33,10 +33,10 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.isPaused)
-        {
-            return;
-        }
+        //if (PauseMenu.isPaused)
+        //{
+            //return;
+        //}
 
         if (Input.GetMouseButtonDown(0) && canAttack)
         {
