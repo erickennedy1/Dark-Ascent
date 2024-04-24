@@ -383,6 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   maxHealth: 3
+  knockbackBool: 0
 --- !u!1 &984796754274536739
 GameObject:
   m_ObjectHideFlags: 0
