@@ -8,13 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: ff5baf7f10ce5aa41b93b73a04b64d5d
-  - enabled: 1
-    path: Assets/Scenes/HubScene.unity
-    guid: 28f374f67717ba74bad1843a0d875532
-  - enabled: 1
-    path: Assets/Scenes/EmptyRoom.unity
-    guid: 91b368f95ef22164f9ffbac4af790f76
-  - enabled: 1
-    path: Assets/Scenes/Dungeon.unity
-    guid: 2dc287ba09ef35c40966cb96c0180088
   m_configObjects: {}
