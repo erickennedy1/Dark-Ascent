@@ -15,8 +15,6 @@ public class PlayerMana : MonoBehaviour
 
     private float lastManaUseTime;
     private Vector2 originalSize;
-    private Vector3 originalBarPosition;
-    private Vector3 originalWavePosition;
 
     private Coroutine manaChangeCoroutine;
 
@@ -31,8 +29,6 @@ public class PlayerMana : MonoBehaviour
         if (ManaCompletaSprite != null && AnimacaoDaMana != null)
         {
             originalSize = ManaCompletaSprite.size;
-            originalBarPosition = ManaCompletaSprite.transform.position;
-            originalWavePosition = AnimacaoDaMana.transform.position;
         }
         UpdateManaUI();
     }
@@ -84,8 +80,12 @@ public class PlayerMana : MonoBehaviour
 
             ManaCompletaSprite.size = new Vector2(originalSize.x, heightChange);
 
+            // Ajuste do offset para a animação descer um pouco mais
+            float extraOffset = 0.24f * originalSize.y;  // 5% da altura total da barra como exemplo
+
+            Vector3 newWavePosition = new Vector3(AnimacaoDaMana.transform.position.x, ManaCompletaSprite.transform.position.y + heightChange / 2 - extraOffset, AnimacaoDaMana.transform.position.z);
             AnimacaoDaMana.size = new Vector2(originalSize.x, heightChange);
-            AnimacaoDaMana.transform.position = new Vector3(AnimacaoDaMana.transform.position.x, originalWavePosition.y - (originalSize.y - heightChange) / 2, originalWavePosition.z);
+            AnimacaoDaMana.transform.position = newWavePosition;
         }
     }
 }
