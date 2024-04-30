@@ -70,11 +70,10 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
-        else
-            if(knockbackBool)
+        else if (knockbackBool)
         {
             StartCoroutine(ApplyKnockback());
-        }       
+        }
     }
 
     private IEnumerator ApplyKnockback()
@@ -97,6 +96,13 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        animator.SetBool("isComboActive", false);
+        animator.SetTrigger("Morrendo");
+        Destruir();
+    }
+
+    private void Destruir()
+    {
+        Destroy(gameObject, 2.0f);
     }
 }
