@@ -609,7 +609,7 @@ MonoBehaviour:
   forbiddenAreaLayer:
     serializedVersion: 2
     m_Bits: 256
-  MaxEnemies: 5
+  MaxEnemies: 3
 --- !u!1 &2038107032
 GameObject:
   m_ObjectHideFlags: 0

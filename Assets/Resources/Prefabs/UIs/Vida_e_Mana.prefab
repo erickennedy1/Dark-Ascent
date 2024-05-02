@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5307414226318590541}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Vida_e_Mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8472663174608117149}
   - component: {fileID: 6253063312401976127}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ManaCompleta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3820671089117179291}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 8384603284632313522}
   - component: {fileID: 6273712288765428233}
   - component: {fileID: 6834024495306776823}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LayoutHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7282272876675743687}
   - component: {fileID: 1327895047912239033}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UIVidaeMana-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 7566400814964326696}
   - component: {fileID: 5951735529002815561}
   - component: {fileID: 8115769697628502839}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: "Anima\xE7\xE3o da Mana"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1998854546941128327}
   - component: {fileID: 5715015051052732025}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UiVidaeMana-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 2746442230552140619}
   - component: {fileID: 1452387448729041409}
   - component: {fileID: 7672963533930516156}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Icone de vida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5458162220848880860}
   - component: {fileID: 5004163993852955743}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mascara da mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,5 +7,4 @@ public class DungeonGenerationData : ScriptableObject
     public int numberOfCrawlers;
     public int roomsMin;
     public int roomsMax;
-    public bool isBossLevel;
 }

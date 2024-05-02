@@ -111,7 +111,7 @@ public class RoomController : MonoBehaviour
         room.transform.parent = transform;
 
         //Defini se a Room tem batalha
-        if(room.type == "Empty" && Random.Range(0,1+1) >= 1)
+        if(room.type == "Empty" && Random.Range(0,100) >= 50)
             room.hasBattle = true;
         else
             room.hasBattle = false;

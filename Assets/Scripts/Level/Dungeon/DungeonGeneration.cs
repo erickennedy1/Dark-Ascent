@@ -20,38 +20,37 @@ public class DungeonGeneration : MonoBehaviour
         //--------Variaveis
         //Organiza a lista pela distancia em realação a coordenada (0,0), de forma decrescente.
         dungeonRooms.Sort((v1,v2) => (v2-Vector2Int.zero).sqrMagnitude.CompareTo((v1-Vector2Int.zero).sqrMagnitude));
-        //BossRoom já foi criada?
+        //gateRoom já foi criada?
         bool gateRoom = false; 
-        //Crawler usado para cria a sala do boss
+        //Crawler usado para cria a sala gate
         DungeonCrawler dungeonCrawler;
 
         //--------Carrega as Rooms
         //Start Rooms
         RoomController.instance.LoadRoom("Start",0,0);
 
-        //Empty and Boss Rooms
+        //Empty and Gate Rooms
         foreach(Vector2Int roomLocation in rooms)
         {
+            //Empty Room
+            RoomController.instance.LoadRoom("Empty", roomLocation.x, roomLocation.y);
+
+            //Gate Room
             if(!gateRoom)
             {
                 dungeonCrawler = new DungeonCrawler(roomLocation);
-                List<Vector2Int> bossPosition = dungeonCrawler.GetNearPositions(DungeonCrawlerController.directionMovementMap);
-                while(bossPosition.Count > 0 && !gateRoom){
-                    if(CanBeGateRoom(bossPosition[0]))
+                List<Vector2Int> gatePosition = dungeonCrawler.GetNearPositions(DungeonCrawlerController.directionMovementMap);
+                while(gatePosition.Count > 0 && !gateRoom){
+                    if(CanBeGateRoom(gatePosition[0]))
                     {
-                        //Boss Room
+                        //Gate Room
                         gateRoom = true;
-                        if(dungeonGenerationData.isBossLevel)
-                            RoomController.instance.LoadRoom("Boss", bossPosition[0].x, bossPosition[0].y);
-                        else
-                            RoomController.instance.LoadRoom("Gate", bossPosition[0].x, bossPosition[0].y);
+                            RoomController.instance.LoadRoom("Gate", gatePosition[0].x, gatePosition[0].y);
                     }else{
-                        bossPosition.RemoveAt(0);
+                        gatePosition.RemoveAt(0);
                     }
                 }
-            }                
-            //Default Room
-            RoomController.instance.LoadRoom("Empty", roomLocation.x, roomLocation.y);
+            }  
         }
     
     }
@@ -61,10 +60,10 @@ public class DungeonGeneration : MonoBehaviour
         //Recebe quais entradas possuem portas
         string type = GetTypeRoom(position);
         //Retorna verdadeiro se:
-        //1. Não é a Coordenada Zero (0,0)
+        //1. A Distancia da coord for maior que 1 (Ou seja, nem a sala Start nem conectada a ela)
         //2. Se já não possue uma sala ali
         //3. Se caso a sala for criada só esteja conectada a uma única sala
-        return (position != Vector2Int.zero) && !dungeonRooms.Exists(pos => pos.x == position.x && pos.y == position.y) && (type == "1000" || type == "0100" || type == "0010" || type == "0001");
+        return (Vector2.Distance(position, Vector2.zero) > 1) && !dungeonRooms.Exists(pos => pos.x == position.x && pos.y == position.y) && (type == "1000" || type == "0100" || type == "0010" || type == "0001");
     }
 
     //Função que retorna uma string equivalente ao binário de entradas da sala em relação as demais
