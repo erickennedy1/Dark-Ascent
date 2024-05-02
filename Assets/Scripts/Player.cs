@@ -4,7 +4,6 @@ public class Player : MonoBehaviour
 {
     public bool canMove = true;
 
-
     void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");

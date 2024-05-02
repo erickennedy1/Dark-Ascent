@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -36,52 +35,58 @@ public class Room : MonoBehaviour
     private void UpdateByType(){
         if(type == "Empty")
         {
-            // RandomTilemapEmpty();
-            Instantiate(Resources.Load("Prefabs/Tilemaps/Generic0", typeof(GameObject)), transform);
+            RandomTilemapEmpty();
             if(hasBattle){
                 gameObject.GetComponentInChildren<SpawnEnemiesController>().SpawnEnemies();
             }
         }
-        else if(type == "Start")
-        {
-            Instantiate(Resources.Load("Prefabs/Tilemaps/Start0", typeof(GameObject)), transform);
-            RoomController.instance.OnPlayerEnterRoom(this);
-            RoomController.instance.UpdateMinimap(this);
-        }
-            
-        else if(type == "Gate")
-        {
-            Instantiate(Resources.Load("Prefabs/Tilemaps/Gate0", typeof(GameObject)), transform);
-            Instantiate(Resources.Load("Prefabs/Gate", typeof(GameObject)), transform);
-        }      
-        else if(type == "Boss")
-        {
-            Instantiate(Resources.Load("Prefabs/Tilemaps/Boss0", typeof(GameObject)), transform);
-            Instantiate(Resources.Load("Prefabs/Gate", typeof(GameObject)), transform);
-        }
-            
+        else{
+            RandomTilemap(type);
+            switch(type)
+            {   
+                case "Start":
+                    //Prepara a sala Start para ser a primeira sala
+                    RoomController.instance.OnPlayerEnterRoom(this);
+                    RoomController.instance.UpdateMinimap(this);
+                    break;
+                case "Gate":
+                    //Adiciona o Gate
+                    Instantiate(Resources.Load("Prefabs/Gate", typeof(GameObject)), transform);
+                    break;
+                default:
+                    Debug.LogError("Type of Room invalid!");
+                    break;
+            }
+        }         
     }
 
     private void RandomTilemapEmpty(){
         //50% de chance de ser uma sala específica
         //50% de chance de ser uma sala Genérica
-        int randomType = Random.Range(0,2);
+        // int randomType = Random.Range(0,2);
+        int randomType = 0;
 
         switch(randomType)
         {
             //Tipo genérico
             case 0:
-                Instantiate(Resources.Load("Prefabs/Tilemaps/Generic/Empty"+Random.Range(0,8), typeof(GameObject)), transform);
+                RandomTilemap("Generic");
                 break;
             //Tipo Especifico baseado nas portas
             case 1:
-                Instantiate(Resources.Load("Prefabs/Tilemaps/"+doorsDirection+"/Empty"+Random.Range(0,2), typeof(GameObject)), transform);
+                // RandomTilemap(doorsDirection);
+                RandomTilemap("Generic");
                 break;
             default:
                 Debug.LogError("randomType Invalid!");
                 break;
         }
             
+    }
+
+    private void RandomTilemap(string type){
+        TilesListData tilesList = (TilesListData)Resources.Load("Prefabs/Tilemaps/"+type+"/"+type+"List");
+        Instantiate(tilesList.tiles[Random.Range(0,tilesList.tiles.Count)], transform);
     }
 
     //Retira Doors desconexas
