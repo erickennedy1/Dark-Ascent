@@ -23,8 +23,8 @@ public class PlayerMana : MonoBehaviour
         ManaCompletaSprite = GameObject.Find("ManaCompleta").GetComponent<SpriteRenderer>();
         AnimacaoDaMana = GameObject.Find("Animação da Mana").GetComponent<SpriteRenderer>();
 
-        currentMana = maxMana;
-        targetMana = maxMana;
+        currentMana = 30;
+        targetMana = currentMana;
 
         if (ManaCompletaSprite != null && AnimacaoDaMana != null)
         {
@@ -43,6 +43,16 @@ public class PlayerMana : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void recuperarMana(int quantidade)
+    {
+        if (targetMana < maxMana)
+        {
+            Debug.Log("Recuperando Mana: " + quantidade);
+            targetMana = currentMana + quantidade;
+            StartManaChangeCoroutine();
+        }
     }
 
     private void StartManaChangeCoroutine()
@@ -80,8 +90,7 @@ public class PlayerMana : MonoBehaviour
 
             ManaCompletaSprite.size = new Vector2(originalSize.x, heightChange);
 
-            // Ajuste do offset para a animação descer um pouco mais
-            float extraOffset = 0.24f * originalSize.y;  // 5% da altura total da barra como exemplo
+            float extraOffset = 0.24f * originalSize.y;
 
             Vector3 newWavePosition = new Vector3(AnimacaoDaMana.transform.position.x, ManaCompletaSprite.transform.position.y + heightChange / 2 - extraOffset, AnimacaoDaMana.transform.position.z);
             AnimacaoDaMana.size = new Vector2(originalSize.x, heightChange);

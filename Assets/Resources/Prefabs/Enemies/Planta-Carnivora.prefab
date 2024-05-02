@@ -323,8 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b362dc4afb7140841b1826804feae81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 2100000, guid: e66e25f2cc564844ba5e6ffeb1f1ffb5, type: 2}
-  damageMaterial: {fileID: 2100000, guid: 2121ef269c480e14a870c6032d994bce, type: 2}
+  materialNormal: {fileID: 2100000, guid: e66e25f2cc564844ba5e6ffeb1f1ffb5, type: 2}
+  materialDano: {fileID: 2100000, guid: 2121ef269c480e14a870c6032d994bce, type: 2}
 --- !u!114 &2919203584295731954
 MonoBehaviour:
   m_ObjectHideFlags: 0

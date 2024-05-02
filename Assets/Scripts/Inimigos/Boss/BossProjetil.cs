@@ -2,21 +2,31 @@ using UnityEngine;
 
 public class BossProjetil : MonoBehaviour
 {
-    [SerializeField] private GameObject projetilPrefab; 
-    [SerializeField] private GameObject projetilDestrutivelPrefab; 
-    [SerializeField] private int quantidadeProjetis = 30; 
-    [SerializeField] private float velocidadeProjetil = 5f; 
-    private float deslocamentoInicial = 4f; 
+    [SerializeField] private GameObject projetilPrefab;
+    [SerializeField] private GameObject projetilDestrutivelPrefab;
+    [SerializeField] private int quantidadeProjetis = 30;
+    [SerializeField] private float velocidadeProjetil = 5f;
+    private float deslocamentoInicial = 4f;
     private float anguloInicio = 15f;
     private float anguloFim = -195f;
     private int vezesParaDisparar = 3;
     private float intervaloDisparos = 3f;
 
-    private int vezesDisparadas = 0; 
+    [SerializeField] private Orbe orbe; 
+
+    private int vezesDisparadas = 0;
 
     void Start()
     {
-        InvokeRepeating(nameof(DispararEmTodasAsDirecoes), 0f, intervaloDisparos);
+        InvokeRepeating(nameof(VerificarDisparo), 0f, intervaloDisparos);
+    }
+
+    private void VerificarDisparo()
+    {
+        if (orbe.prontoParaAtacar)
+        {
+            DispararEmTodasAsDirecoes();
+        }
     }
 
     private void DispararEmTodasAsDirecoes()
@@ -24,7 +34,7 @@ public class BossProjetil : MonoBehaviour
         if (vezesDisparadas < vezesParaDisparar)
         {
             float angulo = anguloInicio;
-            float anguloIncremento = (anguloFim - anguloInicio) / quantidadeProjetis; 
+            float anguloIncremento = (anguloFim - anguloInicio) / quantidadeProjetis;
 
             int indiceDestrutivel = Random.Range(0, quantidadeProjetis - 1);
 
@@ -46,16 +56,18 @@ public class BossProjetil : MonoBehaviour
                 Rigidbody2D rb = projetil.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
-                    rb.velocity = direcao * velocidadeProjetil; 
+                    rb.velocity = direcao * velocidadeProjetil;
                 }
 
-                angulo += anguloIncremento; 
+                angulo += anguloIncremento;
             }
-            vezesDisparadas++; 
+            vezesDisparadas++;
         }
         else
         {
-            CancelInvoke(nameof(DispararEmTodasAsDirecoes)); 
+            CancelInvoke(nameof(VerificarDisparo));
+
+            orbe.gameObject.SetActive(false);
         }
     }
 }

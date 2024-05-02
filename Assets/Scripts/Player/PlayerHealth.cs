@@ -1,24 +1,18 @@
 using UnityEngine;
-using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Configurações de vida")]
     public int maxHealth = 5;
-    public float fadeSpeed = 0.5f; 
+    public float fadeSpeed = 0.5f;
+    public bool seguirPlayer = true;
 
     private SpriteRenderer hpWarningSprite;
-    private GameObject hpWarning;
+    private GameObject UI_VidaBaixa;
     private GameObject healthIconPrefab;
     private GameObject healthPanel;
+    private Camera mainCamera;  
     private int currentHealth;
-
-    void Start()
-    {
-        hpWarning = GameObject.Find("1HPWarning");
-        hpWarningSprite = hpWarning.GetComponent<SpriteRenderer>();
-        hpWarningSprite.color = new Color(hpWarningSprite.color.r, hpWarningSprite.color.g, hpWarningSprite.color.b, 0); 
-    }
 
     void Awake()
     {
@@ -27,6 +21,10 @@ public class PlayerHealth : MonoBehaviour
         {
             healthIconPrefab = healthPanel.transform.GetChild(0).gameObject;
         }
+        UI_VidaBaixa = GameObject.Find("UI_VidaBaixa");
+        hpWarningSprite = UI_VidaBaixa.GetComponent<SpriteRenderer>();
+        hpWarningSprite.color = new Color(hpWarningSprite.color.r, hpWarningSprite.color.g, hpWarningSprite.color.b, 0);
+        mainCamera = Camera.main;  
 
         currentHealth = maxHealth;
         for (int i = 1; i < maxHealth; i++)
@@ -35,8 +33,14 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Update()
+    void LateUpdate()
     {
+        if (seguirPlayer && mainCamera != null)
+        {
+            Vector3 cameraPosition = mainCamera.transform.position;
+            UI_VidaBaixa.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, UI_VidaBaixa.transform.position.z);
+        }
+
         if (currentHealth <= 1 && hpWarningSprite.color.a < 1)
         {
             FadeIn();
@@ -50,14 +54,14 @@ public class PlayerHealth : MonoBehaviour
     private void FadeIn()
     {
         Color color = hpWarningSprite.color;
-        color.a += fadeSpeed * Time.deltaTime; 
+        color.a += fadeSpeed * Time.deltaTime;
         hpWarningSprite.color = color;
     }
 
     private void FadeOut()
     {
         Color color = hpWarningSprite.color;
-        color.a -= fadeSpeed * Time.deltaTime; 
+        color.a -= fadeSpeed * Time.deltaTime;
         hpWarningSprite.color = color;
     }
 
