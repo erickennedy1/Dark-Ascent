@@ -18,6 +18,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     private Transform player;
     private Animator animator;
     private System.Random random = new System.Random();
+    private bool isDead = false; 
 
     void Start()
     {
@@ -28,7 +29,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void Update()
     {
-        if (player != null && InShootingRange() && !IsObstacleBetween())
+        if (!isDead && player != null && InShootingRange() && !IsObstacleBetween()) 
         {
             if (Time.time >= nextAttackTime)
             {
@@ -39,6 +40,8 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void StartCombo()
     {
+        if (isDead) return; 
+
         int comboIndex = random.Next(0, 3);
         animator.SetBool("isComboActive", true);
         switch (comboIndex)
@@ -53,9 +56,8 @@ public class PlantaCarnivoraAttack : MonoBehaviour
                 StartCoroutine(Combo3());
                 break;
         }
-        nextAttackTime = Time.time + comboDelay; 
+        nextAttackTime = Time.time + comboDelay;
     }
-
     IEnumerator Combo1()
     {
         for (int y = 0; y < 2; y++)
@@ -69,7 +71,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     IEnumerator Combo2()
     {
-        for (int i = 0; i < 4; i++) 
+        for (int i = 0; i < 4; i++)
         {
             yield return new WaitForSeconds(attackDelay);
             ShootProjectile();
@@ -93,22 +95,30 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void ShootProjectile()
     {
-        if (projectileSpawnPoint != null && !IsObstacleBetween())
+        if (isDead || !projectileSpawnPoint || IsObstacleBetween()) return;  
+
+        Vector2 direction = (player.position - transform.position).normalized;
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            Vector2 direction = (player.position - transform.position).normalized;
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.velocity = direction * 10; 
-            }
+            rb.velocity = direction * 10;
         }
     }
 
     void EndCombo()
     {
+        if (isDead) return; 
+
         animator.SetBool("isComboActive", false);
         nextAttackTime = Time.time + comboDelay;
+    }
+
+    public void EnemyDie()
+    {
+        isDead = true;  
+        animator.SetBool("isComboActive", false);
+        Destroy(gameObject, 2.0f);
     }
 
     bool InShootingRange()

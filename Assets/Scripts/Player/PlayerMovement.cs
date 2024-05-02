@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
 
     private Vector2 movement;
-    private float lastHorizontal = 0f;
-    private float lastVertical = -1f;
+    private float ultimoMovimentoHorizontal = 0f;
+    private float ultimoMovimentoVertical = -1f;
 
     private PlayerAttack playerAttack;
     private Rigidbody2D rb;
@@ -49,22 +49,22 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetBool("IsMoving", movement.magnitude > 0);
 
-        if (movement.magnitude > 0 || playerAttack.justAttacked)
+        if (movement.magnitude > 0 || playerAttack.acabouDeAtacar)
         {
-            lastHorizontal = movement.magnitude > 0 ? movement.x : playerAttack.lastAttackHorizontal;
-            lastVertical = movement.magnitude > 0 ? movement.y : playerAttack.lastAttackVertical;
+            ultimoMovimentoHorizontal = movement.magnitude > 0 ? movement.x : playerAttack.ultimoAtaqueHorizontal;
+            ultimoMovimentoVertical = movement.magnitude > 0 ? movement.y : playerAttack.ultimoAtaqueVertical;
 
-            if (playerAttack.justAttacked)
+            if (playerAttack.acabouDeAtacar)
             {
-                animator.SetFloat("LastHorizontal", playerAttack.lastAttackHorizontal);
-                animator.SetFloat("LastVertical", playerAttack.lastAttackVertical);
-                playerAttack.justAttacked = false;
+                animator.SetFloat("LastHorizontal", playerAttack.ultimoAtaqueHorizontal);
+                animator.SetFloat("LastVertical", playerAttack.ultimoAtaqueVertical);
+                playerAttack.acabouDeAtacar = false;
             }
         }
         else
         {
-            animator.SetFloat("LastHorizontal", lastHorizontal);
-            animator.SetFloat("LastVertical", lastVertical);
+            animator.SetFloat("LastHorizontal", ultimoMovimentoHorizontal);
+            animator.SetFloat("LastVertical", ultimoMovimentoVertical);
         }
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);

@@ -4,41 +4,28 @@ using System.Collections;
 public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
-    private GameObject sparksAnimationObject;
+    private ParticulasAtaque particulasAtaque;
 
     [Header("Configurações de ataque")]
-    public int damageAmount = 10;
-    private float attackRange = 2f;
-    private float attackParticules = 0.5f;
+    public int danoAtaque = 10;
+    public float distanciaAtaque = 2f;
 
+    private bool podeAtacar = true;
+    private Coroutine ataqueCouldown;
 
-    private bool canAttack = true;
-    private Coroutine attackCooldownCoroutine;
-    private AtaqueEspecial00 specialAttackScript;
-
-    [HideInInspector] public bool justAttacked = false;
-    [HideInInspector] public float lastAttackHorizontal = 0f;
-    [HideInInspector] public float lastAttackVertical = -1f;
+    [HideInInspector] public bool acabouDeAtacar = false;
+    [HideInInspector] public float ultimoAtaqueHorizontal = 0f;
+    [HideInInspector] public float ultimoAtaqueVertical = -1f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        specialAttackScript = GetComponent<AtaqueEspecial00>();
-
-        Transform sparksTransform = transform.Find("Efeito de ataque");
-
-        sparksAnimationObject = sparksTransform.gameObject;
-
+        particulasAtaque = GetComponent<ParticulasAtaque>();  
     }
 
     void Update()
     {
-        //if (PauseMenu.isPaused)
-        //{
-            //return;
-        //}
-
-        if (Input.GetMouseButtonDown(0) && canAttack)
+        if (Input.GetMouseButtonDown(0) && podeAtacar)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 playerPosition = transform.position;
@@ -47,54 +34,18 @@ public class PlayerAttack : MonoBehaviour
             SetAttackAnimationParameters(direction);
 
             animator.SetTrigger("Attack");
-            justAttacked = true;
+            acabouDeAtacar = true;
 
-            attackCooldownCoroutine = StartCoroutine(AttackCooldown());
+            ataqueCouldown = StartCoroutine(AttackCooldown());
 
             PerformAttack(direction);
-
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange, LayerMask.GetMask("Enemy"));
-            if (hit.collider != null)
-            {
-                Vector2 hitDirection = (hit.transform.position - transform.position).normalized;
-                float angle = Vector2.Angle(direction, hitDirection);
-
-                if (angle <= 45f)
-                {
-                    EnemyMovementAndHealth enemy = hit.collider.GetComponent<EnemyMovementAndHealth>();
-                    if (enemy != null)
-                    {
-                        float distance = Vector2.Distance(transform.position, enemy.transform.position);
-                        if (distance <= attackRange)
-                        {
-                            enemy.TakeDamage(damageAmount);
-                            sparksAnimationObject.transform.position = enemy.transform.position;
-
-                            sparksAnimationObject.SetActive(false);
-                            sparksAnimationObject.SetActive(true);
-                        }
-                    }
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q) && canAttack)
-        {
-            bool attackPerformed = specialAttackScript.TryPerformSpecialAttack();
-            if (attackPerformed)
-            {
-                animator.SetTrigger("AtaqueEspecial");
-                attackCooldownCoroutine = StartCoroutine(AttackCooldown());
-            }
         }
     }
 
     private void PerformAttack(Vector2 direction)
     {
-        Vector2 attackPoint = (Vector2)transform.position + direction.normalized * attackRange / 2;
-
-
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, attackRange, LayerMask.GetMask("Enemy", "Projectile"));
+        Vector2 attackPoint = (Vector2)transform.position + direction.normalized * distanciaAtaque / 2;
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, distanciaAtaque, LayerMask.GetMask("Enemy", "Projectile"));
         foreach (var hit in hitObjects)
         {
             if (hit.CompareTag("Enemy"))
@@ -102,12 +53,8 @@ public class PlayerAttack : MonoBehaviour
                 EnemyMovementAndHealth enemy = hit.GetComponent<EnemyMovementAndHealth>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damageAmount);
-
-
-                    GameObject sparksInstance = Instantiate(sparksAnimationObject, enemy.transform.position, Quaternion.identity);
-                    sparksInstance.SetActive(true);
-                    Destroy(sparksInstance, attackParticules);
+                    enemy.TakeDamage(danoAtaque);
+                    particulasAtaque.SpawnParticles(enemy.transform.position);
                 }
             }
             else if (hit.CompareTag("Projectile"))
@@ -123,34 +70,34 @@ public class PlayerAttack : MonoBehaviour
         {
             animator.SetFloat("AttackHorizontal", Mathf.Sign(direction.x));
             animator.SetFloat("AttackVertical", 0);
-            lastAttackHorizontal = Mathf.Sign(direction.x);
-            lastAttackVertical = 0;
+            ultimoAtaqueHorizontal = Mathf.Sign(direction.x);
+            ultimoAtaqueVertical = 0;
         }
         else
         {
             animator.SetFloat("AttackHorizontal", 0);
             animator.SetFloat("AttackVertical", Mathf.Sign(direction.y));
-            lastAttackHorizontal = 0;
-            lastAttackVertical = Mathf.Sign(direction.y);
+            ultimoAtaqueHorizontal = 0;
+            ultimoAtaqueVertical = Mathf.Sign(direction.y);
         }
     }
 
     IEnumerator AttackCooldown()
     {
-        canAttack = false;
+        podeAtacar = false;
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        canAttack = true;
+        podeAtacar = true;
     }
     void OnDestroy()
     {
-        if (attackCooldownCoroutine != null)
+        if (ataqueCouldown != null)
         {
-            StopCoroutine(attackCooldownCoroutine);
+            StopCoroutine(ataqueCouldown);
         }
     }
 
     public void IncreaseDamage(int amount)
     {
-        damageAmount += amount;
+        danoAtaque += amount;
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 public class DamageFeedback : MonoBehaviour
 {
     [Header("Material p quando estiver normal")]
-    public Material defaultMaterial;
+    public Material materialNormal;
     [Header("Material p quando sofrer dano")]
-    public Material damageMaterial;
+    public Material materialDano;
     private float damageDuration = 0.2f; 
     private SpriteRenderer spriteRenderer;
 
@@ -23,10 +23,10 @@ public class DamageFeedback : MonoBehaviour
 
     IEnumerator FlashDamage()
     {
-        spriteRenderer.material = damageMaterial;
+        spriteRenderer.material = materialDano;
 
         yield return new WaitForSeconds(damageDuration);
 
-        spriteRenderer.material = defaultMaterial;
+        spriteRenderer.material = materialNormal;
     }
 }
