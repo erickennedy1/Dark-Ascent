@@ -19,17 +19,13 @@ public class GameController : MonoBehaviour
     //Função chamada antes do Start, Caso já exista um GameController na Scene, o novo GameController se auto Destroy
     //Caso contrário ele não é destruído ao carregar uma nova Scene
     void Awake(){
-        instance = this;
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
-
-        if (objs.Length > 1)
-        {
-            Debug.Log("Destroy, GameController > 1: "+objs.Length);
-            Destroy(gameObject);
-            return;
+        if(instance == null){
+            instance = this;
+            DontDestroyOnLoad(this);
         }
-
-        DontDestroyOnLoad(this);
+        else{
+            Destroy(gameObject);
+        }
     }
 
     void Start()
