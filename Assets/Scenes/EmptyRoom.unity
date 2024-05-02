@@ -604,12 +604,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a15d453de42a041affa72bb8fc30fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesList: {fileID: 11400000, guid: 38d01385da83b6b488736dfb80510523, type: 2}
+  enemiesData: {fileID: 11400000, guid: 38d01385da83b6b488736dfb80510523, type: 2}
   spawnArea: {fileID: 1498573471}
   forbiddenAreaLayer:
     serializedVersion: 2
     m_Bits: 256
   MaxEnemies: 3
+  isDoorsClose: 0
 --- !u!1 &2038107032
 GameObject:
   m_ObjectHideFlags: 0

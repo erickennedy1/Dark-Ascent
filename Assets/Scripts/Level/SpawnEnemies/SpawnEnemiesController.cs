@@ -3,15 +3,28 @@ using UnityEngine;
 
 public class SpawnEnemiesController : MonoBehaviour
 {
-    public SpawnEnemiesData enemiesList; // Referência ao prefab do inimigo
+    public SpawnEnemiesData enemiesData; // Referência ao prefab do inimigo
     public Collider2D spawnArea = null; // Collider que define a área de spawn
     public LayerMask forbiddenAreaLayer; // Camada dos obstáculos para detecção de colisão
     public int MaxEnemies = 3; // Número total de inimigos
     private int currentEnemies = 0;
 
+    public bool isDoorsClose = false;
+
     void Start()
     {
         spawnArea = GetComponent<Collider2D>();
+    }
+
+    void Update()
+    {
+        if(isDoorsClose)
+        {   
+            if(transform.childCount == 0){
+                isDoorsClose = false;
+                GetComponentInParent<Room>().OpenDoors();
+            }
+        }
     }
 
     public void SpawnEnemies()
@@ -29,12 +42,15 @@ public class SpawnEnemiesController : MonoBehaviour
             if (!IsColliding(spawnPosition))
             {
                 // Instancia um inimigo na posição de spawn
-                Instantiate(enemiesList.Enemies[Random.Range(0,enemiesList.Enemies.Count)], spawnPosition, Quaternion.identity, transform);
+                Instantiate(enemiesData.Enemies[Random.Range(0,enemiesData.Enemies.Count)], spawnPosition, Quaternion.identity, transform);
                 currentEnemies++;
             }
             count++;
             if(count >= totalEnemies*3)
                 Debug.Log("Máximo de tantativas atingido");
+
+            GetComponentInParent<Room>().CloseDoors();
+            isDoorsClose = true;
         }
     }
 

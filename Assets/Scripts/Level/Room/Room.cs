@@ -29,7 +29,6 @@ public class Room : MonoBehaviour
         doorsDirection = RoomController.instance.GetDoorsDirection(x, y);
         RemoveUnconnectDoors();
         UpdateByType();
-        
     }
 
     private void UpdateByType(){
@@ -137,6 +136,22 @@ public class Room : MonoBehaviour
     public void OnEnterRoom()
     {
         minimapIcon.OnEnterRoom();
+    }
+
+    public void CloseDoors()
+    {
+        Door[] doors = GetComponentsInChildren<Door>();
+        foreach(Door door in doors){
+            door.CloseDoors();
+        }
+    }
+
+    public void OpenDoors()
+    {
+        Door[] doors = GetComponentsInChildren<Door>();
+        foreach(Door door in doors){
+            door.OpenDoors();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {

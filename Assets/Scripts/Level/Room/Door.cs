@@ -13,6 +13,13 @@ public class Door : MonoBehaviour
         {
             RoomController.instance.OnPlayerTouchDoor(transform.parent.parent.gameObject.GetComponent<Room>(), type);
         }
-        
+    }
+
+    public void CloseDoors(){
+        GetComponentInChildren<DoorCollider>().OnClose();
+    }
+
+    public void OpenDoors(){
+        GetComponentInChildren<DoorCollider>().OnOpen();
     }
 }
