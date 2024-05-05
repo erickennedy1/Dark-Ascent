@@ -9,7 +9,8 @@ public class Room : MonoBehaviour
     public MinimapIcon minimapIcon;
     public bool isKnown = false; //Usado pelo minimapa, para identificar salas conhecias (Que se sabe da existencia)
     public bool isClear = false; //Identifica se a sala foi explorada
-    public bool hasBattle = false; //Identifica salas com batalha
+    public bool hasBattle = false; //Identifica salas com batalha.
+    private Player player;
 
     //Methods
     void Start(){
@@ -21,6 +22,8 @@ public class Room : MonoBehaviour
         }
         RoomController.instance.RegisterRoom(this);
         minimapIcon = GetComponentInChildren<MinimapIcon>();
+        player = GameObject.FindObjectOfType<Player>();
+
     }
 
     //Chamado quando todas as salas forem carregadas
@@ -158,6 +161,7 @@ public class Room : MonoBehaviour
         if(other.tag == "Player")
         {
             RoomController.instance.OnPlayerEnterRoom(this);
+            player.GetComponent<PlayerHealth>().SeguirPlayer(false);
         }
     }
 

@@ -9,9 +9,10 @@ public class PlayerHealth : MonoBehaviour
 
     private SpriteRenderer hpWarningSprite;
     private GameObject UI_VidaBaixa;
+    private GameObject UI_VidaEMana;
     private GameObject healthIconPrefab;
     private GameObject healthPanel;
-    private Camera mainCamera;  
+    private Camera mainCamera;
     private int currentHealth;
 
     void Awake()
@@ -22,9 +23,10 @@ public class PlayerHealth : MonoBehaviour
             healthIconPrefab = healthPanel.transform.GetChild(0).gameObject;
         }
         UI_VidaBaixa = GameObject.Find("UI_VidaBaixa");
+        UI_VidaEMana = GameObject.Find("Vida_e_Mana");
         hpWarningSprite = UI_VidaBaixa.GetComponent<SpriteRenderer>();
         hpWarningSprite.color = new Color(hpWarningSprite.color.r, hpWarningSprite.color.g, hpWarningSprite.color.b, 0);
-        mainCamera = Camera.main;  
+        mainCamera = Camera.main;
 
         currentHealth = maxHealth;
         for (int i = 1; i < maxHealth; i++)
@@ -39,6 +41,16 @@ public class PlayerHealth : MonoBehaviour
         {
             Vector3 cameraPosition = mainCamera.transform.position;
             UI_VidaBaixa.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, UI_VidaBaixa.transform.position.z);
+            UI_VidaEMana.transform.position = new Vector3(cameraPosition.x - 2, cameraPosition.y + 1.7f, UI_VidaEMana.transform.position.z);
+        }
+        else
+        {
+            if (RoomController.instance != null && RoomController.instance.currentRoom != null)
+            {
+                Vector2 roomCenter = RoomController.instance.currentRoom.GetRoomCenter();
+                UI_VidaBaixa.transform.position = new Vector3(roomCenter.x, roomCenter.y, UI_VidaBaixa.transform.position.z);
+                UI_VidaEMana.transform.position = new Vector3(roomCenter.x, roomCenter.y + 1, UI_VidaEMana.transform.position.z); 
+            }
         }
 
         if (currentHealth <= 1 && hpWarningSprite.color.a < 1)
@@ -81,6 +93,11 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player Died");
+    }
+
+    public void SeguirPlayer(bool seguir)
+    {
+        seguirPlayer = seguir;
     }
 
     void UpdateHealthUI()

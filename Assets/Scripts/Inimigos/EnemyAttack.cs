@@ -9,6 +9,7 @@ public class EnemyAttack : MonoBehaviour
     private float RangeAttackStart = 4f;
     private float AttackRange = 2.5f;
     private float dashSpeed = 15f;
+    public bool isDead = false;
 
 
     private Transform player;
@@ -25,7 +26,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
-        DrawAttackRange();  // Desenha o círculo de alcance de ataque
+        DrawAttackRange(); 
 
         if (isReadyToAttack && Vector2.Distance(transform.position, player.position) <= RangeAttackStart)
         {
@@ -98,5 +99,10 @@ public class EnemyAttack : MonoBehaviour
 
         // Conecta o último ponto ao primeiro
         Debug.DrawLine(lastPos, pos, Color.red, 0.02f, false);
+    }
+
+    public void EnemyDie()
+    {
+        Destroy(gameObject);
     }
 }

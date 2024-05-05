@@ -22,6 +22,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
     private Animator animator;
     private DamageFeedback damageFeedback;
     private PlantaCarnivoraAttack plantaAtaque;
+    private EnemyAttack enemyAttack;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
         animator = GetComponent<Animator>();
         damageFeedback = GetComponent<DamageFeedback>();
         plantaAtaque = GetComponent<PlantaCarnivoraAttack>();
+        enemyAttack = GetComponent<EnemyAttack>();
     }
 
     void Update()
@@ -98,9 +100,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
     private void Die()
     {
-        animator.SetBool("isComboActive", false);
-        GetComponent<PolygonCollider2D>().enabled = false;
         animator.SetTrigger("Morrendo");
-        plantaAtaque.EnemyDie();
+        Destroy(gameObject, 1f);
     }
 }
