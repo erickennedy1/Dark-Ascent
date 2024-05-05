@@ -114,13 +114,6 @@ public class PlantaCarnivoraAttack : MonoBehaviour
         nextAttackTime = Time.time + comboDelay;
     }
 
-    public void EnemyDie()
-    {
-        isDead = true;  
-        animator.SetBool("isComboActive", false);
-        Destroy(gameObject, 2.0f);
-    }
-
     bool InShootingRange()
     {
         return Vector2.Distance(transform.position, player.position) <= shootingRange;

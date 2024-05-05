@@ -11,13 +11,12 @@ public class RoomInfo
 
 public class RoomController : MonoBehaviour
 {
-    
     //Váriavel para que esta sala possa ser encontrada de forma pública
     //Chamada pela função Awake
     public static RoomController instance;
     string currentWorldName;
     RoomInfo currentLoadRoomData;
-    Room currentRoom;
+    public Room currentRoom;
 
     Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
     public List<Room> loadedRooms = new List<Room>();
@@ -170,10 +169,11 @@ public class RoomController : MonoBehaviour
     public void OnPlayerEnterRoom(Room room)
     {
         CameraController.instance.currentRoom = room;
-        if(currentRoom != null)
+        if (currentRoom != null)
             currentRoom.OnLeave();
         currentRoom = room;
-        if(updateRooms){
+        if (updateRooms)
+        {
             UpdateMinimap(room);
         }
     }

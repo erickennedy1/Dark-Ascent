@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
 
             animator.SetTrigger("Colidiu");
 
-            Destroy(gameObject, 0.3f);
+            Destroy(gameObject, 0.1f);
         }
     }
 }
