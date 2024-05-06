@@ -9,6 +9,7 @@ TagManager:
   - Room
   - Esquerda
   - Direita
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX

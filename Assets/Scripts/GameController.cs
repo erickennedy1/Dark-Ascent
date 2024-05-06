@@ -72,6 +72,9 @@ public class GameController : MonoBehaviour
         {
             currentWorldLevel = 1;
             currentLevel = 1;
+            currentWorldName = worldNames[currentWorldLevel];
+            //Carrega o próximo nível
+            SceneManager.LoadScene("Dungeon");
         }
         //Se a cena atual não for o Hub
         else{
@@ -79,31 +82,41 @@ public class GameController : MonoBehaviour
             for(int i=1;i<SceneManager.sceneCount;i++)
                 SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
 
-            //Próximo nível
-            currentLevel++;
-            //Se o nível for 2 passa para o próximo cenário
-            if(currentLevel > 2)
+            switch(currentLevel)
             {
-                if(currentWorldLevel+1 < worldNames.Count)
-                {
-                    currentLevel = 1;
-                    currentWorldLevel++;
-                }else{
-                    currentWorldLevel = 0;
-                    currentLevel = 0;
-                    currentWorldName = worldNames[currentWorldLevel];
-                    SceneManager.LoadScene("HubScene");
-                    FindPlayer();
+                case 1:
+                    currentLevel++;
+                    //Carrega o próximo nível
+                    SceneManager.LoadScene("Dungeon");
+                    break;
+                case 2:
+                    currentLevel++;
+                    SceneManager.LoadScene("Boss"+currentWorldName);
                     player.ResetPlayer();
-                    return;
-                }                
-            }  
+                    break;
+                case 3:
+                    //Depois de Derrotar o Boss
+                    //Se houver mais Mundos, passa para o próximo
+                    if(currentWorldLevel+1 < worldNames.Count)
+                    {
+                        currentWorldLevel++;
+                        currentLevel = 1;
+                    }else{
+                        //Se não houver, volta para o Hub
+                        //PS.: Preciso adicionar uma cena final
+                        currentWorldLevel = 0;
+                        currentLevel = -1;
+                        currentWorldName = worldNames[currentWorldLevel];
+                        SceneManager.LoadScene(currentWorldName);
+                        // FindPlayer();
+                        player.ResetPlayer();
+                        return;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
-
-        currentWorldName = worldNames[currentWorldLevel];
-        //Carrega o próximo nível
-        SceneManager.LoadScene("Dungeon");
-        Debug.Log("Dungeon Loaded");
     }
 
     private void FindPlayer()
