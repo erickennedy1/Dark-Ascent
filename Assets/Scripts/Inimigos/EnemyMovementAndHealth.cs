@@ -18,6 +18,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
     private int currentHealth;
     private bool isKnockedBack = false;
     public bool knockbackBool = true;
+    private bool morreu = false;
 
     private Animator animator;
     private DamageFeedback damageFeedback;
@@ -56,13 +57,19 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        AdjustFacingDirection();
+        if (!morreu)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            AdjustFacingDirection();
+        }
     }
 
     private void AdjustFacingDirection()
     {
-        transform.localScale = new Vector3((player.position.x > transform.position.x ? 1 : -1) * 0.8f, 0.8f, 0.8f);
+        if (!morreu)
+        {
+            transform.localScale = new Vector3((player.position.x > transform.position.x ? 1 : -1) * 1.1f, 1.1f, 1.1f);
+        }
     }
 
     public void TakeDamage(int damageAmount)
@@ -101,6 +108,9 @@ public class EnemyMovementAndHealth : MonoBehaviour
     private void Die()
     {
         animator.SetTrigger("Morrendo");
+        morreu = true;
+        Collider2D collider = GetComponent<Collider2D>();
+        collider.enabled = false;
         Destroy(gameObject, 1f);
     }
 }
