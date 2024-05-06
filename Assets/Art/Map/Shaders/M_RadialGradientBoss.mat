@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_RadialGradient
+  m_Name: M_RadialGradientBoss
   m_Shader: {fileID: -6465566751694194690, guid: d80369a427f896d41a5b9a88a7ff7207, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -39,10 +39,12 @@ Material:
     m_Floats:
     - _Fade: 0
     - _GradientIntensity: 1.24
-    - _Intensity: 0.84
-    - _OffsetHorizontal: 0.42
-    - _OffsetVertical: 0.45
+    - _Intensity: 1.9
+    - _OffsetHorizontal: 0.126
+    - _OffsetVertical: 0.107
     - _Radius: 0
+    - _Scale: 3
+    - _ScaleDown: 1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color01: {r: 1, g: 0, b: 0, a: 1}

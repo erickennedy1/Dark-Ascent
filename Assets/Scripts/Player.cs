@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //Somente para testes
+        //Deve ser removido
         if(Input.GetKeyDown(KeyCode.BackQuote))
         {
             GameController.instance.SceneCountTotal();

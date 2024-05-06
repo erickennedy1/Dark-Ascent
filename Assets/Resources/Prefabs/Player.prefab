@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7974917554268887751}
   m_Layer: 0
   m_Name: Colider
-  m_TagString: Untagged
+  m_TagString: PlayerCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e66e25f2cc564844ba5e6ffeb1f1ffb5, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b362dc4afb7140841b1826804feae81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialNormal: {fileID: 2100000, guid: e66e25f2cc564844ba5e6ffeb1f1ffb5, type: 2}
+  materialNormal: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   materialDano: {fileID: 2100000, guid: 2121ef269c480e14a870c6032d994bce, type: 2}
 --- !u!114 &4827911501898961083
 MonoBehaviour:
