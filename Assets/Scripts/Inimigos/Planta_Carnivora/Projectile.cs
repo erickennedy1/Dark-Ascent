@@ -3,9 +3,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [Header("Configurações de dano")]
-    public int damage = 10;
+    public int damage = 1;
 
-    private float lifetime = 4f;
+    private float lifetime = 2f;
     private Animator animator;
 
     void Start()
@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
 
             animator.SetTrigger("Colidiu");
 
-            Destroy(gameObject, 0.1f);
+            Destroy(gameObject);
         }
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlantaCarnivoraAttack : MonoBehaviour
 {
     [Header("Configurações de ataque")]
-    private float shootingRange = 10f;
-    private float attackCooldown = 5f;
+    public float shootingRange = 10f;
     private float attackDelay = 0.15f;
     private float comboDelay = 5f;
+    private float firstAttackDelay = 5f; 
 
     [Header("Componentes")]
     public GameObject projectilePrefab;
@@ -18,7 +18,8 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     private Transform player;
     private Animator animator;
     private System.Random random = new System.Random();
-    private bool isDead = false; 
+    private bool isDead = false;
+    public bool firstAttack = true;  
 
     void Start()
     {
@@ -29,18 +30,31 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void Update()
     {
-        if (!isDead && player != null && InShootingRange() && !IsObstacleBetween()) 
+        if (!isDead && player != null && InShootingRange() && !IsObstacleBetween())
         {
-            if (Time.time >= nextAttackTime)
+            if (firstAttack)
+            {
+                if (Time.time >= nextAttackTime)
+                {
+                    StartCoroutine(DelayFirstAttack());
+                }
+            }
+            else if (Time.time >= nextAttackTime)
             {
                 StartCombo();
             }
         }
     }
 
+    IEnumerator DelayFirstAttack()
+    {
+        yield return new WaitForSeconds(1f);
+        firstAttack = false;
+    }
+
     void StartCombo()
     {
-        if (isDead) return; 
+        if (isDead) return;
 
         int comboIndex = random.Next(0, 3);
         animator.SetBool("isComboActive", true);
@@ -58,6 +72,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
         }
         nextAttackTime = Time.time + comboDelay;
     }
+
     IEnumerator Combo1()
     {
         for (int y = 0; y < 2; y++)
@@ -77,7 +92,6 @@ public class PlantaCarnivoraAttack : MonoBehaviour
             ShootProjectile();
             yield return new WaitForSeconds(0.2f);
         }
-
         EndCombo();
     }
 
@@ -89,13 +103,12 @@ public class PlantaCarnivoraAttack : MonoBehaviour
             ShootProjectile();
             yield return new WaitForSeconds(0.2f);
         }
-
         EndCombo();
     }
 
     void ShootProjectile()
     {
-        if (isDead || !projectileSpawnPoint || IsObstacleBetween()) return;  
+        if (isDead || !projectileSpawnPoint || IsObstacleBetween()) return;
 
         Vector2 direction = (player.position - transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
@@ -108,7 +121,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void EndCombo()
     {
-        if (isDead) return; 
+        if (isDead) return;
 
         animator.SetBool("isComboActive", false);
         nextAttackTime = Time.time + comboDelay;

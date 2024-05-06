@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     private SpriteRenderer hpWarningSprite;
     private GameObject UI_VidaBaixa;
     private GameObject UI_VidaEMana;
+    private GameObject UI;
     private GameObject healthIconPrefab;
     private GameObject healthPanel;
     private Camera mainCamera;
@@ -18,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     void Awake()
     {
         healthPanel = GameObject.Find("LayoutHP");
+
         if (healthPanel.transform.childCount > 0)
         {
             healthIconPrefab = healthPanel.transform.GetChild(0).gameObject;
@@ -26,7 +28,6 @@ public class PlayerHealth : MonoBehaviour
         UI_VidaEMana = GameObject.Find("Vida_e_Mana");
         hpWarningSprite = UI_VidaBaixa.GetComponent<SpriteRenderer>();
         hpWarningSprite.color = new Color(hpWarningSprite.color.r, hpWarningSprite.color.g, hpWarningSprite.color.b, 0);
-        mainCamera = Camera.main;
 
         currentHealth = maxHealth;
         for (int i = 1; i < maxHealth; i++)
@@ -37,6 +38,11 @@ public class PlayerHealth : MonoBehaviour
 
     void LateUpdate()
     {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+
         if (seguirPlayer && mainCamera != null)
         {
             Vector3 cameraPosition = mainCamera.transform.position;
@@ -100,7 +106,7 @@ public class PlayerHealth : MonoBehaviour
         seguirPlayer = seguir;
     }
 
-    void UpdateHealthUI()
+    public void UpdateHealthUI()
     {
         for (int i = 0; i < healthPanel.transform.childCount; i++)
         {
