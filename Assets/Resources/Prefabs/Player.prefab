@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2494118556599397031}
-  - component: {fileID: 7974917554268887751}
+  - component: {fileID: 2208295534094833701}
   m_Layer: 0
   m_Name: Colider
   m_TagString: PlayerCollider
@@ -32,8 +32,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8345199313309669125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &7974917554268887751
-BoxCollider2D:
+--- !u!70 &2208295534094833701
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -64,19 +64,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.9145517}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.48707688}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: -0.915}
+  m_Size: {x: 1, y: 0.487}
+  m_Direction: 1
 --- !u!1 &8010347466936256562
 GameObject:
   m_ObjectHideFlags: 0
