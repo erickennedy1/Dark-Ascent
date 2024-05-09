@@ -3,16 +3,19 @@ using UnityEngine;
 public class MinimapCamera : MonoBehaviour
 {
     public Camera cam;
-    public float offset = 2;
+    public float offset = 10;
 
     void Start(){
-        CalculateOrthoSize();
+        UpdateMinimap();
     }
-    private void CalculateOrthoSize(){
+    public void UpdateMinimap(){
         Bounds bounds = new Bounds();
 
-        foreach(GameObject rooms in GameObject.FindGameObjectsWithTag("Room"))
-            bounds.Encapsulate(rooms.GetComponent<Collider2D>().bounds);
+        foreach(GameObject room in GameObject.FindGameObjectsWithTag("Room"))
+        {
+            if(room.GetComponent<Room>().isKnown)
+                bounds.Encapsulate(room.GetComponent<Collider2D>().bounds);
+        }
 
         bounds.Expand(offset);
 

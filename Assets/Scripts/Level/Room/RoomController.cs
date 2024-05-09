@@ -27,6 +27,7 @@ public class RoomController : MonoBehaviour
     bool updateRooms = false;
 
     public GameObject player;
+    [SerializeField]MinimapCamera minimapCamera;
 
     //**Assim que a sala for iniciada** a sala é considerada uma instancia publica
     void Awake() //Awake é chamado primeiro que todos
@@ -200,6 +201,10 @@ public class RoomController : MonoBehaviour
             if(r != null && !r.isKnown)
                 r.OnKnow();
         }
+
+        //Atualiza a Camera
+        if(updateRooms)
+            minimapCamera.UpdateMinimap();
     }
 
     //Função que Identifica a próxima sala, baseado na porta tocada, e posiciona o player nessa nova sala
@@ -243,15 +248,17 @@ public class RoomController : MonoBehaviour
         //Atualiza todas as Rooms
         foreach(Room room in loadedRooms)
             room.UpdateRoom();
-        updateRooms = true;
 
         //Tudo que precisa ser feito depois de atualizar todas as salas
+        //Carrega Minimap_Camera
+        Instantiate(Resources.Load("Prefabs/Minimap_Camera", typeof(Camera)));
+        minimapCamera = FindObjectOfType<Camera>().GetComponent<MinimapCamera>();
+
         //Identifica o player
         player = GameObject.FindGameObjectWithTag("Player");
         //Posiciona o player no centro da sala Start
         player.transform.position = loadedRooms.Find(item => item.type == "Start").GetRoomCenter();
 
-        //Carrega Minimap_Camera
-        Instantiate(Resources.Load("Prefabs/Minimap_Camera", typeof(Camera)));
+        updateRooms = true;
     }
 }
