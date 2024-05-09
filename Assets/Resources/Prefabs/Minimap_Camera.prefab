@@ -43,7 +43,7 @@ Camera:
   m_GameObject: {fileID: 7191057012726936664}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1719434464546473822}
-  offset: 2
+  offset: 10
 --- !u!114 &-5466523471808421543
 MonoBehaviour:
   m_ObjectHideFlags: 0
