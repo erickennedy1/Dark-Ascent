@@ -104,12 +104,7 @@ public class GameController : MonoBehaviour
                     }else{
                         //Se não houver, volta para o Hub
                         //PS.: Preciso adicionar uma cena final
-                        currentWorldLevel = 0;
-                        currentLevel = -1;
-                        currentWorldName = worldNames[currentWorldLevel];
-                        SceneManager.LoadScene(currentWorldName);
-                        // FindPlayer();
-                        player.ResetPlayer();
+                        GoToHub();
                         return;
                     }
                     break;
@@ -117,6 +112,19 @@ public class GameController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void GoToHub()
+    {
+        //Unload todas as cenas adicionais
+        for(int i=1;i<SceneManager.sceneCount;i++)
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
+        
+        currentWorldLevel = 0;
+        currentLevel = 0;
+        currentWorldName = worldNames[currentWorldLevel];
+        SceneManager.LoadScene("Hub");
+        player.ResetPlayer();
     }
 
     private void FindPlayer()
