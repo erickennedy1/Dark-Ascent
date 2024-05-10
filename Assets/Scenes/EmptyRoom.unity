@@ -612,7 +612,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   MaxEnemies: 3
-  isDoorsClose: 0
 --- !u!1 &1541824387
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,8 +678,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0000500679, y: 0.00019979477, z: 0}
-    m_Extent: {x: 13.00065, y: 8.000299, z: 0}
+    m_Center: {x: 0, y: -0.00019979477, z: 0}
+    m_Extent: {x: 13.0004, y: 8.000401, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

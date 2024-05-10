@@ -27,7 +27,7 @@ public class RoomController : MonoBehaviour
     bool updateRooms = false;
 
     public GameObject player;
-    [SerializeField]MinimapCamera minimapCamera;
+    [SerializeField]MinimapController minimapController;
 
     //**Assim que a sala for iniciada** a sala é considerada uma instancia publica
     void Awake() //Awake é chamado primeiro que todos
@@ -169,23 +169,38 @@ public class RoomController : MonoBehaviour
     //Função chamada quando o player entra na sala
     public void OnPlayerEnterRoom(Room room)
     {
+        //Update Camera
+        UpdateCamera(room);
+
+        //Update Room States
+        if (updateRooms)
+        {
+            UpdateRoomStates(room);
+        }
+    }
+
+    public void UpdateCamera(Room room)
+    {
         CameraController.instance.currentRoom = room;
         if (currentRoom != null)
             currentRoom.OnLeave();
         currentRoom = room;
-        if (updateRooms)
-        {
-            UpdateMinimap(room);
-        }
     }
 
-    public void UpdateMinimap(Room room)
+    public void UpdateRoomStates(Room room)
     {
         if(!room.isKnown)
             room.OnKnow();
-        if(!room.isClear)
+        if(room.hasBattle && !room.isClear)
+            StartBattle();
+        else if(!room.isClear)
             room.OnClear();
-        
+
+        UpdateMinimap(room);
+    }
+
+    public void UpdateMinimap(Room room)
+    {       
         room.OnEnterRoom();
 
         //Defini como conhecido todas as salas próximas
@@ -204,7 +219,7 @@ public class RoomController : MonoBehaviour
 
         //Atualiza a Camera
         if(updateRooms)
-            minimapCamera.UpdateMinimap();
+            minimapController.UpdateMinimap();
     }
 
     //Função que Identifica a próxima sala, baseado na porta tocada, e posiciona o player nessa nova sala
@@ -251,8 +266,8 @@ public class RoomController : MonoBehaviour
 
         //Tudo que precisa ser feito depois de atualizar todas as salas
         //Carrega Minimap_Camera
-        Instantiate(Resources.Load("Prefabs/Minimap_Camera", typeof(Camera)));
-        minimapCamera = FindObjectOfType<Camera>().GetComponent<MinimapCamera>();
+        minimapController = GameObject.Find("MinimapController").GetComponent<MinimapController>();
+        minimapController.InitCamera();
 
         //Identifica o player
         player = GameObject.FindGameObjectWithTag("Player");
@@ -260,5 +275,18 @@ public class RoomController : MonoBehaviour
         player.transform.position = loadedRooms.Find(item => item.type == "Start").GetRoomCenter();
 
         updateRooms = true;
+    }
+
+    public void StartBattle()
+    {
+        minimapController.DisableMap();
+        currentRoom.CloseDoors();
+    }
+
+    public void EndBattle()
+    {
+        minimapController.EnableMap();
+        currentRoom.OpenDoors();
+        currentRoom.isClear = true;
     }
 }

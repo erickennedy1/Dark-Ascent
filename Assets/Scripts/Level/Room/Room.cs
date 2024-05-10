@@ -12,6 +12,8 @@ public class Room : MonoBehaviour
     public bool hasBattle = false; //Identifica salas com batalha.
     private Player player;
 
+    private SpawnEnemiesController spawnEnemiesController;
+
     //Methods
     void Start(){
         //Verifica se RoomController existe
@@ -22,8 +24,8 @@ public class Room : MonoBehaviour
         }
         RoomController.instance.RegisterRoom(this);
         minimapIcon = GetComponentInChildren<MinimapIcon>();
-        player = GameObject.FindObjectOfType<Player>();
-
+        player = FindObjectOfType<Player>();
+        spawnEnemiesController = gameObject.GetComponentInChildren<SpawnEnemiesController>();
     }
 
     //Chamado quando todas as salas forem carregadas
@@ -39,7 +41,9 @@ public class Room : MonoBehaviour
         {
             RandomTilemapEmpty();
             if(hasBattle){
-                gameObject.GetComponentInChildren<SpawnEnemiesController>().SpawnEnemies();
+                spawnEnemiesController.SpawnEnemies();
+            }else{
+                spawnEnemiesController.gameObject.SetActive(false);
             }
         }
         else{
@@ -48,8 +52,8 @@ public class Room : MonoBehaviour
             {   
                 case "Start":
                     //Prepara a sala Start para ser a primeira sala
-                    RoomController.instance.OnPlayerEnterRoom(this);
-                    RoomController.instance.UpdateMinimap(this);
+                    RoomController.instance.UpdateCamera(this);
+                    RoomController.instance.UpdateRoomStates(this);
                     break;
                 case "Gate":
                     //Adiciona o Gate

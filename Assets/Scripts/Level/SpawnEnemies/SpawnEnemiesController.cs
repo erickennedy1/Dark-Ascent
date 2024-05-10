@@ -9,7 +9,7 @@ public class SpawnEnemiesController : MonoBehaviour
     public int MaxEnemies = 3; // Número total de inimigos
     private int currentEnemies = 0;
 
-    public bool isDoorsClose = false;
+    private bool hasEnemies;
 
     void Start()
     {
@@ -18,17 +18,15 @@ public class SpawnEnemiesController : MonoBehaviour
 
     void Update()
     {
-        if(isDoorsClose)
-        {   
-            if(transform.childCount == 0){
-                isDoorsClose = false;
-                GetComponentInParent<Room>().OpenDoors();
-            }
+        if(hasEnemies)
+        {
+            CheckEnemiesAlive();
         }
     }
 
     public void SpawnEnemies()
     {
+        hasEnemies = true;
         int count = 0;
         Vector3 spawnPosition;
         int totalEnemies = Random.Range(1,MaxEnemies+1);
@@ -48,9 +46,14 @@ public class SpawnEnemiesController : MonoBehaviour
             count++;
             if(count >= totalEnemies*3)
                 Debug.Log("Máximo de tantativas atingido");
+        }
+    }
 
-            GetComponentInParent<Room>().CloseDoors();
-            isDoorsClose = true;
+    void CheckEnemiesAlive()
+    {
+        if(transform.childCount == 0){
+            RoomController.instance.EndBattle();
+            gameObject.SetActive(false);
         }
     }
 
