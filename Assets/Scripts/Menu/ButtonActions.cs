@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonActions : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class ButtonActions : MonoBehaviour
     private void PlayGame()
     {
         Debug.Log("Iniciando o jogo...");
+        SceneManager.LoadScene("Hub");
     }
 
     private void ToggleGameObject(GameObject panel, GameObject inicialPanel)

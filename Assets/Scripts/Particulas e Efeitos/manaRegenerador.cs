@@ -32,7 +32,7 @@ public class manaRegenerador : MonoBehaviour
         {
             if (playerMana != null)
             {
-                playerMana.recuperarMana(10);
+                playerMana.RecuperarMana(10);
             }
             else
             {

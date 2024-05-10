@@ -1,100 +1,55 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMana : MonoBehaviour
 {
     [Header("Configurações de Mana")]
     public int maxMana = 100;
     public int currentMana;
-    private int targetMana;
-
-    private float manaChangeDuration = 1.5f;
-
-    private SpriteRenderer ManaCompletaSprite;
-    private SpriteRenderer AnimacaoDaMana;
-
-    private float lastManaUseTime;
-    private Vector2 originalSize;
-
-    private Coroutine manaChangeCoroutine;
+    private Animator manaAnimator;
+    private string manaAnimationStateName = "ManaChange"; 
 
     void Start()
     {
-        ManaCompletaSprite = GameObject.Find("ManaCompleta").GetComponent<SpriteRenderer>();
-        AnimacaoDaMana = GameObject.Find("Animação da Mana").GetComponent<SpriteRenderer>();
+        manaAnimator = GameObject.Find("UI_vida_e_mana").GetComponent<Animator>();
+        currentMana = maxMana;
+        SetManaAnimation(currentMana);
 
-        currentMana = 30;
-        targetMana = currentMana;
-
-        if (ManaCompletaSprite != null && AnimacaoDaMana != null)
-        {
-            originalSize = ManaCompletaSprite.size;
-        }
-        UpdateManaUI();
+        DontDestroyOnLoad(manaAnimator);
     }
 
-    public bool UseMana(int amount)
+    public void UsarMana(int amount)
     {
-        if (targetMana >= amount)
+        if (currentMana >= amount)
         {
-            targetMana -= amount;
-            lastManaUseTime = Time.time;
-            StartManaChangeCoroutine();
-            return true;
+            currentMana -= amount;
+            SetManaAnimation(currentMana);
         }
-        return false;
     }
 
-    public void recuperarMana(int quantidade)
+    public void RecuperarMana(int quantidade)
     {
-        if (targetMana < maxMana)
-        {
-            Debug.Log("Recuperando Mana: " + quantidade);
-            targetMana = currentMana + quantidade;
-            StartManaChangeCoroutine();
-        }
+        currentMana = Mathf.Min(currentMana + quantidade, maxMana);
+        SetManaAnimation(currentMana);
     }
 
-    private void StartManaChangeCoroutine()
+    private void SetManaAnimation(int mana)
     {
-        if (manaChangeCoroutine != null)
-        {
-            StopCoroutine(manaChangeCoroutine);
-        }
-        manaChangeCoroutine = StartCoroutine(AnimateManaChange());
+        float normalizedTime = 1f - (float)mana / maxMana;
+        Debug.Log("Normalized time: " + normalizedTime); // Verifique este valor
+        manaAnimator.Play(manaAnimationStateName, 0, normalizedTime);
     }
 
-    IEnumerator AnimateManaChange()
+    public void ResetMana()
     {
-        float elapsedTime = 0f;
-        int startingMana = currentMana;
-
-        while (elapsedTime < manaChangeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            currentMana = (int)Mathf.Lerp(startingMana, targetMana, elapsedTime / manaChangeDuration);
-            UpdateManaUI();
-            yield return null;
-        }
-
-        currentMana = targetMana;
-        UpdateManaUI();
+        currentMana = maxMana;
+        SetManaAnimation(currentMana);
+        Debug.Log("Mana resetada para o máximo");
     }
 
-    void UpdateManaUI()
+    void OnEnable()
     {
-        if (ManaCompletaSprite != null && AnimacaoDaMana != null)
-        {
-            float manaPercentage = (float)currentMana / maxMana;
-            float heightChange = originalSize.y * manaPercentage;
-
-            ManaCompletaSprite.size = new Vector2(originalSize.x, heightChange);
-
-            float extraOffset = 0.24f * originalSize.y;
-
-            Vector3 newWavePosition = new Vector3(AnimacaoDaMana.transform.position.x, ManaCompletaSprite.transform.position.y + heightChange / 2 - extraOffset, AnimacaoDaMana.transform.position.z);
-            AnimacaoDaMana.size = new Vector2(originalSize.x, heightChange);
-            AnimacaoDaMana.transform.position = newWavePosition;
-        }
+        SetManaAnimation(currentMana);
     }
+
 }

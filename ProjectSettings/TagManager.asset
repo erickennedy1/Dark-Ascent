@@ -10,6 +10,7 @@ TagManager:
   - Esquerda
   - Direita
   - PlayerCollider
+  - HealthIcon
   layers:
   - Default
   - TransparentFX

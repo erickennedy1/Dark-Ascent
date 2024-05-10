@@ -13,18 +13,15 @@ public class GameController : MonoBehaviour
     public int currentLevel;
 
     private Player player;
-    private GameObject UI;
 
     public bool isGamePaused = false;
 
     //Função chamada antes do Start, Caso já exista um GameController na Scene, o novo GameController se auto Destroy
     //Caso contrário ele não é destruído ao carregar uma nova Scene
     void Awake(){
-        UI = GameObject.Find("UI");
         if (instance == null){
             instance = this;
             DontDestroyOnLoad(this);
-            DontDestroyOnLoad(UI);
         }
         else{
             Destroy(gameObject);
@@ -88,6 +85,7 @@ public class GameController : MonoBehaviour
                     currentLevel++;
                     //Carrega o próximo nível
                     SceneManager.LoadScene("Dungeon");
+                    player.ResetPlayer();
                     break;
                 case 2:
                     currentLevel++;

@@ -5,7 +5,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 {
     [Header("Configurações de ataque")]
     public float shootingRange = 10f;
-    private float attackDelay = 0.15f;
+    private float attackDelay = 0.8f;
     private float comboDelay = 5f;
     private float firstAttackDelay = 5f; 
 

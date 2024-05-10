@@ -1,43 +1,133 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Configurações de Vida")]
     public int maxHealth = 5;
+    public GameObject healthIconPrefab;
+    private List<GameObject> healthIcons = new List<GameObject>();
     private int currentHealth;
-    private GameObject healthPanel;
+    private Transform healthLayoutGroup;
+    private PlayerMana playerMana;
 
-    void Awake()
+    void Start()
     {
-        healthPanel = GameObject.Find("Vida");
+        healthLayoutGroup = GameObject.Find("Vida_Layout").transform;
+        playerMana = GetComponent<PlayerMana>();
+
+        if (playerMana == null)
+        {
+            Debug.LogError("Componente PlayerMana não encontrado!");
+        }
+        if (healthLayoutGroup == null)
+        {
+            Debug.LogError("Não foi possível encontrar o objeto 'Vida_Layout'!");
+            return;
+        }
         currentHealth = maxHealth;
-        UpdateHealthUI();
+        Debug.Log("Reiniciando saúde no Start");
+        ResetHealthIcons();
+        InitializeHealthIcons();
+    }
+
+    private void ResetHealthIcons()
+    {
+        foreach (GameObject icon in healthIcons)
+        {
+            Destroy(icon);
+        }
+        healthIcons.Clear();
+    }
+
+    private void InitializeHealthIcons()
+    {
+        for (int i = 0; i < maxHealth; i++)
+        {
+            GameObject icon = Instantiate(healthIconPrefab, healthLayoutGroup);
+            icon.SetActive(true);
+            healthIcons.Add(icon);
+        }
     }
 
     public void TakeDamage(int damageAmount)
     {
+        Debug.Log("Dano recebido: " + damageAmount);
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateHealthUI();
+        Debug.Log("Saúde atual: " + currentHealth);
+
+        for (int i = 0; i < healthIcons.Count; i++)
+        {
+            if (healthIcons[i] != null) 
+            {
+                Animator animator = healthIcons[i].GetComponent<Animator>();
+                if (animator != null) 
+                {
+                    if (i >= currentHealth)
+                    {
+                        animator.SetTrigger("VidaQuebrando");
+                    }
+                }
+            }
+        }
 
         if (currentHealth <= 0)
         {
+            Debug.Log("Saúde esgotada, chamando Die()");
             Die();
+        }
+    }
+
+
+    public void GainHealth(int healAmount)
+    {
+        int previousHealth = currentHealth;
+        currentHealth += healAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        for (int i = previousHealth; i < currentHealth; i++)
+        {
+            healthIcons[i].SetActive(true);
         }
     }
 
     void Die()
     {
         Debug.Log("Player Died");
+        playerMana.ResetMana();
+        SceneManager.LoadScene("Hub");
+        transform.position = Vector3.zero;
     }
 
-    public void UpdateHealthUI()
+    void Awake()
     {
-        for (int i = 0; i < healthPanel.transform.childCount; i++)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Hub")
         {
-            GameObject icon = healthPanel.transform.GetChild(i).gameObject;
-            icon.SetActive(i < currentHealth);
+            currentHealth = maxHealth;
+            ResetHealthIcons();
+            InitializeHealthIcons();
+            Debug.Log("Saúde resetada no carregamento da cena 'Hub'");
         }
+    }
+
+
+    void OnEnable()
+    {
+        currentHealth = maxHealth;
+        ResetHealthIcons();
+        InitializeHealthIcons();
+        Debug.Log("Saúde resetada no OnEnable");
     }
 }
