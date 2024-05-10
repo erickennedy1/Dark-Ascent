@@ -25,7 +25,7 @@ public class UIController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             if (player != null)
             {
-                player.UpdateHealthUI();
+                
             }
             else
             {

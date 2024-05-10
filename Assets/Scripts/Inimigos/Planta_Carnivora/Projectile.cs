@@ -5,7 +5,7 @@ public class Projectile : MonoBehaviour
     [Header("Configurações de dano")]
     public int damage = 1;
 
-    private float lifetime = 2f;
+    private float lifetime = 1.3f;
     private Animator animator;
 
     void Start()

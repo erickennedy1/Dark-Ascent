@@ -20,19 +20,6 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>(); 
     }
 
-    private void Awake()
-    {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
-
-        if (objs.Length > 1)
-        {
-            Debug.Log("Destroy, Player > 1: " + objs.Length);
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(this);
-    }
     void FixedUpdate()
     {
         HandleMovementInput();
