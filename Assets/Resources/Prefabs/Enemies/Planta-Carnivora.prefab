@@ -309,10 +309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2048b0ec732fe4ebbc48f2fb1f3c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingRange: 10
+  distanciaAtaque: 10
+  ataqueDelay: 3
   projectilePrefab: {fileID: 8520883754821663664, guid: a4cfc2c79d4c19e4ba10cae087aba969, type: 3}
   projectileSpawnPoint: {fileID: 798390207991093544}
-  firstAttack: 1
 --- !u!114 &5757412178967290802
 MonoBehaviour:
   m_ObjectHideFlags: 0

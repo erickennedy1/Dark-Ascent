@@ -3,59 +3,61 @@ using UnityEngine;
 
 public class PlantaCarnivoraAttack : MonoBehaviour
 {
-    [Header("Configurações de ataque")]
-    public float shootingRange = 10f;
-    private float attackDelay = 1.0f;  // Intervalo entre os ataques
+    [Header("Attack Settings")]
+    public float distanciaAtaque = 10f;
+    public float ataqueDelay = 1.0f;
+    public float enableAttackDelay = 2.0f;
 
-    [Header("Componentes")]
+    [Header("Components")]
     public GameObject projectilePrefab;
     public Transform projectileSpawnPoint;
 
-    private LayerMask obstacleLayer;
-    private float nextAttackTime = 0f;
+    private float nextAttackTime = 2f;
     private Transform player;
     private Animator animator;
     private bool isDead = false;
-    private float squaredShootingRange;
+    public bool canAttack = true;
+    private bool canAttack2 = false;
 
     void Start()
     {
-        obstacleLayer = LayerMask.GetMask("Wall");
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
-        squaredShootingRange = shootingRange * shootingRange;
     }
 
     void Update()
     {
-        if (!isDead && player != null && InShootingRange() && !IsObstacleBetween())
+        if (!isDead && Time.time >= nextAttackTime && IsPlayerInRange() && canAttack2)
         {
-            if (Time.time >= nextAttackTime)
-            {
-                ShootProjectile();
-                nextAttackTime = Time.time + attackDelay;
-            }
+            animator.SetTrigger("Attack");
+            nextAttackTime = Time.time + ataqueDelay;
+        }
+
+        if (canAttack && !canAttack2)
+        {
+            StartCoroutine(EnableAttackWithDelay());
         }
     }
 
-    void ShootProjectile()
+    public void ShootProjectile()
     {
-        if (isDead || !projectileSpawnPoint) return;
+        if (projectileSpawnPoint == null || isDead || !canAttack2) return; 
 
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 targetDirection = (player.position - transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        rb.velocity = direction * 10; // Velocidade do projétil
+        rb.velocity = targetDirection * 10;
     }
 
-    bool InShootingRange()
+    bool IsPlayerInRange()
     {
-        return (transform.position - player.position).sqrMagnitude <= squaredShootingRange;
+        float squaredDistance = (transform.position - player.position).sqrMagnitude;
+        return squaredDistance <= distanciaAtaque * distanciaAtaque;
     }
 
-    bool IsObstacleBetween()
+    IEnumerator EnableAttackWithDelay()
     {
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, obstacleLayer);
-        return hit.collider != null;
+        yield return new WaitForSeconds(enableAttackDelay);
+        canAttack2 = true;
     }
 }

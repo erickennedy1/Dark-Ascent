@@ -45,4 +45,9 @@ public class BossEspinhos : MonoBehaviour
             Instantiate(espinhosPrefab, new Vector3(jogador.position.x, jogador.position.y+0.5f, jogador.position.z), Quaternion.identity);
         }
     }
+
+    public void AtivarEspinhosExterno()
+    {
+        StartCoroutine(AtivarEspinhos());
+    }
 }

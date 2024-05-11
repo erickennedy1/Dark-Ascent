@@ -12,7 +12,8 @@ public class BossProjetil : MonoBehaviour
     public int vezesParaDisparar = 3;
     private float intervaloDisparos = 3f;
 
-    [SerializeField] private Orbe orbe; 
+    [SerializeField] private Orbe orbe;
+    public BossController bossController;
 
     private int vezesDisparadas = 0;
 
@@ -65,8 +66,9 @@ public class BossProjetil : MonoBehaviour
         }
         else
         {
+            Debug.Log("Oiii");
             CancelInvoke(nameof(VerificarDisparo));
-
+            bossController.Teste(false);
             orbe.gameObject.SetActive(false);
         }
     }

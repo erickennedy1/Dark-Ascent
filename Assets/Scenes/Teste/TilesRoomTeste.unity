@@ -1269,6 +1269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftWallDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 4123410536885192715, guid: c4e9e3bd479ca0b429e15bb886f29f3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6114321552455397713, guid: c4e9e3bd479ca0b429e15bb886f29f3c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1329,6 +1333,10 @@ PrefabInstance:
     - target: {fileID: 154601368575823982, guid: 16f3f6806d442d3428938f11b52e062e, type: 3}
       propertyPath: m_Name
       value: TopWallDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 154601368575823982, guid: 16f3f6806d442d3428938f11b52e062e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8356746886090529782, guid: 16f3f6806d442d3428938f11b52e062e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1516,6 +1524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomWallDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 1082973660277083460, guid: a2e00263cd7274940b124eeb995aa906, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2641518718056433178, guid: a2e00263cd7274940b124eeb995aa906, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1674,6 +1686,10 @@ PrefabInstance:
     - target: {fileID: 6391434130412432541, guid: 8ef53ac7eb4fa68409c53f277bfa77c1, type: 3}
       propertyPath: m_Name
       value: RightWallDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391434130412432541, guid: 8ef53ac7eb4fa68409c53f277bfa77c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
