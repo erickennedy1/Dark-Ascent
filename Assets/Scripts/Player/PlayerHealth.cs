@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -11,11 +12,14 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
     private Transform healthLayoutGroup;
     private PlayerMana playerMana;
+    private Animator animator;
 
     void Start()
     {
         healthLayoutGroup = GameObject.Find("Vida_Layout").transform;
         playerMana = GetComponent<PlayerMana>();
+
+        animator = GetComponent<Animator>();
 
         if (playerMana == null)
         {
@@ -96,9 +100,13 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player Died");
-        playerMana.ResetMana();
-        SceneManager.LoadScene("Hub");
-        transform.position = Vector3.zero;
+        animator.SetTrigger("Morrendo");
+    }
+
+    public void Morrendo()
+    {
+        playerMana.ResetMana();                 
+        GameController.instance.GoToHub();        
     }
 
     void Awake()
