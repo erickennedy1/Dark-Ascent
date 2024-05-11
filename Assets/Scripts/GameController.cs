@@ -112,7 +112,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void GoToHub()
+    public void GoToHub()
     {
         //Unload todas as cenas adicionais
         for(int i=1;i<SceneManager.sceneCount;i++)
