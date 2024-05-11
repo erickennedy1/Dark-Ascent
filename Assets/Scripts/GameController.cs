@@ -56,10 +56,10 @@ public class GameController : MonoBehaviour
             isGamePaused = false;
 
         //Caso o jogo estaja pausado
-        if(isGamePaused)
-            player.canMove = false;
+        if (isGamePaused)
+            PlayerAcao(false);
         else
-            player.canMove = true;
+            PlayerAcao(true);
     }
 
     public void NextLevel()
@@ -133,4 +133,32 @@ public class GameController : MonoBehaviour
     public void SceneCountTotal(){
         Debug.Log("Total de Scenes: "+SceneManager.sceneCount);
     }
+
+    public void PlayerAcao(bool estado)
+    {
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        PlayerAttack playerAttack = player.GetComponent<PlayerAttack>();
+
+        if (playerMovement != null)
+            playerMovement.canMove = estado;
+        if (playerAttack != null)
+            playerAttack.canAttack = estado;
+
+        foreach (var enemy in FindObjectsOfType<EnemyMovementAndHealth>())
+        {
+            enemy.canMove = estado;
+        }
+
+        foreach (var enemy in FindObjectsOfType<EnemyAttack>())
+        {
+            enemy.canAttack = estado;
+        }
+
+        foreach (var enemy in FindObjectsOfType<PlantaCarnivoraAttack>())
+        {
+            enemy.canAttack = estado;  
+        }
+    }
+
+
 }

@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Configurações de movimento")]
     public float moveSpeed = 5f;
+    public bool canMove = true;
 
     private Vector2 movement;
     private float ultimoMovimentoHorizontal = 0f;
@@ -22,7 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleMovementInput();
+        if (canMove)  // Verifica se o movimento está permitido
+        {
+            HandleMovementInput();
+        }
     }
 
     void HandleMovementInput()

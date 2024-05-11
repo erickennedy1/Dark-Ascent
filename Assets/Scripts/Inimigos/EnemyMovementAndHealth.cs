@@ -19,6 +19,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
     private bool isKnockedBack = false;
     public bool knockbackBool = true;
     private bool morreu = false;
+    public bool canMove = true;
 
     private Animator animator;
     private DamageFeedback damageFeedback;
@@ -57,7 +58,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        if (!morreu)
+        if (!morreu && canMove)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
             AdjustFacingDirection();

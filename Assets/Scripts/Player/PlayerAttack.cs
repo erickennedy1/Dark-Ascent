@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Configurações de ataque")]
     public int danoAtaque = 10;
     public float distanciaAtaque = 2f;
+    public bool canAttack = true;
 
     private bool podeAtacar = true;
     private Coroutine ataqueCouldown;
@@ -25,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && podeAtacar)
+        if (Input.GetMouseButtonDown(0) && podeAtacar && canAttack)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 playerPosition = transform.position;
