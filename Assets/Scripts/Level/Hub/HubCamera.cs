@@ -1,4 +1,3 @@
-using Unity.Collections;
 using UnityEngine;
 
 public class Follow_player : MonoBehaviour
@@ -9,7 +8,7 @@ public class Follow_player : MonoBehaviour
     private Vector3 offset = new Vector3(0, 0, -10);
     public float smoothSpeed = 0.15f;
 
-    [SerializeField]private Bounds _cameraBounds;
+    private Bounds _cameraBounds;
 
     private Camera _mainCamera;
 
