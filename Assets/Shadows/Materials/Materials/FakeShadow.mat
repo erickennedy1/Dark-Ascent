@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material 1
-  m_Shader: {fileID: 4800000, guid: 74a90f756d3d0ab48be4fd466b051f25, type: 3}
+  m_Name: FakeShadow
+  m_Shader: {fileID: 4800000, guid: cbf85ded9945a6249b7dce66a76cc5bc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,29 +23,27 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MaskTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EnableExternalAlpha: 0
-    - _OpacitySpeed: 5
+    - PixelSnap: 0
+    - _Direction: 0.43
+    - _Fade: 0
+    - _FadeAmount: 0.617
+    - _Height: 0.87
+    - _Intensity: 0.0175
+    - _OnlyShadow: 0
+    - _Quality: 4
+    - _Soft: 0
+    - _Tilt: 0
     m_Colors:
-    - _Center: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: 1, g: 0, b: 0, a: 0}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0.8156863}
+    - _SpritePivot: {r: 0, g: 0, b: 0, a: 0}
+    - _SpriteSize: {r: 0, g: 0, b: 0, a: 0}
+    - _SpriteSizeRel: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

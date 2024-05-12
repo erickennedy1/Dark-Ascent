@@ -136,13 +136,15 @@ public class GameController : MonoBehaviour
 
     public void PlayerAcao(bool estado)
     {
-        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-        PlayerAttack playerAttack = player.GetComponent<PlayerAttack>();
-
-        if (playerMovement != null)
+        foreach (PlayerMovement playerMovement in player.GetComponentsInChildren<PlayerMovement>())
+        {
             playerMovement.canMove = estado;
-        if (playerAttack != null)
+        }
+
+        foreach (PlayerAttack playerAttack in player.GetComponentsInChildren<PlayerAttack>())
+        {
             playerAttack.canAttack = estado;
+        }
 
         foreach (var enemy in FindObjectsOfType<EnemyMovementAndHealth>())
         {
@@ -156,7 +158,7 @@ public class GameController : MonoBehaviour
 
         foreach (var enemy in FindObjectsOfType<PlantaCarnivoraAttack>())
         {
-            enemy.canAttack = estado;  
+            enemy.canAttack = estado;
         }
     }
 

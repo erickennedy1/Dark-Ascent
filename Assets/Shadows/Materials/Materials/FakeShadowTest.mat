@@ -7,12 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material 1
-  m_Shader: {fileID: 4800000, guid: 74a90f756d3d0ab48be4fd466b051f25, type: 3}
+  m_Name: FakeShadowTest
+  m_Shader: {fileID: 4800000, guid: dc5b6078032080e4c8370cfbbc3f7701, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _TILT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -31,21 +32,42 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MaskTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
+    m_Ints:
+    - _Quality: 0
     m_Floats:
+    - PixelSnap: 0
+    - _Blur: 0
+    - _DeltaY: 0
+    - _Direction: -0.77
+    - _Dst: 10
+    - _DstA: 7
     - _EnableExternalAlpha: 0
-    - _OpacitySpeed: 5
+    - _Fade: 0
+    - _FadeAmount: 0.765
+    - _Height: 0.762
+    - _Intensity: 0.0119
+    - _MaxHeight: 1
+    - _OnlyShadow: 0
+    - _Op: 0
+    - _OpA: 0
+    - _Perspective: 0
+    - _Quality: 4
+    - _ScreenPos: 0
+    - _Soft: 0
+    - _SpriteHeight: 0
+    - _Src: 5
+    - _SrcA: 5
+    - _Test: 0.65
+    - _Tilt: 1
     m_Colors:
-    - _Center: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Opacity: {r: 0, g: 0, b: 0, a: 0.68235296}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0.8}
+    - _SpritePivot: {r: 0, g: 0, b: 0, a: 0}
+    - _SpritePos: {r: 0, g: 0, b: 0, a: 0}
+    - _SpriteSize: {r: 0, g: 0, b: 0, a: 0}
+    - _SpriteSizeRel: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

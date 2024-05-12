@@ -1,29 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class BossEspinhos : MonoBehaviour
 {
     [SerializeField] private GameObject espinhosPrefab;
     [SerializeField] private float intervaloInicialEntreEspinhos = 0.5f;
-    [SerializeField] private float intervaloSecundarioEntreEspinhos = 0.2f;  
-    [SerializeField] private float duracaoAtiva = 10f;
-    [SerializeField] private float duracaoPausa = 5f;
+    [SerializeField] private float intervaloSecundarioEntreEspinhos = 0.2f;
+    [SerializeField] public float duracaoAtiva = 10f;
+    [SerializeField] public float duracaoPausa = 5f;
 
     private Transform jogador;
-    private bool primeiraAtivacao = true;  
+    private bool primeiraAtivacao = true;
+    private int ativaçõesRealizadas = 0;  // Variável para contar quantas vezes os espinhos foram ativados
+    private int maxAtivacoes = 2;  // Máximo de ativações permitidas
 
     void Start()
     {
         jogador = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    public void IniciarEspinhos()
+    {
         StartCoroutine(AtivarEspinhos());
     }
 
-    private IEnumerator AtivarEspinhos()
+    public void PararEspinhos()
     {
-        float intervaloAtual = intervaloInicialEntreEspinhos;  
+        StopCoroutine(AtivarEspinhos());
+        CancelInvoke(nameof(CriarEspinhos));
+    }
 
-        while (true)
+    public IEnumerator AtivarEspinhos()
+    {
+        float intervaloAtual = intervaloInicialEntreEspinhos;
+
+        while (ativaçõesRealizadas < maxAtivacoes)
         {
             InvokeRepeating(nameof(CriarEspinhos), 0f, intervaloAtual);
             yield return new WaitForSeconds(duracaoAtiva);
@@ -32,9 +43,11 @@ public class BossEspinhos : MonoBehaviour
 
             if (primeiraAtivacao)
             {
-                intervaloAtual = intervaloSecundarioEntreEspinhos; 
-                primeiraAtivacao = false; 
+                intervaloAtual = intervaloSecundarioEntreEspinhos;
+                primeiraAtivacao = false;
             }
+
+            ativaçõesRealizadas++;  // Incrementa a contagem de ativações
         }
     }
 
@@ -42,12 +55,7 @@ public class BossEspinhos : MonoBehaviour
     {
         if (jogador != null)
         {
-            Instantiate(espinhosPrefab, new Vector3(jogador.position.x, jogador.position.y+0.5f, jogador.position.z), Quaternion.identity);
+            Instantiate(espinhosPrefab, new Vector3(jogador.position.x, jogador.position.y + 0.5f, jogador.position.z), Quaternion.identity);
         }
-    }
-
-    public void AtivarEspinhosExterno()
-    {
-        StartCoroutine(AtivarEspinhos());
     }
 }

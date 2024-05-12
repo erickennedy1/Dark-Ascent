@@ -10,25 +10,8 @@ public class BossProjetil : MonoBehaviour
     private float anguloInicio = 15f;
     private float anguloFim = -195f;
     public int vezesParaDisparar = 3;
-    private float intervaloDisparos = 3f;
-
-    [SerializeField] private Orbe orbe;
-    public BossController bossController;
-
-    private int vezesDisparadas = 0;
-
-    void Start()
-    {
-        InvokeRepeating(nameof(VerificarDisparo), 0f, intervaloDisparos);
-    }
-
-    private void VerificarDisparo()
-    {
-        if (orbe.prontoParaAtacar)
-        {
-            DispararEmTodasAsDirecoes();
-        }
-    }
+    public float intervaloDisparos = 3f;
+    public int vezesDisparadas = 0;
 
     private void DispararEmTodasAsDirecoes()
     {
@@ -36,7 +19,6 @@ public class BossProjetil : MonoBehaviour
         {
             float angulo = anguloInicio;
             float anguloIncremento = (anguloFim - anguloInicio) / quantidadeProjetis;
-
             int indiceDestrutivel = Random.Range(0, quantidadeProjetis - 1);
 
             for (int i = 0; i < quantidadeProjetis; i++)
@@ -66,10 +48,22 @@ public class BossProjetil : MonoBehaviour
         }
         else
         {
-            Debug.Log("Oiii");
-            CancelInvoke(nameof(VerificarDisparo));
-            bossController.Teste(false);
-            orbe.gameObject.SetActive(false);
+            CancelarDisparos();
         }
+    }
+
+    public void ResetarDisparos()
+    {
+        vezesDisparadas = 0;
+    }
+
+    public void AtivarCombo()
+    {
+        InvokeRepeating(nameof(DispararEmTodasAsDirecoes), 0f, intervaloDisparos);
+    }
+
+    public void CancelarDisparos()
+    {
+        CancelInvoke(nameof(DispararEmTodasAsDirecoes));
     }
 }

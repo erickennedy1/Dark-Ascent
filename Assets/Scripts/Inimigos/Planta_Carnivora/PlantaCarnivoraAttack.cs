@@ -6,42 +6,37 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     [Header("Attack Settings")]
     public float distanciaAtaque = 10f;
     public float ataqueDelay = 1.0f;
-    public float enableAttackDelay = 2.0f;
+    public float enableAttackDelay = 3.0f;
 
     [Header("Components")]
     public GameObject projectilePrefab;
     public Transform projectileSpawnPoint;
 
-    private float nextAttackTime = 2f;
+    private float nextAttackTime = 0f;
     private Transform player;
     private Animator animator;
     private bool isDead = false;
-    public bool canAttack = true;
-    private bool canAttack2 = false;
+    public bool canAttack = false;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        StartCoroutine(EnableAttackWithDelay());
     }
 
     void Update()
     {
-        if (!isDead && Time.time >= nextAttackTime && IsPlayerInRange() && canAttack2)
+        if (!isDead && Time.time >= nextAttackTime && IsPlayerInRange() && canAttack)
         {
             animator.SetTrigger("Attack");
-            nextAttackTime = Time.time + ataqueDelay;
-        }
-
-        if (canAttack && !canAttack2)
-        {
-            StartCoroutine(EnableAttackWithDelay());
+            nextAttackTime = Time.time + ataqueDelay; 
         }
     }
 
     public void ShootProjectile()
     {
-        if (projectileSpawnPoint == null || isDead || !canAttack2) return; 
+        if (projectileSpawnPoint == null || isDead || !canAttack) return;
 
         Vector2 targetDirection = (player.position - transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
@@ -51,13 +46,13 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     bool IsPlayerInRange()
     {
-        float squaredDistance = (transform.position - player.position).sqrMagnitude;
-        return squaredDistance <= distanciaAtaque * distanciaAtaque;
+        return (transform.position - player.position).sqrMagnitude <= distanciaAtaque * distanciaAtaque;
     }
 
     IEnumerator EnableAttackWithDelay()
     {
         yield return new WaitForSeconds(enableAttackDelay);
-        canAttack2 = true;
+        canAttack = true;
+        nextAttackTime = Time.time + ataqueDelay; 
     }
 }

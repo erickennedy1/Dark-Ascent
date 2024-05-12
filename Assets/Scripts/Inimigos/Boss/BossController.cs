@@ -5,28 +5,34 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public BossEspinhos espinhos;
-    public BossProjetil projetil;
+    public BossProjetil bossProjetil;
+    public BossEspinhos bossEspinhos;
 
-    public Boolean teste = false;
-
-    private void Update()
+    void Update()
     {
-        if (teste)
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            espinhos.gameObject.SetActive(false);
-            projetil.gameObject.SetActive(true);
+            AtivarComboProjetil();
         }
-        else
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            espinhos.gameObject.SetActive(true);
-            projetil.gameObject.SetActive(false);
+            AtivarComboEspinhos();
         }
     }
 
-    public void Teste(bool teste1)
+    private void AtivarComboProjetil()
     {
-        teste1 = teste;
+        if (bossProjetil != null)
+        {
+            bossProjetil.AtivarCombo();
+        }
+    }
 
+    private void AtivarComboEspinhos()
+    {
+        if (bossEspinhos != null)
+        {
+            bossEspinhos.IniciarEspinhos();
+        }
     }
 }
