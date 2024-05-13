@@ -13,6 +13,13 @@ public class BossProjetil : MonoBehaviour
     public float intervaloDisparos = 3f;
     public int vezesDisparadas = 0;
 
+    public void infosAtaque(int disparos, int intervalo, int quantidade)
+    {
+        vezesParaDisparar = disparos;
+        intervaloDisparos = intervalo;
+        quantidadeProjetis = quantidade;
+    }
+
     private void DispararEmTodasAsDirecoes()
     {
         if (vezesDisparadas < vezesParaDisparar)

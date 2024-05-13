@@ -46,7 +46,8 @@ public class PlayerAttack : MonoBehaviour
     private void PerformAttack(Vector2 direction)
     {
         Vector2 attackPoint = (Vector2)transform.position + direction.normalized * distanciaAtaque / 2;
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, distanciaAtaque, LayerMask.GetMask("Enemy", "Projectile"));
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, distanciaAtaque, LayerMask.GetMask("Enemy", "Projectile", "Boss"));  // Inclui "Boss" na máscara de camada
+
         foreach (var hit in hitObjects)
         {
             if (hit.CompareTag("Enemy"))
@@ -62,8 +63,18 @@ public class PlayerAttack : MonoBehaviour
             {
                 Destroy(hit.gameObject);
             }
+            else if (hit.CompareTag("Boss"))  
+            {
+                BossHealth boss = hit.GetComponent<BossHealth>();
+                if (boss != null)
+                {
+                    boss.TakeDamage(danoAtaque);
+                    particulasAtaque.SpawnParticles(hit.transform.position); 
+                }
+            }
         }
     }
+
 
     void SetAttackAnimationParameters(Vector2 direction)
     {
