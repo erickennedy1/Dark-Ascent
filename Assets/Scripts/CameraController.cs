@@ -10,7 +10,8 @@ public class CameraController : MonoBehaviour
     private float unpauseDistance; //Distância mínima para despausar o player
     private Vector3 velocity = Vector3.zero;
 
-    public bool isTransitioning = false;
+    private bool isTransitioning = false;
+    private bool isPause = false;
 
     void Awake()
     {
@@ -30,12 +31,13 @@ public class CameraController : MonoBehaviour
         if(!isTransitioning && transform.position != desiredPosition)
         {
             isTransitioning = true;
-            GameController.instance.isGamePaused=true;
+            isPause = true;
+            GameController.instance.PauseGame();
 
             if(!currentRoom.hasBattle || currentRoom.isClear)
             {
                 smoothTime = 0.15f;
-                unpauseDistance = 0.035f;
+                unpauseDistance = 0.1f;
             }
             else
             {
@@ -54,8 +56,10 @@ public class CameraController : MonoBehaviour
             // Verifica se a câmera está em transição
             float distance = Vector3.Distance(transform.position,desiredPosition);
 
-            if(distance <= unpauseDistance)
-                GameController.instance.isGamePaused = false;
+            if(isPause && distance <= unpauseDistance){
+                isPause = false;
+                GameController.instance.UnpauseGame();
+            }
 
             if (distance <= 0.01f) {
                 transform.position = desiredPosition;
