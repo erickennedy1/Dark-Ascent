@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (canMove)  // Verifica se o movimento está permitido
+        if (canMove)  
         {
             HandleMovementInput();
         }

@@ -40,65 +40,64 @@ public class BossController : MonoBehaviour
         }
     }
 
-    IEnumerator ExecutarCombo1()
+    private void ReiniciarEstado()
     {
-        bossProjetil.infosAtaque(5, 5, 15);
         if (bossProjetil != null)
         {
-            bossProjetil.AtivarCombo();
-            yield return new WaitForSeconds(25);
             bossProjetil.CancelarDisparos();
             bossProjetil.ResetarDisparos();
         }
 
         if (bossEspinhos != null)
         {
-            bossEspinhos.IniciarEspinhos();
-            yield return new WaitForSeconds(15);
             bossEspinhos.PararEspinhos();
         }
+    }
+
+    IEnumerator ExecutarCombo1()
+    {
+        ReiniciarEstado();
+        bossProjetil.infosAtaque(5, 5, 15);
+        bossProjetil.AtivarCombo();
+        yield return new WaitForSeconds(25);
+        bossProjetil.CancelarDisparos();
+        bossProjetil.ResetarDisparos();
+
+        bossEspinhos.IniciarEspinhos();
+        yield return new WaitForSeconds(15);
+        bossEspinhos.PararEspinhos();
 
         yield return new WaitForSeconds(2);
     }
 
     IEnumerator ExecutarCombo2()
     {
+        ReiniciarEstado();
         bossProjetil.infosAtaque(6, 4, 25);
-        if (bossProjetil != null)
-        {
-            bossProjetil.AtivarCombo();
-            yield return new WaitForSeconds(28);
-            bossProjetil.CancelarDisparos();
-            bossProjetil.ResetarDisparos();
-        }
+        bossProjetil.AtivarCombo();
+        yield return new WaitForSeconds(28);
+        bossProjetil.CancelarDisparos();
+        bossProjetil.ResetarDisparos();
 
-        if (bossEspinhos != null)
-        {
-            bossEspinhos.IniciarEspinhos();
-            yield return new WaitForSeconds(15);
-            bossEspinhos.PararEspinhos();
-        }
+        bossEspinhos.IniciarEspinhos();
+        yield return new WaitForSeconds(15);
+        bossEspinhos.PararEspinhos();
 
         yield return new WaitForSeconds(2);
     }
 
     IEnumerator ExecutarCombo3()
     {
+        ReiniciarEstado();
         bossProjetil.infosAtaque(20, 2, 40);
-        if (bossProjetil != null)
-        {
-            bossProjetil.AtivarCombo();
-            yield return new WaitForSeconds(40);
-            bossProjetil.CancelarDisparos();
-            bossProjetil.ResetarDisparos();
-        }
+        bossProjetil.AtivarCombo();
+        yield return new WaitForSeconds(40);
+        bossProjetil.CancelarDisparos();
+        bossProjetil.ResetarDisparos();
 
-        if (bossEspinhos != null)
-        {
-            bossEspinhos.IniciarEspinhos();
-            yield return new WaitForSeconds(15);
-            bossEspinhos.PararEspinhos();
-        }
+        bossEspinhos.IniciarEspinhos();
+        yield return new WaitForSeconds(15);
+        bossEspinhos.PararEspinhos();
 
         yield return new WaitForSeconds(2);
     }
@@ -112,6 +111,13 @@ public class BossController : MonoBehaviour
         {
             StopCoroutine(ataqueCorrente);
         }
+        ReiniciarEstado();
+        StartCoroutine(DelayAntesDoNovoCombo());
+    }
+
+    IEnumerator DelayAntesDoNovoCombo()
+    {
+        yield return new WaitForSeconds(1);  
         ataqueCorrente = StartCoroutine(AtaqueContinuo());
     }
 }

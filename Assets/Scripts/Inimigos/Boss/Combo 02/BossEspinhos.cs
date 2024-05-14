@@ -3,14 +3,26 @@ using UnityEngine;
 public class BossEspinhos : MonoBehaviour
 {
     [SerializeField] private GameObject espinhosPrefab;
-    [SerializeField] private float intervaloEntreEspinhos = 0.5f;  // Intervalo constante para a criação de espinhos
-    [SerializeField] public float duracaoAtiva = 15f;  // Tempo de duração da ativação dos espinhos
+    [SerializeField] private float intervaloEntreEspinhos = 0.5f;
+    [SerializeField] public float duracaoAtiva = 15f;
 
     private Transform jogador;
+    private Rigidbody2D rbJogador;
 
     void Start()
     {
-        jogador = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject jogadorObj = GameObject.FindGameObjectWithTag("Player");
+        if (jogadorObj != null)
+        {
+            jogador = jogadorObj.transform;
+            rbJogador = jogadorObj.GetComponent<Rigidbody2D>();
+        }
+    }
+
+    public void ConfigEspinhos(int intervalo, int duracao)
+    {
+        intervaloEntreEspinhos = intervalo;
+        duracaoAtiva = duracao;
     }
 
     public void IniciarEspinhos()
@@ -25,9 +37,20 @@ public class BossEspinhos : MonoBehaviour
 
     private void CriarEspinhos()
     {
-        if (jogador != null)
+        if (jogador != null && rbJogador != null)
         {
-            Vector3 posicaoEspinhos = new Vector3(jogador.position.x, jogador.position.y + 0.5f, jogador.position.z);
+            float direcaoEspinhosX = 0f;  // Reset da direção a cada chamada
+            if (rbJogador.velocity.x > 0)
+            {
+                direcaoEspinhosX = 5f;  // Ajuste conforme necessário
+            }
+            else if (rbJogador.velocity.x < 0)
+            {
+                direcaoEspinhosX = -5f;  // Ajuste conforme necessário
+            }
+
+            // Configurando a posição dos espinhos considerando também a direção Y se necessário
+            Vector3 posicaoEspinhos = jogador.position + new Vector3(direcaoEspinhosX, 1f, 0f);
             Instantiate(espinhosPrefab, posicaoEspinhos, Quaternion.identity);
         }
     }
