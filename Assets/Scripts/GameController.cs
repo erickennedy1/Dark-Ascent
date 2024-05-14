@@ -35,31 +35,16 @@ public class GameController : MonoBehaviour
         FindPlayer();
     }
 
-    void Update()
+    public void PauseGame()
     {
-        //Se a cena atual não for Hub
-        if(currentWorldLevel != 0)
-        {
-            //Evitar o erro do GameController Tentar encontrar a CameraController antes de ser carregada
-            if(CameraController.instance != null)
-            {
-                //O game fica pausado se a camera estiver em transição
-                if(CameraController.instance.isTransitioning)
-                    isGamePaused = true;
-                else
-                    isGamePaused = false;
-            }
-        }
-        //Se a cena atual for Hub
-        else
-            //Podem ser criados condições para que não se mova no hub
-            isGamePaused = false;
+        isGamePaused = true;
+        PlayerAcao(false);
+    }
 
-        //Caso o jogo estaja pausado
-        if (isGamePaused)
-            PlayerAcao(false);
-        else
-            PlayerAcao(true);
+    public void UnpauseGame(){
+        isGamePaused = false;
+        PlayerAcao(true);
+
     }
 
     public void NextLevel()
@@ -123,6 +108,7 @@ public class GameController : MonoBehaviour
         currentWorldName = worldNames[currentWorldLevel];
         SceneManager.LoadScene("Hub");
         player.ResetPlayer();
+        UnpauseGame();
     }
 
     private void FindPlayer()
