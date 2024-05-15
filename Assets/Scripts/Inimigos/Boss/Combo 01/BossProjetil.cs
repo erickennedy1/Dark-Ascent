@@ -27,7 +27,7 @@ public class BossProjetil : MonoBehaviour
             float angulo = anguloInicio;
             float anguloIncremento = (anguloFim - anguloInicio) / quantidadeProjetis;
             int indiceDestrutivel = Random.Range(0, quantidadeProjetis - 1);
-            int indiceDestrutivelOpsto = (indiceDestrutivel + quantidadeProjetis / 2) % quantidadeProjetis; // Cálculo para o projétil oposto
+            int indiceDestrutivelOpsto = (indiceDestrutivel + quantidadeProjetis / 2) % quantidadeProjetis;
 
             for (int i = 0; i < quantidadeProjetis; i++)
             {
