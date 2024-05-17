@@ -42,7 +42,7 @@ public class BossHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Boss defeated!");
-            // Aqui você pode adicionar mais lógica para quando o boss for derrotado.
+            bossController.HandleDeath();
         }
     }
 }
