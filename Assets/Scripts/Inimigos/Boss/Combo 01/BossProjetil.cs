@@ -13,13 +13,6 @@ public class BossProjetil : MonoBehaviour
     public float intervaloDisparos = 3f;
     public int vezesDisparadas = 0;
 
-    public void infosAtaque(int disparos, int intervalo, int quantidade)
-    {
-        vezesParaDisparar = disparos;
-        intervaloDisparos = intervalo;
-        quantidadeProjetis = quantidade;
-    }
-
     private void DispararEmTodasAsDirecoes()
     {
         if (vezesDisparadas < vezesParaDisparar)
@@ -66,13 +59,23 @@ public class BossProjetil : MonoBehaviour
         vezesDisparadas = 0;
     }
 
-    public void AtivarCombo()
+    public void AtivarCombo(int disparos, int intervalo, int quantidade)
     {
+        vezesParaDisparar = disparos;
+        intervaloDisparos = intervalo;
+        quantidadeProjetis = quantidade;
+
         InvokeRepeating(nameof(DispararEmTodasAsDirecoes), 0f, intervaloDisparos);
     }
 
     public void CancelarDisparos()
     {
         CancelInvoke(nameof(DispararEmTodasAsDirecoes));
+    }
+
+    public void CancelarDisparosImediatamente()
+    {
+        CancelarDisparos();
+        ResetarDisparos();
     }
 }

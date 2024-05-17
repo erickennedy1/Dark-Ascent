@@ -9,6 +9,7 @@ public class BossEspinhos : MonoBehaviour
     private Transform jogador;
     private Rigidbody2D rbJogador;
     private float tempoAtivo;  // Adicionado para controlar o tempo de atividade dos espinhos
+    private bool espinhosAtivos;
 
     void Start()
     {
@@ -20,32 +21,31 @@ public class BossEspinhos : MonoBehaviour
         }
     }
 
-    public void ConfigEspinhos(int intervalo, int duracao)
+    public void IniciarEspinhos(float intervalo, int duracao)
     {
         intervaloEntreEspinhos = intervalo;
         duracaoAtiva = duracao;
-    }
 
-    public void IniciarEspinhos()
-    {
-        tempoAtivo = 0f; // Resetar o contador de tempo
+        tempoAtivo = 0f;
+        espinhosAtivos = true;
         InvokeRepeating(nameof(CriarEspinhos), 0f, intervaloEntreEspinhos);
     }
 
     public void PararEspinhos()
     {
         CancelInvoke(nameof(CriarEspinhos));
+        espinhosAtivos = false;
     }
 
     private void Update()
     {
-        if (tempoAtivo >= duracaoAtiva)
-        {
-            PararEspinhos();
-        }
-        else
+        if (espinhosAtivos)
         {
             tempoAtivo += Time.deltaTime;
+            if (tempoAtivo >= duracaoAtiva)
+            {
+                PararEspinhos();
+            }
         }
     }
 

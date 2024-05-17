@@ -11,12 +11,26 @@ public class InvocacaoChefe : MonoBehaviour
     public int numeroDeMonstros = 5;
     public float tempoEntreInvocacoes = 2.0f;
 
+    private Coroutine invocacaoRoutine;
 
     public void IniciarInvocacao(int quantidadeMonstros, float atraso)
     {
         numeroDeMonstros = quantidadeMonstros;
         tempoEntreInvocacoes = atraso;
-        StartCoroutine(InvocarMonstros(quantidadeMonstros, atraso));
+        if (invocacaoRoutine != null)
+        {
+            StopCoroutine(invocacaoRoutine);
+        }
+        invocacaoRoutine = StartCoroutine(InvocarMonstros(quantidadeMonstros, atraso));
+    }
+
+    public void PararInvocacao()
+    {
+        if (invocacaoRoutine != null)
+        {
+            StopCoroutine(invocacaoRoutine);
+            invocacaoRoutine = null;
+        }
     }
 
     private IEnumerator InvocarMonstros(int quantidadeMonstros, float atraso)
