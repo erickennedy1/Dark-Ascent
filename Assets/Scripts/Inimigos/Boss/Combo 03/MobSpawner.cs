@@ -48,10 +48,12 @@ public class InvocacaoChefe : MonoBehaviour
     {
         SpriteRenderer renderizadorMonstro = monstro.GetComponent<SpriteRenderer>();
         EnemyMovementAndHealth movimentoMonstro = monstro.GetComponent<EnemyMovementAndHealth>();
+        EnemyAttack enemyAtacck = monstro.GetComponent<EnemyAttack>();  
         Color cor = renderizadorMonstro.color;
         float tempoDecorrido = 0f;
 
         movimentoMonstro.canMove = false;
+        enemyAtacck.canAttack = false;
 
         while (tempoDecorrido < duracaoDesvanecimento)
         {
@@ -65,5 +67,6 @@ public class InvocacaoChefe : MonoBehaviour
         renderizadorMonstro.color = cor;
 
         movimentoMonstro.canMove = true;
+        enemyAtacck.canAttack = true;
     }
 }

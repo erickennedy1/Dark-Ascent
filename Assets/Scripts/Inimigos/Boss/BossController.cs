@@ -9,6 +9,8 @@ public class BossController : MonoBehaviour
     [SerializeField] private BossEspinhos bossEspinhos;
     [SerializeField] private InvocacaoChefe invocacaoChefe;
 
+    public Animator cabecaBoss;
+
     private Coroutine currentComboRoutine;
     private int currentComboNumber;
 
@@ -47,6 +49,9 @@ public class BossController : MonoBehaviour
 
         CancelCurrentActions();
 
+        // Definir triggers no Animator
+        SetAnimatorTrigger(comboNumber);
+
         currentComboRoutine = StartCoroutine(ComboRoutine(comboNumber, immediate));
     }
 
@@ -83,9 +88,9 @@ public class BossController : MonoBehaviour
             }
 
             if (bossHealth.currentHealth <= 0 || GetComboNumber(bossHealth.currentHealth) != comboNumber)
-                yield break; 
+                yield break;
 
-            yield return null; 
+            yield return null;
         }
     }
 
@@ -106,5 +111,42 @@ public class BossController : MonoBehaviour
         bossProjetil.CancelarDisparosImediatamente();
         bossEspinhos.PararEspinhos();
         invocacaoChefe.PararInvocacao();
+    }
+
+    public void HandleDeath()
+    {
+        if (currentComboRoutine != null)
+        {
+            StopCoroutine(currentComboRoutine);
+        }
+
+        CancelCurrentActions();
+        StartCoroutine(DestroyBossAfterDelay(3f));
+    }
+
+    private IEnumerator DestroyBossAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
+    }
+
+    private void SetAnimatorTrigger(int comboNumber)
+    {
+        switch (comboNumber)
+        {
+            case 1:
+                break;
+            case 2:
+                cabecaBoss.SetTrigger("primeiraTroca");
+                break;
+            case 3:
+                cabecaBoss.SetTrigger("segundaTroca");
+                cabecaBoss.ResetTrigger("primeiraTroca");
+                break;
+            default:
+                cabecaBoss.ResetTrigger("primeiraTroca");
+                cabecaBoss.ResetTrigger("segundaTroca");
+                break;
+        }
     }
 }
