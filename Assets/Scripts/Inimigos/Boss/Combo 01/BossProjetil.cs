@@ -6,7 +6,7 @@ public class BossProjetil : MonoBehaviour
     [SerializeField] private GameObject projetilDestrutivelPrefab;
     [SerializeField] private int quantidadeProjetis = 30;
     [SerializeField] private float velocidadeProjetil = 5f;
-    private float deslocamentoInicial = 4f;
+    private float deslocamentoInicial = 5f;
     private float anguloInicio = 15f;
     private float anguloFim = -195f;
     public int vezesParaDisparar = 3;

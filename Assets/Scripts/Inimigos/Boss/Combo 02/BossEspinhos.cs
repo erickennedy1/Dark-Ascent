@@ -8,7 +8,7 @@ public class BossEspinhos : MonoBehaviour
 
     private Transform jogador;
     private Rigidbody2D rbJogador;
-    private float tempoAtivo;  // Adicionado para controlar o tempo de atividade dos espinhos
+    private float tempoAtivo; 
     private bool espinhosAtivos;
 
     void Start()

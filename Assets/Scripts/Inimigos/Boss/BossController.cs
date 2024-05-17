@@ -54,14 +54,14 @@ public class BossController : MonoBehaviour
     {
         if (immediate)
         {
-            yield return new WaitForSeconds(1); // Tempo de espera para a transição repentina
+            yield return new WaitForSeconds(1);
         }
         else
         {
             yield return new WaitForSeconds(3);
         }
 
-        while (true) // Loop para garantir que o combo reinicie se necessário
+        while (true)
         {
             switch (comboNumber)
             {
@@ -83,9 +83,9 @@ public class BossController : MonoBehaviour
             }
 
             if (bossHealth.currentHealth <= 0 || GetComboNumber(bossHealth.currentHealth) != comboNumber)
-                yield break; // Sai do loop se a saúde mudar ou o boss morrer
+                yield break; 
 
-            yield return null; // Espera um frame antes de reiniciar o combo
+            yield return null; 
         }
     }
 
