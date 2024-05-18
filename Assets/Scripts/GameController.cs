@@ -139,12 +139,7 @@ public class GameController : MonoBehaviour
 
         foreach (var enemy in FindObjectsOfType<EnemyAttack>())
         {
-            enemy.canAttack = estado;
-        }
-
-        foreach (var enemy in FindObjectsOfType<PlantaCarnivoraAttack>())
-        {
-            enemy.canAttack = estado;
+            //enemy.canAttack = estado;
         }
     }
 

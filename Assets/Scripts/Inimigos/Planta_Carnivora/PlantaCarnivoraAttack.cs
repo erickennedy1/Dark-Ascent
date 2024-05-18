@@ -6,7 +6,6 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     [Header("Attack Settings")]
     public float distanciaAtaque = 10f;
     public float ataqueDelay = 1.0f;
-    public float enableAttackDelay = 3.0f;
 
     [Header("Components")]
     public GameObject projectilePrefab;
@@ -16,21 +15,21 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     private Transform player;
     private Animator animator;
     private bool isDead = false;
-    public bool canAttack = false;
+    private bool canAttack = false;
+    private bool isVisible = false; 
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
-        StartCoroutine(EnableAttackWithDelay());
     }
 
     void Update()
     {
-        if (!isDead && Time.time >= nextAttackTime && IsPlayerInRange() && canAttack)
+        if (isVisible && !isDead && Time.time >= nextAttackTime && IsPlayerInRange() && canAttack)
         {
             animator.SetTrigger("Attack");
-            nextAttackTime = Time.time + ataqueDelay; 
+            nextAttackTime = Time.time + ataqueDelay;
         }
     }
 
@@ -51,8 +50,20 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     IEnumerator EnableAttackWithDelay()
     {
-        yield return new WaitForSeconds(enableAttackDelay);
+        yield return new WaitForSeconds(0.3f);
         canAttack = true;
-        nextAttackTime = Time.time + ataqueDelay; 
+        nextAttackTime = Time.time + ataqueDelay;
+    }
+
+    void OnBecameVisible()
+    {
+        isVisible = true;
+        StartCoroutine(EnableAttackWithDelay()); 
+    }
+
+    void OnBecameInvisible()
+    {
+        isVisible = false;
+        canAttack = false; 
     }
 }

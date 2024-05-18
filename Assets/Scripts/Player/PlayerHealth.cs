@@ -13,12 +13,15 @@ public class PlayerHealth : MonoBehaviour
     private Transform healthLayoutGroup;
     private PlayerMana playerMana;
     private Animator animator;
+    private PlayerAttack playerAttack;
+    private PlayerMovement playerMovement;
 
     void Start()
     {
         healthLayoutGroup = GameObject.Find("Vida_Layout").transform;
         playerMana = GetComponent<PlayerMana>();
-
+        playerAttack = GetComponent<PlayerAttack>();
+        playerMovement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
 
         if (playerMana == null)
@@ -101,6 +104,8 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Player Died");
         animator.SetTrigger("Morrendo");
+        playerAttack.canAttack = false;
+        playerMovement.canMove = false;
     }
 
     public void Morrendo()

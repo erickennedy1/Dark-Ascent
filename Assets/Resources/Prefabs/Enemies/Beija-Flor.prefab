@@ -292,7 +292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 1
   isDead: 0
-  canAttack: 1
 --- !u!114 &4626182440287027328
 MonoBehaviour:
   m_ObjectHideFlags: 0

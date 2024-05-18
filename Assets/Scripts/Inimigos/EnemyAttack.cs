@@ -10,7 +10,8 @@ public class EnemyAttack : MonoBehaviour
     private float AttackRange = 2.5f;
     private float dashSpeed = 15f;
     public bool isDead = false;
-    public bool canAttack = true;
+    private bool canAttack = false;
+    private bool isVisible = false;
 
     private Transform player;
     private Animator animator;
@@ -77,5 +78,23 @@ public class EnemyAttack : MonoBehaviour
         isDead = true;  
         //animator.SetTrigger("Die");
         Destroy(gameObject);
+    }
+
+    IEnumerator EnableAttackWithDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
+    }
+
+    void OnBecameVisible()
+    {
+        isVisible = true;
+        StartCoroutine(EnableAttackWithDelay());
+    }
+
+    void OnBecameInvisible()
+    {
+        isVisible = false;
+        canAttack = false;
     }
 }

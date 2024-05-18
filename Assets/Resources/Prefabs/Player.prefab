@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  healthIconPrefab: {fileID: 0}
+  healthIconPrefab: {fileID: 5351256848130148378, guid: 1aef49655cd5ccf4892a558a34411723, type: 3}
 --- !u!114 &1868116986395670757
 MonoBehaviour:
   m_ObjectHideFlags: 0
