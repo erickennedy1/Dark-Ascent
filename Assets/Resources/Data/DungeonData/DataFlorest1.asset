@@ -15,4 +15,3 @@ MonoBehaviour:
   numberOfCrawlers: 3
   roomsMin: 3
   roomsMax: 5
-  isBossLevel: 0

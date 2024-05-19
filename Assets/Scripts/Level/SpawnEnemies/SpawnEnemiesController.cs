@@ -19,19 +19,16 @@ public class SpawnEnemiesController : MonoBehaviour
     void Update()
     {
         if(hasEnemies)
-        {
             CheckEnemiesAlive();
-        }
     }
 
     public void SpawnEnemies()
     {
         hasEnemies = true;
-        int count = 0;
         Vector3 spawnPosition;
         int totalEnemies = Random.Range(1,MaxEnemies+1);
         // Verifica se o número atual de inimigos é menor que o máximo
-        while (currentEnemies < totalEnemies && count < totalEnemies*3)
+        while (currentEnemies < totalEnemies)
         {
             // Gera uma posição de spawn aleatória
             spawnPosition = GetRandomSpawnPosition();
@@ -43,9 +40,6 @@ public class SpawnEnemiesController : MonoBehaviour
                 Instantiate(enemiesData.Enemies[Random.Range(0,enemiesData.Enemies.Count)], spawnPosition, Quaternion.identity, transform);
                 currentEnemies++;
             }
-            count++;
-            if(count >= totalEnemies*3)
-                Debug.Log("Máximo de tantativas atingido");
         }
     }
 
@@ -69,7 +63,7 @@ public class SpawnEnemiesController : MonoBehaviour
 
     bool IsColliding(Vector2 position)
     {
-        return Physics2D.OverlapCircle(position, 0.75f, forbiddenAreaLayer) != null;
+        return Physics2D.OverlapCircle(position, 1f, forbiddenAreaLayer) != null;
     }
 
     void OnDrawGizmos(){
