@@ -37,14 +37,21 @@ public class GameController : MonoBehaviour
 
     public void PauseGame()
     {
+        //Retorna se já estiver pausado
+        if(isGamePaused)
+            return;
+        
         isGamePaused = true;
         PlayerAcao(false);
     }
 
     public void UnpauseGame(){
+        //Retorna se não estiver pausado
+        if(!isGamePaused)
+            return;
+        
         isGamePaused = false;
         PlayerAcao(true);
-
     }
 
     public void NextLevel()
@@ -142,6 +149,5 @@ public class GameController : MonoBehaviour
             //enemy.canAttack = estado;
         }
     }
-
 
 }

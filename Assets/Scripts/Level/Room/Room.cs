@@ -48,6 +48,7 @@ public class Room : MonoBehaviour
         }
         else{
             RandomTilemap(type);
+            spawnEnemiesController.gameObject.SetActive(false);
             switch(type)
             {   
                 case "Start":

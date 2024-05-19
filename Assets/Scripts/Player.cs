@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool canMove = true;
-
     void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
@@ -18,10 +16,6 @@ public class Player : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    void Update()
-    {
-        
-    }
     public void ResetPlayer()
     {
         transform.position = Vector3.zero;
