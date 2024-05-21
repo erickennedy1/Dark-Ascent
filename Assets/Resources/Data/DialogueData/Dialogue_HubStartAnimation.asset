@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7823a4ec6045d86459df5c04a7b107b0, type: 3}
+  m_Name: Dialogue_HubStartAnimation
+  m_EditorClassIdentifier: 
+  sentencesList:
+  - name: ???
+    sentence: Parece estar acordando.
+  - name: ???
+    sentence: "\xC9 claro, nunca falho com minhas cria\xE7\xF5es."
+  loop: 0

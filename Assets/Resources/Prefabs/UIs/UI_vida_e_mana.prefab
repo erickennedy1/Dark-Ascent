@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 2103230012223933234}
   - component: {fileID: 6841313132368238302}
   - component: {fileID: 1174884898138622839}
+  - component: {fileID: 4132141613133405518}
   m_Layer: 5
   m_Name: UI_vida_e_mana
   m_TagString: Untagged
@@ -200,6 +201,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4132141613133405518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837376205465412393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5805d1c037a7f5a42bad66c7dfbab4f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIs:
+  - {fileID: 8866262676887696014}
+  - {fileID: 2508718631994659151}
 --- !u!1 &3023795467228015837
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static event Action EventEndDialogue;
     public static DialogueManager instance;
-    private Queue<string> _sentences;
+    private Queue<Dialogue> _dialogues;
 
-    private string _currentSentence;
+    private Dialogue _currentDialogue;
 
     [Tooltip("Tempo de espera em segundos, entre cada letra do dialogo")]
     private float textSpeed = 0.05f;
@@ -22,9 +24,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dialogueText;
     [Tooltip("Não é um botão, é o texto que indica qual botão apertar")]
     [SerializeField] private TextMeshProUGUI _nextButton;
+    [SerializeField] private Image _icon;
+    [SerializeField] private RectTransform _iconRect;
 
     [Header("Animatior")]
     [SerializeField] private Animator animator;
+
+    [Header("Data")]
+    [Tooltip("Lista contendo personagens, com seus nomes e icones")]
+    public CharactersData characters;
 
     void Awake() {
         if(instance == null)
@@ -36,7 +44,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     void Start() {
-        _sentences = new Queue<string>();
+        _dialogues = new Queue<Dialogue>();
     }
 
     void Update(){
@@ -47,14 +55,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(DialogueData dialogue)
     {
+        //Pause Player
+        GameController.instance.PlayerAcao(false);
+
         //Setup Dialogue
-        _sentences.Clear();
-        _nameText.text = dialogue.name; //Set Name
+        _dialogues.Clear();
+        _nameText.text = ""; //Set Name
         _dialogueText.text = "";
-        foreach(string sentence in dialogue.sentences) //Set All Texts
-            _sentences.Enqueue(sentence);
+        foreach(Dialogue dialog in dialogue.sentencesList) //Set All Texts
+            _dialogues.Enqueue(dialog);
 
         //Setup Dialogue On
         StartCoroutine(SetDialogueState(true, DisplayNextSentence));
@@ -62,7 +73,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if(!_isTyping && _sentences.Count == 0){
+        if(!_isTyping && _dialogues.Count == 0){
             EndDialogue();
             return;
         }
@@ -72,9 +83,18 @@ public class DialogueManager : MonoBehaviour
         {
             StopAllCoroutines();
             _isTyping = false;
-            _dialogueText.text = _currentSentence;
-        }else{
-            _currentSentence = _sentences.Dequeue();
+            _dialogueText.text = _currentDialogue.sentence;
+        }
+        //Nova sentença
+        else{
+            _currentDialogue = _dialogues.Dequeue();
+
+            _nameText.text = _currentDialogue.name; //Set Name
+            //Set Icon
+            Character character = characters.characters.Find(x => x.name == _currentDialogue.name);
+            _icon.sprite = character.icon;
+            _iconRect.sizeDelta = character.iconRect.sizeDelta;
+
             StartCoroutine(TypeSentence());
         }
     }
@@ -84,7 +104,7 @@ public class DialogueManager : MonoBehaviour
         OnTypeStart();
 
         _dialogueText.text = "";
-        foreach(char letter in _currentSentence.ToCharArray())
+        foreach(char letter in _currentDialogue.sentence.ToCharArray())
         {
             _dialogueText.text += letter;
             yield return new WaitForSeconds(textSpeed);
@@ -104,7 +124,11 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        //Setup Dialogue Off        
+        //Unpause Player
+        EventEndDialogue?.Invoke();
+
+        //Setup Dialogue Off
+        _nextButton.gameObject.SetActive(false);
         StartCoroutine(SetDialogueState(false));
     }
 
