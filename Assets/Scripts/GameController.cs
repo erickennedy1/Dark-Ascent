@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     public int currentWorldLevel;
     public int currentLevel;
 
-    private Player player;
+    public Player player;
 
     public bool isGamePaused = false;
 
@@ -60,6 +60,8 @@ public class GameController : MonoBehaviour
         //Se a cena atual for Hub
         if(currentWorldLevel == 0)
         {
+            player.SetLightState(true);
+
             currentWorldLevel = 1;
             currentLevel = 1;
             currentWorldName = worldNames[currentWorldLevel];
@@ -116,6 +118,7 @@ public class GameController : MonoBehaviour
         currentWorldName = worldNames[currentWorldLevel];
         SceneManager.LoadScene("Hub");
         player.ResetPlayer();
+        player.SetLightState(false);
         UnpauseGame();
     }
 
@@ -148,6 +151,32 @@ public class GameController : MonoBehaviour
         foreach (var enemy in FindObjectsOfType<EnemyAttack>())
         {
             //enemy.canAttack = estado;
+        }
+    }
+
+    public void EnablePlayerInput()
+    {
+        foreach (PlayerMovement playerMovement in player.GetComponentsInChildren<PlayerMovement>())
+        {
+            playerMovement.canMove = true;
+        }
+
+        foreach (PlayerAttack playerAttack in player.GetComponentsInChildren<PlayerAttack>())
+        {
+            playerAttack.canAttack = true;
+        }
+    }
+
+    public void DisablePlayerInput()
+    {
+        foreach (PlayerMovement playerMovement in player.GetComponentsInChildren<PlayerMovement>())
+        {
+            playerMovement.canMove = false;
+        }
+
+        foreach (PlayerAttack playerAttack in player.GetComponentsInChildren<PlayerAttack>())
+        {
+            playerAttack.canAttack = false;
         }
     }
 

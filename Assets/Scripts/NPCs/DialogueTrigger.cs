@@ -5,14 +5,14 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField]
-    private List<Dialogue> _dialogueList = new List<Dialogue>();
-    private Queue<Dialogue> _dialogueQueue = new Queue<Dialogue>();
+    private List<DialogueData> _dialogueList = new List<DialogueData>();
+    private Queue<DialogueData> _dialogueQueue = new Queue<DialogueData>();
     private bool _canTriggerDialogue = false;
 
     void Start(){
         //Transforma a List em Queue
         //A Unity não permite um SerializeField do tipo Queue
-        foreach(Dialogue dialogue in _dialogueList){
+        foreach(DialogueData dialogue in _dialogueList){
             _dialogueQueue.Enqueue(dialogue);
         }
     }
@@ -26,7 +26,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        Dialogue dialogue = _dialogueQueue.Peek();
+        DialogueData dialogue = _dialogueQueue.Peek();
         if(!dialogue.loop){
             dialogue = _dialogueQueue.Dequeue();
         }

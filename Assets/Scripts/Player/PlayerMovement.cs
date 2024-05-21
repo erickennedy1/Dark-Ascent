@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Configurações de movimento")]
+    [Header("Configuraï¿½ï¿½es de movimento")]
     public float moveSpeed = 5f;
     private float dashDistance = 3f;
     private float dashDuration = 0.1f;
@@ -41,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
                     TryDash();
                 }
             }
+        }else{
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", 0);
+            animator.SetBool("IsMoving", false);
         }
     }
 

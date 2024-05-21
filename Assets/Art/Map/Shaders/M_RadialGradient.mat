@@ -39,10 +39,10 @@ Material:
     m_Floats:
     - _Fade: 0
     - _GradientIntensity: 1.24
-    - _Intensity: 0.84
-    - _OffsetHorizontal: 0.42
-    - _OffsetVertical: 0.45
-    - _Radius: 0
+    - _Intensity: 1
+    - _OffsetHorizontal: 0
+    - _OffsetVertical: 0
+    - _Radius: -1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color01: {r: 1, g: 0, b: 0, a: 1}
