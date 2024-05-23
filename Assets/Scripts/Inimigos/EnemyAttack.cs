@@ -92,7 +92,7 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator EnableAttackWithDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.05f);
         canAttack = true;
     }
 
