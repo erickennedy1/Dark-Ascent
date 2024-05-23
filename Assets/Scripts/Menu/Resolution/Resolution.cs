@@ -5,11 +5,11 @@ using UnityEngine;
 public class Resolution : MonoBehaviour
 {
     public GameObject iconFull;
-    public bool fullScreen = true;
+    public bool fullScreen = false;
 
     void Start()
     {
-        fullScreen = true;
+        fullScreen = false;
     }
 
     void OnMouseDown()

@@ -17,14 +17,20 @@ public class EnemyAttack : MonoBehaviour
     private Animator animator;
     private bool isReadyToAttack = true;
     private Rigidbody2D rb;
-
+    private PlayerHealth playerHealth;
     private void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
-    }
+        playerHealth = GetComponent<PlayerHealth>();
 
+        GameObject obj = GameObject.Find("Player");
+        if (obj != null)
+        {
+            playerHealth = obj.GetComponent<PlayerHealth>();
+        }
+    }
     private void Update()
     {
         if (!isDead && canAttack)  
@@ -52,10 +58,14 @@ public class EnemyAttack : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, player.position) <= AttackRange)
         {
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (playerHealth.currentHealth >= 1)
             {
-                playerHealth.TakeDamage(damageAmount);
+                PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damageAmount);
+
+                }
             }
         }
     }

@@ -9,12 +9,15 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 5;
     public GameObject healthIconPrefab;
     private List<GameObject> healthIcons = new List<GameObject>();
-    private int currentHealth;
+    public int currentHealth;
     private Transform healthLayoutGroup;
     private PlayerMana playerMana;
     private Animator animator;
     private PlayerAttack playerAttack;
+    private Rigidbody2D rd;
     private PlayerMovement playerMovement;
+    public GameController gameController;
+    private PolygonCollider2D playerCollider;
 
     void Start()
     {
@@ -23,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         playerMovement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
+        playerCollider = GetComponent<PolygonCollider2D>();
 
         if (playerMana == null)
         {
@@ -104,15 +108,24 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Player Died");
         animator.SetTrigger("Morrendo");
-        playerAttack.canAttack = false;
-        playerMovement.canMove = false;
+        gameController.PlayerAcao(false);
+        playerCollider.enabled = false;
     }
 
     public void Morrendo()
     {
-        playerMana.ResetMana();                 
-        GameController.instance.GoToHub();        
+        playerMana.ResetMana();
+        GameController.instance.GoToHub();
+        StartCoroutine(Reativar());
     }
+
+    private IEnumerator Reativar()
+    {
+        yield return new WaitForSeconds(2);
+        gameController.PlayerAcao(true);
+        playerCollider.enabled = true;
+    }
+
 
     void Awake()
     {

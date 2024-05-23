@@ -22,38 +22,38 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 21300000, guid: 9bffccf1455b78d4284bf4d5a5d6b6fe, type: 3}
-    - time: 0.083333336
+    - time: 0.11111111
       value: {fileID: 21300000, guid: d85ec9c97639be340bd30b7e28e2e4a3, type: 3}
-    - time: 0.16666667
+    - time: 0.22222222
       value: {fileID: 21300000, guid: cdd55e8c4c41e58449571befec1fc353, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: a84a73d826669444f829983bee5f324c, type: 3}
     - time: 0.33333334
+      value: {fileID: 21300000, guid: a84a73d826669444f829983bee5f324c, type: 3}
+    - time: 0.44444445
       value: {fileID: 21300000, guid: aba4c65e68cc0044dbe28bb64d3a8c20, type: 3}
-    - time: 0.41666666
+    - time: 0.5555556
       value: {fileID: 21300000, guid: d4775f4124f408b4e886d4d8151e18ea, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: eef5e1d736ba0ee459fc6f9048b9ef85, type: 3}
-    - time: 0.5833333
-      value: {fileID: 21300000, guid: d3e74eeee94b83645be488a67d1aa334, type: 3}
     - time: 0.6666667
+      value: {fileID: 21300000, guid: eef5e1d736ba0ee459fc6f9048b9ef85, type: 3}
+    - time: 0.7777778
+      value: {fileID: 21300000, guid: d3e74eeee94b83645be488a67d1aa334, type: 3}
+    - time: 0.8888889
       value: {fileID: 21300000, guid: 71cc23a34521bfe46a15573b9a205ef2, type: 3}
-    - time: 0.75
-      value: {fileID: 21300000, guid: 1dd43ee247c5c3249ac4caf1ae6ef54d, type: 3}
-    - time: 0.8333333
-      value: {fileID: 21300000, guid: 702ed51c52b502d439a31e2b0dae56e0, type: 3}
-    - time: 0.9166667
-      value: {fileID: 21300000, guid: db87f83c54762dc438595b0cbffed92a, type: 3}
     - time: 1
+      value: {fileID: 21300000, guid: 1dd43ee247c5c3249ac4caf1ae6ef54d, type: 3}
+    - time: 1.1111112
+      value: {fileID: 21300000, guid: 702ed51c52b502d439a31e2b0dae56e0, type: 3}
+    - time: 1.2222222
+      value: {fileID: 21300000, guid: db87f83c54762dc438595b0cbffed92a, type: 3}
+    - time: 1.3333334
       value: {fileID: 21300000, guid: 8f79e32c4ff5f724480b7b372efa307d, type: 3}
-    - time: 1.0833334
+    - time: 1.4444444
       value: {fileID: 21300000, guid: 5d081cb1478c1ae4096dd51506c02d7b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 9
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -89,7 +89,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1666667
+    m_StopTime: 1.5555556
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -109,7 +109,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.1666666
+  - time: 1.5555556
     functionName: Morrendo
     data: 
     objectReferenceParameter: {fileID: 0}

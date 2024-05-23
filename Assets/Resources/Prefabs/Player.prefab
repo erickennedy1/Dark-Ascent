@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  canMove: 0
+  canMove: 1
 --- !u!114 &4443047421659294804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +526,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   healthIconPrefab: {fileID: 5351256848130148378, guid: 1aef49655cd5ccf4892a558a34411723, type: 3}
+  currentHealth: 0
+  gameController: {fileID: 0}
 --- !u!114 &1868116986395670757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   danoAtaque: 1
   distanciaAtaque: 2
-  canAttack: 0
+  canAttack: 1
   acabouDeAtacar: 0
   ultimoAtaqueHorizontal: 0
   ultimoAtaqueVertical: -1

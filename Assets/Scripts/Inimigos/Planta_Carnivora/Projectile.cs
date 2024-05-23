@@ -8,12 +8,14 @@ public class Projectile : MonoBehaviour
     private float lifetime = 1.3f;
     private Animator animator;
     private Rigidbody2D rb;
+    private CircleCollider2D enemyCollider;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        Destroy(gameObject, lifetime); 
+        Destroy(gameObject, lifetime);
+        enemyCollider = GetComponent<CircleCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +31,8 @@ public class Projectile : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
+                enemyCollider.enabled = false;
+
             }
         }
     }
@@ -39,8 +43,6 @@ public class Projectile : MonoBehaviour
             rb.Sleep();
         
     }
-
-
     public void DestroyProjectile()
     {
         Destroy(gameObject);
