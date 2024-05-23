@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
     private void PerformAttack(Vector2 direction)
     {
         Vector2 attackPoint = (Vector2)transform.position + direction.normalized * distanciaAtaque / 2;
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, distanciaAtaque, LayerMask.GetMask("Enemy", "Projectile", "Boss"));  // Inclui "Boss" na máscara de camada
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, distanciaAtaque, LayerMask.GetMask("Enemy", "Projectile", "Boss")); 
 
         foreach (var hit in hitObjects)
         {

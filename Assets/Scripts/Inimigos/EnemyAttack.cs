@@ -38,7 +38,10 @@ public class EnemyAttack : MonoBehaviour
 
             if (isReadyToAttack && Vector2.Distance(transform.position, player.position) <= RangeAttackStart)
             {
-                StartCoroutine(PerformAttack());
+                if (playerHealth.currentHealth > 0)
+                {
+                    StartCoroutine(PerformAttack());
+                }
             }
         }
     }
@@ -92,7 +95,7 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator EnableAttackWithDelay()
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(1f);
         canAttack = true;
     }
 

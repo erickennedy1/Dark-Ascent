@@ -62,6 +62,10 @@ public class BossEspinhos : MonoBehaviour
             {
                 direcaoEspinhosX = -5f;
             }
+            else
+            {
+                direcaoEspinhosX = 0;
+            }
 
             Vector3 posicaoEspinhos = jogador.position + new Vector3(direcaoEspinhosX, 1f, 0f);
             Instantiate(espinhosPrefab, posicaoEspinhos, Quaternion.identity);

@@ -19,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
     public GameController gameController;
     private PolygonCollider2D playerCollider;
 
+    public int contadorMortes = 0;
+
     void Start()
     {
         healthLayoutGroup = GameObject.Find("Vida_Layout").transform;
@@ -106,6 +108,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+        contadorMortes++;
         Debug.Log("Player Died");
         animator.SetTrigger("Morrendo");
         gameController.PlayerAcao(false);

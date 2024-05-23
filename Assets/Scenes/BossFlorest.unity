@@ -1566,7 +1566,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -550544779
+  m_SortingLayerID: 448490163
   m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &376985082
@@ -3254,6 +3254,8 @@ MonoBehaviour:
   maxHealth: 30
   currentHealth: 0
   bossController: {fileID: 822456509}
+  orbe: {fileID: 2124959888}
+  defeatedSprite: {fileID: 21300000, guid: d8c8af558195569439842dfa97ce2189, type: 3}
 --- !u!1 &859914649
 GameObject:
   m_ObjectHideFlags: 0
