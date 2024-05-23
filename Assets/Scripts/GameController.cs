@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
-
+    
     [Tooltip("Lista de Nomes dos níveis - Começando pelo Hub")]
     public List<string> worldNames = new();
     public string currentWorldName;
@@ -61,31 +61,31 @@ public class GameController : MonoBehaviour
         //Se a cena atual for Hub
         if(currentWorldLevel == 0)
         {
-            player.SetLightState(true);
-
+            //Setup world level
             currentWorldLevel = 1;
             currentLevel = 1;
             currentWorldName = worldNames[currentWorldLevel];
+
+            //Set player
+            player.SetLightState(true);
+
             //Carrega o próximo nível
-            SceneManager.LoadScene("Dungeon");
+            LoadScene("Dungeon");
+            player.ResetPlayer();
         }
         //Se a cena atual não for o Hub
         else{
-            //Unload todas as cenas adicionais
-            for(int i=1;i<SceneManager.sceneCount;i++)
-                SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
-
             switch(currentLevel)
             {
                 case 1:
                     currentLevel++;
                     //Carrega o próximo nível
-                    SceneManager.LoadScene("Dungeon");
+                    LoadScene("Dungeon");
                     player.ResetPlayer();
                     break;
                 case 2:
                     currentLevel++;
-                    SceneManager.LoadScene("Boss"+currentWorldName);
+                    LoadScene("Boss"+currentWorldName);
                     player.ResetPlayer();
                     break;
                 case 3:
@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
                         currentWorldLevel++;
                         currentLevel = 1;
                     }else{
-                        //Se não houver, volta para o Hub
+                        //Se não houver, vai para cena final
                         //PS.: Preciso adicionar uma cena final
                         GoToHub();
                         return;
@@ -108,16 +108,26 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void GoToHub()
+    public void LoadScene(string sceneName)
     {
         //Unload todas as cenas adicionais
         for(int i=1;i<SceneManager.sceneCount;i++)
             SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
-        
+
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void GoToHub()
+    {
+        //Reseta Fase
         currentWorldLevel = 0;
         currentLevel = 0;
         currentWorldName = worldNames[currentWorldLevel];
-        SceneManager.LoadScene("Hub");
+
+        //Carrega a cena Hub
+        LoadScene("Hub");
+
+        //Reseta o Player
         player.ResetPlayer();
         player.SetLightState(false);
         UnpauseGame();
@@ -126,10 +136,6 @@ public class GameController : MonoBehaviour
     private void FindPlayer()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
-
-    public void SceneCountTotal(){
-        Debug.Log("Total de Scenes: "+SceneManager.sceneCount);
     }
 
     public void PlayerAcao(bool estado)
