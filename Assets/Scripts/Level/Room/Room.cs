@@ -68,10 +68,11 @@ public class Room : MonoBehaviour
     }
 
     private void RandomTilemapEmpty(){
-        //50% de chance de ser uma sala específica
-        //50% de chance de ser uma sala Genérica
-        // int randomType = Random.Range(0,2);
-        int randomType = 0;
+        //25% de chance de ser uma sala específica
+        //75% de chance de ser uma sala Genérica
+        int chanceOfGeneric = 75;
+        int randomType = Random.Range(0,100);
+        randomType = randomType < chanceOfGeneric ? 0 : 1;
 
         switch(randomType)
         {
@@ -81,8 +82,7 @@ public class Room : MonoBehaviour
                 break;
             //Tipo Especifico baseado nas portas
             case 1:
-                // RandomTilemap(doorsDirection);
-                RandomTilemap("Generic");
+                RandomTilemap(doorsDirection);
                 break;
             default:
                 Debug.LogError("randomType Invalid!");
@@ -92,7 +92,7 @@ public class Room : MonoBehaviour
     }
 
     private void RandomTilemap(string type){
-        TilesListData tilesList = (TilesListData)Resources.Load("Prefabs/Tilemaps/"+type+"/"+type+"List");
+        TilesListData tilesList = (TilesListData)Resources.Load("Prefabs/Tilemaps/"+type+"/List"+type);
         Instantiate(tilesList.tiles[Random.Range(0,tilesList.tiles.Count)], transform);
     }
 

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DataFlorest1
   m_EditorClassIdentifier: 
   numberOfCrawlers: 3
-  roomsMin: 3
-  roomsMax: 5
+  roomsMin: 6
+  roomsMax: 8
