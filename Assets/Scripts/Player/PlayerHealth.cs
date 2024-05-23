@@ -5,7 +5,7 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Configurações de Vida")]
+    [Header("Configuraï¿½ï¿½es de Vida")]
     public int maxHealth = 5;
     public GameObject healthIconPrefab;
     private List<GameObject> healthIcons = new List<GameObject>();
@@ -16,7 +16,6 @@ public class PlayerHealth : MonoBehaviour
     private PlayerAttack playerAttack;
     private Rigidbody2D rd;
     private PlayerMovement playerMovement;
-    public GameController gameController;
     private PolygonCollider2D playerCollider;
 
     public int contadorMortes = 0;
@@ -32,15 +31,15 @@ public class PlayerHealth : MonoBehaviour
 
         if (playerMana == null)
         {
-            Debug.LogError("Componente PlayerMana não encontrado!");
+            Debug.LogError("Componente PlayerMana nï¿½o encontrado!");
         }
         if (healthLayoutGroup == null)
         {
-            Debug.LogError("Não foi possível encontrar o objeto 'Vida_Layout'!");
+            Debug.LogError("Nï¿½o foi possï¿½vel encontrar o objeto 'Vida_Layout'!");
             return;
         }
         currentHealth = maxHealth;
-        Debug.Log("Reiniciando saúde no Start");
+        Debug.Log("Reiniciando saï¿½de no Start");
         ResetHealthIcons();
         InitializeHealthIcons();
     }
@@ -69,7 +68,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Dano recebido: " + damageAmount);
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        Debug.Log("Saúde atual: " + currentHealth);
+        Debug.Log("Saï¿½de atual: " + currentHealth);
 
         for (int i = 0; i < healthIcons.Count; i++)
         {
@@ -88,7 +87,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Saúde esgotada, chamando Die()");
+            Debug.Log("Saï¿½de esgotada, chamando Die()");
             Die();
         }
     }
@@ -111,7 +110,7 @@ public class PlayerHealth : MonoBehaviour
         contadorMortes++;
         Debug.Log("Player Died");
         animator.SetTrigger("Morrendo");
-        gameController.PlayerAcao(false);
+        GameController.instance.PlayerAcao(false);
         playerCollider.enabled = false;
     }
 
@@ -125,7 +124,7 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator Reativar()
     {
         yield return new WaitForSeconds(2);
-        gameController.PlayerAcao(true);
+        GameController.instance.PlayerAcao(true);
         playerCollider.enabled = true;
     }
 
@@ -147,7 +146,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
             ResetHealthIcons();
             InitializeHealthIcons();
-            Debug.Log("Saúde resetada no carregamento da cena 'Hub'");
+            Debug.Log("Saï¿½de resetada no carregamento da cena 'Hub'");
         }
     }
 
@@ -157,6 +156,6 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         ResetHealthIcons();
         InitializeHealthIcons();
-        Debug.Log("Saúde resetada no OnEnable");
+        Debug.Log("Saï¿½de resetada no OnEnable");
     }
 }

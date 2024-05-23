@@ -55,6 +55,7 @@ public class GameController : MonoBehaviour
         PlayerAcao(true);
     }
 
+    [ContextMenu("Next Level")]
     public void NextLevel()
     {
         //Se a cena atual for Hub
