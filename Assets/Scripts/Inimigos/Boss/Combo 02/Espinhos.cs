@@ -6,11 +6,11 @@ public class Espinhos : MonoBehaviour
 {
     public int dano = 1;
     private float tempo = 1.2f;
-    private Collider2D colliderComponent; 
+    private Collider2D colliderComponent;
 
     void Start()
     {
-        colliderComponent = GetComponent<Collider2D>(); 
+        colliderComponent = GetComponent<Collider2D>();
         colliderComponent.enabled = false;
         Destroy(gameObject, tempo);
     }
@@ -30,11 +30,10 @@ public class Espinhos : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (playerHealth != null && playerHealth.currentHealth > 0)
             {
                 playerHealth.TakeDamage(dano);
             }
         }
     }
-
 }

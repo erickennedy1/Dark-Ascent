@@ -16,7 +16,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     private Animator animator;
     private bool isDead = false;
     private bool canAttack = false;
-    private bool isVisible = false; 
+    private bool isVisible = false;
 
     void Start()
     {
@@ -26,10 +26,13 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void Update()
     {
-        if (isVisible && !isDead && Time.time >= nextAttackTime && IsPlayerInRange() && canAttack)
+        if (isVisible && !isDead && canAttack && IsPlayerInRange())
         {
-            animator.SetTrigger("Attack");
-            nextAttackTime = Time.time + ataqueDelay;
+            if (Time.time >= nextAttackTime)
+            {
+                animator.SetTrigger("Attack");
+                nextAttackTime = Time.time + ataqueDelay;
+            }
         }
     }
 
@@ -50,20 +53,20 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     IEnumerator EnableAttackWithDelay()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
         canAttack = true;
-        nextAttackTime = Time.time + ataqueDelay;
+        nextAttackTime = Time.time; 
     }
 
     void OnBecameVisible()
     {
         isVisible = true;
-        StartCoroutine(EnableAttackWithDelay()); 
+        StartCoroutine(EnableAttackWithDelay());
     }
 
     void OnBecameInvisible()
     {
         isVisible = false;
-        canAttack = false; 
+        canAttack = false;
     }
 }

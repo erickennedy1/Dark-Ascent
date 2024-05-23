@@ -1,32 +1,32 @@
 using UnityEngine;
-using UnityEngine.UI; // Importa o namespace necessário para trabalhar com UI.
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ButtonUI : MonoBehaviour
+public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Sprite novoSprite;
 
-    private Image imageComponent; // Alterado de SpriteRenderer para Image.
+    private Image imageComponent;
     private Sprite spriteOriginal;
 
     void Start()
     {
-        imageComponent = gameObject.GetComponent<Image>(); // Obtém o componente Image ao invés de SpriteRenderer.
-        spriteOriginal = imageComponent.sprite; // Armazena o sprite original.
+        imageComponent = gameObject.GetComponent<Image>();
+        spriteOriginal = imageComponent.sprite;
     }
 
-    void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        imageComponent.sprite = novoSprite; // Muda o sprite.
-        SoundManager.Instance.PlaySound(SoundManager.Instance.mouseEnter); // Assume que você tem um gerenciador de som.
+        imageComponent.sprite = novoSprite;
     }
 
-    void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        imageComponent.sprite = spriteOriginal; // Retorna ao sprite original.
+        imageComponent.sprite = spriteOriginal;
     }
 
     public void ResetToOriginalSprite()
     {
-        imageComponent.sprite = spriteOriginal; // Método para resetar o sprite manualmente.
+        imageComponent.sprite = spriteOriginal;
     }
 }

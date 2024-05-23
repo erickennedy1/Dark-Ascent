@@ -16,7 +16,7 @@ public class ProjetilIndestrutivel : MonoBehaviour
         if (collision.tag == "Player")
         {
             PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (playerHealth != null && playerHealth.currentHealth > 0)
             {
                 playerHealth.TakeDamage(dano);
             }

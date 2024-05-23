@@ -13,6 +13,7 @@ public class BossController : MonoBehaviour
 
     private Coroutine currentComboRoutine;
     private int currentComboNumber;
+    private Collider2D bossCollider;
 
     private void OnEnable()
     {
@@ -22,6 +23,11 @@ public class BossController : MonoBehaviour
     private void OnDisable()
     {
         bossHealth.onHealthChanged -= HandleHealthChanged;
+    }
+
+    private void Start()
+    {
+        bossCollider = GetComponent<Collider2D>(); // Get the Collider2D component
     }
 
     private void HandleHealthChanged(int currentHealth)
@@ -121,7 +127,8 @@ public class BossController : MonoBehaviour
         }
 
         CancelCurrentActions();
-        StartCoroutine(DestroyBossAfterDelay(3f));
+        bossCollider.enabled = false; 
+        StartCoroutine(DestroyBossAfterDelay(8f));
     }
 
     private IEnumerator DestroyBossAfterDelay(float delay)
