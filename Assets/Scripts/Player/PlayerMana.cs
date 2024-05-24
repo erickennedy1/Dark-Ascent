@@ -7,7 +7,7 @@ public class PlayerMana : MonoBehaviour
     public int maxMana = 100;
     public int currentMana;
     private Animator manaAnimator;
-    private string manaAnimationStateName = "ManaChange"; 
+    private string manaAnimationStateName = "Mana_animacao"; 
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class PlayerMana : MonoBehaviour
         currentMana = maxMana;
         SetManaAnimation(currentMana);
 
-        DontDestroyOnLoad(manaAnimator);
+        //DontDestroyOnLoad(manaAnimator);
     }
 
     public void UsarMana(int amount)

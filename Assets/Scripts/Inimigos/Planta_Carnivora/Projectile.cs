@@ -35,7 +35,6 @@ public class Projectile : MonoBehaviour
                 playerHealth.TakeDamage(damage);
             }
 
-            // Optionally call DestroyProjectile() to stop and destroy the projectile immediately
             DestroyProjectile();
         }
     }
@@ -48,7 +47,6 @@ public class Projectile : MonoBehaviour
 
         animator.SetTrigger("Colidiu");
 
-        // Optionally call DestroyProjectile() to stop and destroy the projectile immediately
         DestroyProjectile();
     }
 
@@ -58,7 +56,7 @@ public class Projectile : MonoBehaviour
         rb.angularVelocity = 0f;
         rb.isKinematic = true;
         collider2D.enabled = false;
-        Invoke("DelayedDestroy", 0.4f); // Delay the destroy by 0.4 seconds
+        Invoke("DelayedDestroy", 0.4f); 
     }
 
     private void DelayedDestroy()

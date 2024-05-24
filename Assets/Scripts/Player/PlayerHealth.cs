@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
         InitializeHealthIcons();
     }
 
-    private void ResetHealthIcons()
+    public void ResetHealthIcons()
     {
         foreach (GameObject icon in healthIcons)
         {
@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
         healthIcons.Clear();
     }
 
-    private void InitializeHealthIcons()
+    public void InitializeHealthIcons()
     {
         for (int i = 0; i < maxHealth; i++)
         {
@@ -108,6 +108,9 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         contadorMortes++;
+        playerAttack.danoAtaque = 1;
+        playerMana.RecuperarMana(100);
+        maxHealth = 5;
         Debug.Log("Player Died");
         animator.SetTrigger("Morrendo");
         GameController.instance.PlayerAcao(false);
@@ -116,7 +119,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void Morrendo()
     {
-        playerMana.ResetMana();
         GameController.instance.GoToHub();
         StartCoroutine(Reativar());
     }
