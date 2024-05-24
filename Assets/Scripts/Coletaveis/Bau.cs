@@ -23,7 +23,7 @@ public class Bau : MonoBehaviour
     }
     private void Update()
     {
-        if (playerProximo && Input.GetKeyDown(KeyCode.F) && !bauAberto)
+        if (playerProximo && Input.GetKeyDown(KeyCode.E) && !bauAberto)
         {
             AbrirBau();
             bauAberto = true;
