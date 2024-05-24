@@ -12,6 +12,7 @@ TagManager:
   - PlayerCollider
   - HealthIcon
   - Boss
+  - ManaUI
   layers:
   - Default
   - TransparentFX

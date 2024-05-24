@@ -36,6 +36,15 @@ public class GameController : MonoBehaviour
         FindPlayer();
     }
 
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     public void PauseGame()
     {
         //Retorna se já estiver pausado

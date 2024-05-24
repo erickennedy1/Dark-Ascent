@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -20,7 +21,16 @@ public class Player : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void ResetPlayer()
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+        public void ResetPlayer()
     {
         transform.position = Vector3.zero;
     }

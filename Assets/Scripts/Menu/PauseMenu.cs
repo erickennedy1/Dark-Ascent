@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class PauseMenu : MonoBehaviour
     private bool isPaused = false;
     private PlayerHealth playerHealth;
     private PlayerAttack playerAttack;
+    private PlayerMana playerMana;
 
     private static PauseMenu instance;
+    private float startTime; 
 
     void Awake()
     {
@@ -40,7 +43,9 @@ public class PauseMenu : MonoBehaviour
 
         playerHealth = FindObjectOfType<PlayerHealth>();
         playerAttack = FindObjectOfType<PlayerAttack>();
+        playerMana = FindObjectOfType<PlayerMana>();    
 
+        startTime = Time.time; 
         UpdateUI();
     }
 
@@ -81,7 +86,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
 
-        ResetPlayerInputs(true);
+        GameController.instance.PlayerAcao(true);
     }
 
     public void Quit()
@@ -96,25 +101,23 @@ public class PauseMenu : MonoBehaviour
         {
             UpdateUI();
             pauseMenuUI.SetActive(true);
-            ResetPlayerInputs(false);
+            GameController.instance.PlayerAcao(false);
         }
         Time.timeScale = 0f;
         isPaused = true;
     }
 
-    private void ResetPlayerInputs(bool state)
+    public void mainMenu()
     {
-        PlayerAttack playerController = FindObjectOfType<PlayerAttack>();
-        if (playerController != null)
-        {
-            playerController.canAttack = state;
-        }
-
-        if (!state)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-        }
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
+        startTime = Time.time; 
+        playerAttack.danoAtaque = 1;
+        playerHealth.contadorMortes = 0;
+        playerHealth.maxHealth = 5;
+        playerMana.maxMana = 100;
     }
+
 
     private void UpdateUI()
     {
@@ -131,7 +134,7 @@ public class PauseMenu : MonoBehaviour
 
     private void UpdateGameTime()
     {
-        float gameTime = Time.time;
+        float gameTime = Time.time - startTime; 
         tempoDeJogo.text = "Tempo de jogo: " + gameTime.ToString("F2") + "s";
     }
 }
