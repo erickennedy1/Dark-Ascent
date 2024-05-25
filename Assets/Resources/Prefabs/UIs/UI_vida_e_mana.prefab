@@ -89,6 +89,8 @@ GameObject:
   - component: {fileID: 6841313132368238302}
   - component: {fileID: 1174884898138622839}
   - component: {fileID: 4132141613133405518}
+  - component: {fileID: 4489869013264827871}
+  - component: {fileID: 2104204657150648847}
   m_Layer: 5
   m_Name: UI_vida_e_mana
   m_TagString: ManaUI
@@ -217,6 +219,36 @@ MonoBehaviour:
   UIs:
   - {fileID: 8866262676887696014}
   - {fileID: 2508718631994659151}
+--- !u!114 &4489869013264827871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837376205465412393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6dbbcbd2eba4b24a8dfb71e05a6bb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Aviso: {fileID: 2572527273693567209}
+  Texto: {fileID: 1996862270180662337}
+  text:
+  - "Pressione E para abrir o ba\xFA."
+  - "Vida m\xE1xima j\xE1 atingida!"
+--- !u!114 &2104204657150648847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837376205465412393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a69cbf25e8b2c45b7be1ef0a1bcbda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  revealMaterial: {fileID: 2100000, guid: 89e8b90b8200ba342991c39f572f35b9, type: 2}
 --- !u!1 &2572527273693567209
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,8 +855,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: pressione E para abrir o bau
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d56367bcadffed4e9766abff8b795e3, type: 2}
-  m_sharedMaterial: {fileID: 6042164794570011665, guid: 9d56367bcadffed4e9766abff8b795e3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
+  m_sharedMaterial: {fileID: -8115810070448887857, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -848,8 +880,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

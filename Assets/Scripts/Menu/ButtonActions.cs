@@ -44,7 +44,7 @@ public class ButtonActions : MonoBehaviour
     private void PlayGame()
     {
         Debug.Log("Iniciando o jogo...");
-        SceneManager.LoadScene("Hub");
+        GameController.instance.LoadScene("Cutscene_Inicial");
     }
 
     private void ToggleGameObject(GameObject panel, GameObject inicialPanel)

@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 8549758400628170341}
   - component: {fileID: 5757412178967290802}
   - component: {fileID: 2919203584295731954}
+  - component: {fileID: 5808822072842595448}
   m_Layer: 3
   m_Name: Planta-Carnivora
   m_TagString: Enemy
@@ -342,6 +343,20 @@ MonoBehaviour:
   speed: 0
   maxHealth: 3
   knockbackBool: 0
+  canMove: 1
+--- !u!114 &5808822072842595448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2337802755959058129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f24d963a97c354dae0b4ca77817a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 8732769572164511182, guid: 45aa90b2aaff6204ab7d557527098aea, type: 3}
 --- !u!1 &3203782460311020762
 GameObject:
   m_ObjectHideFlags: 0

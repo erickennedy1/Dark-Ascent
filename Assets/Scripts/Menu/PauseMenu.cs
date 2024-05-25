@@ -134,7 +134,9 @@ public class PauseMenu : MonoBehaviour
 
     private void UpdateGameTime()
     {
-        float gameTime = Time.time - startTime; 
-        tempoDeJogo.text = "Tempo de jogo: " + gameTime.ToString("F2") + "s";
+        float gameTime = Time.time - startTime;
+        int minutes = Mathf.FloorToInt(gameTime / 60f);
+        tempoDeJogo.text = "Tempo de jogo: " + minutes + "m";
     }
+
 }

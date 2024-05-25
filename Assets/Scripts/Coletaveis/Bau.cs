@@ -7,10 +7,11 @@ public class Bau : MonoBehaviour
     public Animator animator;
     public GameObject itemPrefab;
     public Transform spawnPoint;
-    public GameObject ui_Aviso;
+    private PlayerHealth playerHealth;
 
+    public bool bauDano = false;
     private bool playerProximo = false;
-    private bool bauAberto = false; 
+    private bool bauAberto = false;
 
     private float jumpHeight = 2f;
     private float jumpDistance = 2f;
@@ -18,16 +19,29 @@ public class Bau : MonoBehaviour
 
     private void Start()
     {
-        ui_Aviso = GameObject.Find("UI_Aviso");
-        ui_Aviso.SetActive(false);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerHealth = player.GetComponent<PlayerHealth>();
+        }
     }
     private void Update()
     {
         if (playerProximo && Input.GetKeyDown(KeyCode.E) && !bauAberto)
         {
-            AbrirBau();
-            bauAberto = true;
-            ui_Aviso.SetActive(false);
+            if(!bauDano)
+            {
+                AbrirBau();
+                bauAberto = true;
+                UI_Aviso.Instance.SetAviso(false, string.Empty);
+            }
+            else
+            {
+                playerHealth.TakeDamage(1);
+                AbrirBau();
+                bauAberto = true;
+                UI_Aviso.Instance.SetAviso(false, string.Empty);
+            }
         }
     }
 
@@ -36,11 +50,10 @@ public class Bau : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerProximo = true;
-        }
-
-        if(other.CompareTag("Player") && !bauAberto)
-        {
-            ui_Aviso.SetActive(true);
+            if (!bauAberto)
+            {
+                UI_Aviso.Instance.SetAviso(true, UI_Aviso.Instance.text[0]);
+            }
         }
     }
 
@@ -49,7 +62,7 @@ public class Bau : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerProximo = false;
-            ui_Aviso.SetActive(false);
+            UI_Aviso.Instance.SetAviso(false, string.Empty);
         }
     }
 
