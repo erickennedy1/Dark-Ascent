@@ -29,6 +29,14 @@ public class CutsceneInicial : MonoBehaviour
         StartCoroutine(CutsceneTextos());
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameController.instance.LoadScene("Hub");
+        }
+    }
+    
     IEnumerator CutsceneTextos()
     {
         TextTMP.text = string.Empty;
@@ -80,6 +88,8 @@ public class CutsceneInicial : MonoBehaviour
         TextTMP.text = string.Empty;
         TextTM.SetActive(false);
         videoScene.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        GameController.instance.LoadScene("Hub");
     }
 
     IEnumerator escritaTexto(int textoAtual)

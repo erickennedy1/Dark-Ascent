@@ -53,7 +53,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     IEnumerator EnableAttackWithDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         canAttack = true;
         nextAttackTime = Time.time; 
     }

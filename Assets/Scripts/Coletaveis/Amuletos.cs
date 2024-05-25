@@ -97,10 +97,17 @@ public class Amuletos : MonoBehaviour
                 }
                 else
                 {
-
+                    StartCoroutine(Aviso());
                 }
             }
         }
+    }
+
+    IEnumerator Aviso()
+    {
+        UI_Aviso.Instance.SetAviso(true, UI_Aviso.Instance.text[1]);
+        yield return new WaitForSeconds(2f);
+        UI_Aviso.Instance.SetAviso(false, string.Empty);
     }
 
     void UpgradeMana(GameObject player)
