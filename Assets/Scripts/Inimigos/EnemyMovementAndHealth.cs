@@ -110,7 +110,7 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
     private void Die()
     {
-        enemyAttack.EnemyDie();
+        //enemyAttack.EnemyDie();
         animator.SetTrigger("Morrendo");
         morreu = true;
         Collider2D collider = GetComponent<Collider2D>();

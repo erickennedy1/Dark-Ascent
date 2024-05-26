@@ -107,14 +107,14 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+        FadeController.StartFade(true);
+        ImageFadeController.FadeIn();
         contadorMortes++;
         playerAttack.danoAtaque = 1;
-        playerMana.RecuperarMana(100);
-        maxHealth = 5;
-        Debug.Log("Player Died");
         animator.SetTrigger("Morrendo");
         GameController.instance.PlayerAcao(false);
         playerCollider.enabled = false;
+        StartCoroutine(Died());
     }
 
     public void Morrendo()
@@ -123,8 +123,17 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(Reativar());
     }
 
+    private IEnumerator Died()
+    {
+        yield return new WaitForSeconds(3);
+        playerMana.RecuperarMana(100);
+        maxHealth = 5;
+    }
+
     private IEnumerator Reativar()
     {
+        ImageFadeController.ResetFade();
+        FadeController.StartFade(false);
         yield return new WaitForSeconds(2);
         GameController.instance.PlayerAcao(true);
         playerCollider.enabled = true;
