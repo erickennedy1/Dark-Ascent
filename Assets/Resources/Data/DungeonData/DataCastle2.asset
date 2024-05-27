@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7823a4ec6045d86459df5c04a7b107b0, type: 3}
-  m_Name: Dialogue_HubStartAnimation
+  m_Script: {fileID: 11500000, guid: b463f4b0967e5c54c906c9b3eee93be6, type: 3}
+  m_Name: DataCastle2
   m_EditorClassIdentifier: 
-  sentencesList:
-  - name: ???
-    sentence: Parece estar acordando.
-  - name: ???
-    sentence: "\xC9 claro, nunca falho com minhas cria\xE7\xF5es."
-  loop: 0
+  numberOfCrawlers: 3
+  roomsMin: 12
+  roomsMax: 14
+  isBossLevel: 1

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CutsceneInicial : MonoBehaviour
@@ -17,7 +18,7 @@ public class CutsceneInicial : MonoBehaviour
     [Header("Video")]
     public GameObject videoScene;
 
-    [Header("Velocidade da digitação")]
+    [Header("Velocidade da digitaï¿½ï¿½o")]
     public float velocidade = 0.1f;
 
 
@@ -33,7 +34,7 @@ public class CutsceneInicial : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameController.instance.LoadScene("Hub");
+            SceneManager.LoadScene("Hub_Init");
         }
     }
     
@@ -88,8 +89,8 @@ public class CutsceneInicial : MonoBehaviour
         TextTMP.text = string.Empty;
         TextTM.SetActive(false);
         videoScene.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
-        GameController.instance.LoadScene("Hub");
+        yield return new WaitForSeconds(4.0f);
+        SceneManager.LoadScene("Hub_Init");
     }
 
     IEnumerator escritaTexto(int textoAtual)
