@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody2D rd;
     private PlayerMovement playerMovement;
     private PolygonCollider2D playerCollider;
+
+    [SerializeField]
+    private RadialFadeController fadeController;
 
     public int contadorMortes = 0;
 
@@ -107,7 +111,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        FadeController.StartFade(true);
+        // FadeController.StartFade(true);
+        fadeController.SetFadeOn();
         ImageFadeController.FadeIn();
         contadorMortes++;
         playerAttack.danoAtaque = 1;
@@ -118,6 +123,12 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void Morrendo()
+    {
+        //Espera um pouco antes de ir para o hub
+        Invoke("MorrendoDelayCall", 2f);
+    }
+
+    private void MorrendoDelayCall()
     {
         GameController.instance.GoToHub();
         StartCoroutine(Reativar());
@@ -132,13 +143,15 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator Reativar()
     {
+        // FadeController.StartFade(false);
+        fadeController.SetFadeOff();
         ImageFadeController.ResetFade();
-        FadeController.StartFade(false);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        animator.SetTrigger("Revivendo");
+        yield return new WaitForSeconds(2.5f);
         GameController.instance.PlayerAcao(true);
         playerCollider.enabled = true;
     }
-
 
     void Awake()
     {

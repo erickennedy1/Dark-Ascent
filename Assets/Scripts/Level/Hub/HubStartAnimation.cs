@@ -24,11 +24,9 @@ public class HubStartAnimation : MonoBehaviour
 
     IEnumerator Step01(){
         //Escuridão por um tempo
-        yield return new WaitForSeconds(4);
-        //Animação do player ressurgindo
-        //animatorPlayer
         yield return new WaitForSeconds(3);
         //Começa Diálogo ???
+        Debug.Log("Step01");
         _dialogueTrigger.TriggerDialogue();
     }
 
