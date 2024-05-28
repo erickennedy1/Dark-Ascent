@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
     private float AttackRange = 2.5f;
     private float dashSpeed = 15f;
     public bool isDead = false;
-    private bool canAttack = false;
+    public bool canAttack = false;
     private bool isVisible = false;
 
     private Transform player;

@@ -20,8 +20,6 @@ public class HubStartAnimation : MonoBehaviour
         StartCoroutine(Step01());
     }
 
-    
-
     IEnumerator Step01(){
         //Escuridão por um tempo
         yield return new WaitForSeconds(3);
@@ -34,6 +32,7 @@ public class HubStartAnimation : MonoBehaviour
         //Chamado ao terminar o diálogo ???
         DialogueManager.EventEndDialogue -= Step02;
         DialogueManager.EventEndDialogue += Step04;
+        SoundTrackManager.Instance.PlayMusic("Hub");
         StartCoroutine(Step03());
     }
 

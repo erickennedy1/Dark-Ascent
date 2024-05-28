@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
     private ParticulasAtaque particulasAtaque;
 
-    [Header("Configurações de ataque")]
+    [Header("Configuraï¿½ï¿½es de ataque")]
     public int danoAtaque = 10;
     public float distanciaAtaque = 2f;
     public bool canAttack = true;
@@ -33,8 +33,11 @@ public class PlayerAttack : MonoBehaviour
             Vector2 direction = (mousePosition - playerPosition).normalized;
 
             SetAttackAnimationParameters(direction);
-
+            
+            //AnimaÃ§Ã£o e Som
             animator.SetTrigger("Attack");
+            SoundManager.Instance.PlaySound("Player_Attack");
+
             acabouDeAtacar = true;
 
             ataqueCouldown = StartCoroutine(AttackCooldown());
@@ -52,6 +55,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
+                SoundManager.Instance.PlaySound("Player_Attack_Hit");
                 EnemyMovementAndHealth enemy = hit.GetComponent<EnemyMovementAndHealth>();
                 if (enemy != null)
                 {

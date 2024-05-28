@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
     public AudioMixerGroup outputMixer;
     public List<Sound> sounds;
+    private List<Sound> activeLoopSounds = new List<Sound>();
 
     void Awake()
     {
@@ -41,6 +42,21 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
+        if(s.loop){
+            activeLoopSounds.Add(s);
+        }
         s.source.Play();
+    }
+
+    public void StopSoundLoop(string name){
+        Sound s = activeLoopSounds.Find(sound => sound.name == name);
+        if(s == null)
+        {
+            Debug.LogWarning("SoundLoop: "+name+" not found!");
+            return;
+        }
+
+        s.source.Stop();
+        activeLoopSounds.Remove(s);
     }
 }

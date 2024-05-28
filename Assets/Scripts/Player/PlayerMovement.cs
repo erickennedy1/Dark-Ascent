@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
 
     private Vector2 movement;
+    public bool isMoving = false;
     private float ultimoMovimentoHorizontal = 0f;
     private float ultimoMovimentoVertical = -1f;
     private bool isDashing = false;
@@ -42,9 +43,19 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }else{
-            animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", 0);
-            animator.SetBool("IsMoving", false);
+            SetMovementZero();
+        }
+    }
+
+    public void SetMovementZero()
+    {
+        animator.SetFloat("Horizontal", 0);
+        animator.SetFloat("Vertical", 0);
+        animator.SetBool("IsMoving", false);
+        movement = Vector2.zero;
+        if(isMoving){
+            isMoving = false;
+            SoundManager.Instance.StopSoundLoop("Player_Movement");       
         }
     }
 
@@ -57,7 +68,18 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
-        animator.SetBool("IsMoving", movement.magnitude > 0);
+        //Estava parado e andou
+        if(!isMoving && movement.magnitude > 0){
+            isMoving = true;
+            animator.SetBool("IsMoving", true);
+            SoundManager.Instance.PlaySound("Player_Movement");
+        }
+        //Estava andando e parou
+        else if(isMoving && movement.magnitude == 0){
+            isMoving = false;
+            animator.SetBool("IsMoving", false);
+            SoundManager.Instance.StopSoundLoop("Player_Movement");
+        }
 
         UpdateLastMovementDirection();
 

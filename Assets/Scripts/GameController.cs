@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (SceneManager.GetActiveScene().name == "Menu")
+        if (scene.name == "Menu")
         {
             Destroy(gameObject);
             return;
@@ -101,8 +102,7 @@ public class GameController : MonoBehaviour
                     break;
                 case 2:
                     currentLevel++;
-                    LoadScene("Boss"+currentWorldName);
-                    player.ResetPlayer();
+                    StartCoroutine(WaitLoadScene("Boss"+currentWorldName, "EnableBoss"));
                     break;
                 case 3:
                     //Depois de Derrotar o Boss
@@ -131,6 +131,28 @@ public class GameController : MonoBehaviour
             SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
 
         SceneManager.LoadScene(sceneName);
+    }
+
+    IEnumerator WaitLoadScene(string sceneName, string methodName)
+    {
+        //Unload todas as cenas adicionais
+        for(int i=1;i<SceneManager.sceneCount;i++)
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
+
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        while(!async.isDone){
+            Debug.Log("Loading Scene");
+            yield return null;
+        }
+
+        Invoke(methodName, 0.1f);
+    }
+
+    private void EnableBoss()
+    {
+        player.ResetPlayer();
+        player.transform.position = new Vector3(0,-5.5f,0);
+        FindObjectOfType<BossController>().enabled = true;
     }
 
     public void GoToHub()
@@ -173,7 +195,7 @@ public class GameController : MonoBehaviour
 
         foreach (var enemy in FindObjectsOfType<EnemyAttack>())
         {
-            //enemy.canAttack = estado;
+            enemy.canAttack = estado;
         }
     }
 

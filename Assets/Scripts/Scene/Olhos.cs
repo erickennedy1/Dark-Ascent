@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Olhos : MonoBehaviour
 {
-    public Transform player; // Referência ao Transform do jogador
-    public float maxDistance = 0.4f; // Distância máxima que a pupila pode se mover do centro
+    public Transform player; // Referï¿½ncia ao Transform do jogador
+    public float maxDistance = 0.4f; // Distï¿½ncia mï¿½xima que a pupila pode se mover do centro
 
-    private Vector2 originalPosition; // Posição original do centro da pupila
+    private Vector2 originalPosition; // Posiï¿½ï¿½o original do centro da pupila
 
     void Start()
     {
-        originalPosition = transform.localPosition; // Guarda a posição local original da pupila
+        player = GameObject.Find("Player").GetComponent<Transform>();
+        originalPosition = transform.localPosition; // Guarda a posiï¿½ï¿½o local original da pupila
     }
 
     void Update()
     {
-        Vector2 direction = player.position - transform.parent.position; // Direção do jogador
+        Vector2 direction = player.position - transform.parent.position; // Direï¿½ï¿½o do jogador
         direction = Vector2.ClampMagnitude(direction, maxDistance); // Limita o movimento da pupila
 
-        transform.localPosition = originalPosition + direction; // Atualiza a posição local da pupila
+        transform.localPosition = originalPosition + direction; // Atualiza a posiï¿½ï¿½o local da pupila
     }
 }
 
