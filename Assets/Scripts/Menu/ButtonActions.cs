@@ -21,7 +21,7 @@ public class ButtonActions : MonoBehaviour
 
     void OnMouseDown()
     {
-        SoundManager.Instance.PlaySound(SoundManager.Instance.mouseClick);
+        SoundManager.Instance.PlaySound("UI_MouseClick");
 
         if (playGame)
         {
@@ -44,7 +44,7 @@ public class ButtonActions : MonoBehaviour
     private void PlayGame()
     {
         Debug.Log("Iniciando o jogo...");
-        GameController.instance.LoadScene("Cutscene_Inicial");
+        SceneManager.LoadScene("Cutscene_Inicial");
     }
 
     private void ToggleGameObject(GameObject panel, GameObject inicialPanel)

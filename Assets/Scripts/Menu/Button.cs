@@ -17,7 +17,7 @@ public class Button : MonoBehaviour
     void OnMouseEnter()
     {
         spritePadrao.sprite = novoSprite;
-        SoundManager.Instance.PlaySound(SoundManager.Instance.mouseEnter);
+        SoundManager.Instance.PlaySound("UI_MouseEnter");
     }
 
     void OnMouseExit()

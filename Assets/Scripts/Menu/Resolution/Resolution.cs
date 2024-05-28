@@ -14,7 +14,7 @@ public class Resolution : MonoBehaviour
 
     void OnMouseDown()
     {
-        SoundManager.Instance.PlaySound(SoundManager.Instance.mouseClick);
+        SoundManager.Instance.PlaySound("UI_MouseClick");
 
             if (fullScreen)
         {

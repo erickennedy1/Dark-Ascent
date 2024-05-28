@@ -38,7 +38,7 @@ public class HubStartAnimation : MonoBehaviour
     }
 
     IEnumerator Step03(){
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         //Ilumina tudo ao redor
         _animatorDark.SetBool("startTransition", true);
         yield return new WaitForSeconds(5);

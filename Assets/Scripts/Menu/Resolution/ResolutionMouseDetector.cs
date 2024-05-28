@@ -8,7 +8,7 @@ public class ResolutionMouseDetector : MonoBehaviour
     public ResolutionNumberChange resolutionNumberChange;
     void OnMouseEnter()
     {
-        SoundManager.Instance.PlaySound(SoundManager.Instance.mouseEnter);
+        SoundManager.Instance.PlaySound("UI_MouseEnter");
 
         if (gameObject.tag == "Esquerda")
         {
@@ -22,7 +22,7 @@ public class ResolutionMouseDetector : MonoBehaviour
 
     void OnMouseDown()
     {
-        SoundManager.Instance.PlaySound(SoundManager.Instance.mouseClick);
+        SoundManager.Instance.PlaySound("UI_MouseClick");
 
         if (gameObject.tag == "Esquerda")
         {
