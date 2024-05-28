@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     //Função chamada antes do Start, Caso já exista um GameController na Scene, o novo GameController se auto Destroy
     //Caso contrário ele não é destruído ao carregar uma nova Scene
     void Awake(){
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         if (instance == null){
             instance = this;
             DontDestroyOnLoad(this);
@@ -29,6 +31,11 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void Start()
     {
         currentWorldLevel = 0;
@@ -36,7 +43,7 @@ public class GameController : MonoBehaviour
         FindPlayer();
     }
 
-    private void Update()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (SceneManager.GetActiveScene().name == "Menu")
         {

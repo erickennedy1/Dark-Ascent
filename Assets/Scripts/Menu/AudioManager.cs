@@ -3,8 +3,22 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
     public AudioMixer audioMixer;
 
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }else{
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    #region SetVolume
     public void SetMasterVolume(float volume)
     {
         volume = Mathf.Max(volume, 0.0001f);
@@ -21,4 +35,5 @@ public class AudioManager : MonoBehaviour
         volume = Mathf.Max(volume, 0.0001f); 
         audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
     }
+    #endregion
 }
