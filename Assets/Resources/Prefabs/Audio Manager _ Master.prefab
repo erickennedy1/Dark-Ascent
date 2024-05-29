@@ -60,13 +60,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Player_Attack
     clip: {fileID: 8300000, guid: 26f18199e64855d4c80f0c4874084d71, type: 3}
-    volume: 0.45
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Player_Attack_Hit
     clip: {fileID: 8300000, guid: 65c83925b6b10d642b164c298280cb1a, type: 3}
-    volume: 1
+    volume: 0.85
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -154,6 +154,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Hub
     clip: {fileID: 8300000, guid: f804c6bc517c728418b2498123a654f8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: End
+    clip: {fileID: 8300000, guid: f153f90b462556c429dd5f406018e9cf, type: 3}
     volume: 1
     pitch: 1
     loop: 1

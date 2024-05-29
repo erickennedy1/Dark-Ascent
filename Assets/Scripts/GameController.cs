@@ -112,9 +112,11 @@ public class GameController : MonoBehaviour
                         currentWorldLevel++;
                         currentLevel = 1;
                     }else{
-                        //Se não houver, vai para cena final
-                        //PS.: Preciso adicionar uma cena final
-                        GoToHub();
+                        LoadScene("EndScene");
+                        Destroy(player.gameObject);
+                        Destroy(FindAnyObjectByType<PauseMenu>().gameObject);
+                        Destroy(FindAnyObjectByType<UI_Controll>().gameObject);
+                        Destroy(gameObject);
                         return;
                     }
                     break;

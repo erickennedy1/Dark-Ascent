@@ -12,6 +12,7 @@ public class BossProjetil : MonoBehaviour
     public int vezesParaDisparar = 3;
     public float intervaloDisparos = 3f;
     public int vezesDisparadas = 0;
+    public Animator orb;
 
     private void DispararEmTodasAsDirecoes()
     {
@@ -59,17 +60,18 @@ public class BossProjetil : MonoBehaviour
         vezesDisparadas = 0;
     }
 
-    public void AtivarCombo(int disparos, int intervalo, int quantidade)
+    public void AtivarCombo(int disparos, float intervalo, int quantidade)
     {
         vezesParaDisparar = disparos;
         intervaloDisparos = intervalo;
         quantidadeProjetis = quantidade;
 
-        InvokeRepeating(nameof(DispararEmTodasAsDirecoes), 0f, intervaloDisparos);
+        InvokeRepeating(nameof(PreparacaoAtaque), 0f, intervaloDisparos+0.5f);
     }
 
     public void CancelarDisparos()
     {
+        CancelInvoke(nameof(PreparacaoAtaque));
         CancelInvoke(nameof(DispararEmTodasAsDirecoes));
     }
 
@@ -77,5 +79,11 @@ public class BossProjetil : MonoBehaviour
     {
         CancelarDisparos();
         ResetarDisparos();
+    }
+
+    public void PreparacaoAtaque(){
+        //Tempo de Preparação
+        orb.SetTrigger("onAttack");
+        Invoke(nameof(DispararEmTodasAsDirecoes), 0.5f);
     }
 }

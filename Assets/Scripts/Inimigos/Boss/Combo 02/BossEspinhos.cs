@@ -11,6 +11,8 @@ public class BossEspinhos : MonoBehaviour
     private float tempoAtivo; 
     private bool espinhosAtivos;
 
+    public Animator orb;
+
     void Start()
     {
         GameObject jogadorObj = GameObject.FindGameObjectWithTag("Player");
@@ -28,11 +30,18 @@ public class BossEspinhos : MonoBehaviour
 
         tempoAtivo = 0f;
         espinhosAtivos = true;
-        InvokeRepeating(nameof(CriarEspinhos), 0f, intervaloEntreEspinhos);
+        InvokeRepeating(nameof(PreparacaoAtaque), 0f, intervaloEntreEspinhos);
+    }
+
+    public void PreparacaoAtaque(){
+        //Tempo de Preparação
+        orb.SetTrigger("onAttack");
+        Invoke(nameof(CriarEspinhos), 0.5f);
     }
 
     public void PararEspinhos()
     {
+        CancelInvoke(nameof(PreparacaoAtaque));
         CancelInvoke(nameof(CriarEspinhos));
         espinhosAtivos = false;
     }

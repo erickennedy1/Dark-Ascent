@@ -150,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dano: 1
   tempoDeVida: 5
-  projetilDestrutivel: 0
 --- !u!58 &-5958395243675848917
 CircleCollider2D:
   m_ObjectHideFlags: 0

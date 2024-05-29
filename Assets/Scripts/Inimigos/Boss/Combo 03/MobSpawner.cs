@@ -13,6 +13,10 @@ public class InvocacaoChefe : MonoBehaviour
 
     private Coroutine invocacaoRoutine;
 
+    void Start(){
+        jogador = FindObjectOfType<Player>().transform;
+    }
+
     public void IniciarInvocacao(int quantidadeMonstros, float atraso)
     {
         numeroDeMonstros = quantidadeMonstros;

@@ -63,6 +63,9 @@ public class SoundTrackManager : MonoBehaviour
             case "BossFlorest":
                 PlayMusic("Boss");
                 break;
+            case "EndScene":
+                PlayMusic("End");
+                break;
             case "EmptyRoom":
                 //Só para não ficar dando mensagem de Erro
                 break;
