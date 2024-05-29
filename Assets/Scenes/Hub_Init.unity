@@ -13745,7 +13745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -14820,8 +14820,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00024986267, y: -0.00045013428, z: 0}
-    m_Extent: {x: 20.00005, y: 15.99975, z: 0}
+    m_Center: {x: 0.000049591064, y: -0.00045013428, z: 0}
+    m_Extent: {x: 20.00045, y: 16.00055, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -18590,6 +18590,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2612653893143658710, guid: 56fc78eea23c2e24491fb0c3e19fb97e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8115810070448887857, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
+    - target: {fileID: 2612653893143658710, guid: 56fc78eea23c2e24491fb0c3e19fb97e, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7881797331191169195, guid: 56fc78eea23c2e24491fb0c3e19fb97e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8115810070448887857, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
+    - target: {fileID: 7881797331191169195, guid: 56fc78eea23c2e24491fb0c3e19fb97e, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8877916206951696099, guid: 56fc78eea23c2e24491fb0c3e19fb97e, type: 3}
       propertyPath: m_Name
       value: Pause
@@ -20715,14 +20731,14 @@ RectTransform:
   m_GameObject: {fileID: 2031595332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 874239191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 214.2, y: -126.1}
+  m_AnchoredPosition: {x: 154, y: -93}
   m_SizeDelta: {x: 197, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031595334
