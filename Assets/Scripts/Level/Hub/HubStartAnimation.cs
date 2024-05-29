@@ -8,6 +8,8 @@ public class HubStartAnimation : MonoBehaviour
     [SerializeField] private DialogueTrigger _dialogueTrigger;
     [SerializeField] private Animator _animatorDark;
     [SerializeField] private UI_Controll _controllUIs;
+
+    [SerializeField] private TutorialController _tutorial;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +21,6 @@ public class HubStartAnimation : MonoBehaviour
         //Começa animação inicial
         StartCoroutine(Step01());
     }
-
-    
 
     IEnumerator Step01(){
         //Escuridão por um tempo
@@ -34,6 +34,7 @@ public class HubStartAnimation : MonoBehaviour
         //Chamado ao terminar o diálogo ???
         DialogueManager.EventEndDialogue -= Step02;
         DialogueManager.EventEndDialogue += Step04;
+        SoundTrackManager.Instance.PlayMusic("Hub");
         StartCoroutine(Step03());
     }
 
@@ -42,15 +43,33 @@ public class HubStartAnimation : MonoBehaviour
         //Ilumina tudo ao redor
         _animatorDark.SetBool("startTransition", true);
         yield return new WaitForSeconds(5);
-        //Começa o diálogo Introdutório
-        DialogueManager.EventEndDialogue += GameController.instance.EnablePlayerInput;
+        //Começa o diálogo Introdutório   
         _dialogueTrigger.TriggerDialogue();
     }
 
     public void Step04(){
         //Chamado ao terminar o diálogo Introdutório
         DialogueManager.EventEndDialogue -= Step04;
+        _tutorial.gameObject.SetActive(true);
+        _tutorial.EventEndTutorial += Step05;
+        _tutorial.StartTutorial();
+    }
+
+    public void Step05(){
+        _tutorial.EventEndTutorial -= Step05;
+        EndAnimation();
+    }
+
+    public void EndAnimation()
+    {
+        //Adiciona um event ao terminar o dialogo para Liberar o player
+        DialogueManager.EventEndDialogue += GameController.instance.EnablePlayerInput;
+
+        //Ativa as UIs
         _controllUIs.SetStateCanvasList(true);
+
+        //Libera o Player
+        GameController.instance.EnablePlayerInput();
     }
 }
 

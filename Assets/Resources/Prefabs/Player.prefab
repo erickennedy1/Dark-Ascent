@@ -268,6 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   canMove: 1
+  isMoving: 0
 --- !u!95 &8792612549072128647
 Animator:
   serializedVersion: 5
@@ -733,6 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   canMove: 0
+  isMoving: 0
 --- !u!114 &4443047421659294804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -874,7 +876,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8646553772693586011}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class SoundTrackManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class SoundTrackManager : MonoBehaviour
 
     void Awake()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         if (Instance == null){
             Instance = this;
         }
@@ -34,8 +37,46 @@ public class SoundTrackManager : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch(scene.name)
+        {
+            case "Menu":
+                PlayMusic("Menu");
+                break;
+            case "Cutscene_Inicial":
+                PlayMusic("CutScene");
+                break;
+            case "Hub_Init":
+                StopMusic();
+                break;
+            case "Hub":
+                PlayMusic("Hub");
+                break;
+            case "Dungeon":
+                PlayMusic("Exploration");
+                break;
+            case "BossFlorest":
+                PlayMusic("Boss");
+                break;
+            case "EndScene":
+                PlayMusic("End");
+                break;
+            case "EmptyRoom":
+                //Só para não ficar dando mensagem de Erro
+                break;
+            default:
+                Debug.LogWarning("Scene not Recognized");
+                break;
+        }
+    }
+
     void Start(){
-        PlayMusic("Menu_Music");
+        PlayMusic("Menu");
     }
 
     public void PlayMusic(string name)

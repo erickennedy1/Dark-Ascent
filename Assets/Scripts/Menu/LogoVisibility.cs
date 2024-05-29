@@ -38,7 +38,7 @@ public class LogoVisibility : MonoBehaviour
 
     IEnumerator ActivateObjects()
     {
-        yield return new WaitForSeconds(6.5f);  
+        yield return new WaitForSeconds(3.5f);  
 
         foreach (GameObject obj in objects)
         {

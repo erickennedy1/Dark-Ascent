@@ -10,6 +10,8 @@ public class BossController : MonoBehaviour
     [SerializeField] private InvocacaoChefe invocacaoChefe;
 
     public Animator cabecaBoss;
+    public Animator orb;
+    public Animator portao;
 
     private Coroutine currentComboRoutine;
     private int currentComboNumber;
@@ -36,7 +38,7 @@ public class BossController : MonoBehaviour
         if (newComboNumber != currentComboNumber)
         {
             currentComboNumber = newComboNumber;
-            StartCombo(currentComboNumber, true);
+            StartCombo(currentComboNumber, false);
         }
     }
 
@@ -64,12 +66,11 @@ public class BossController : MonoBehaviour
     private IEnumerator ComboRoutine(int comboNumber, bool immediate)
     {
         if (immediate)
-        {
             yield return new WaitForSeconds(1);
-        }
-        else
-        {
-            yield return new WaitForSeconds(3);
+        else{
+            orb.SetBool("buildOrb", true);
+            yield return new WaitForSeconds(2);
+            orb.SetBool("buildOrb", false);
         }
 
         while (true)
@@ -77,19 +78,19 @@ public class BossController : MonoBehaviour
             switch (comboNumber)
             {
                 case 1:
-                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(5, 3, 15), 16, bossProjetil.ResetarDisparos));
-                    yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(2f, 9), 10, bossEspinhos.PararEspinhos));
+                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(3, 3, 15), 10));
+                    yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(1.5f, 9), 10, bossEspinhos.PararEspinhos));
                     yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(3, 2.0f), 10));
                     break;
                 case 2:
-                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(7, 3, 25), 22, bossProjetil.ResetarDisparos));
-                    yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(1.5f, 14), 15, bossEspinhos.PararEspinhos));
-                    yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(4, 2.0f), 11));
+                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(4, 2.5f, 25), 12));
+                    yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(1.25f, 14), 14, bossEspinhos.PararEspinhos));
+                    yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(4, 1.8f), 10));
                     break;
                 case 3:
-                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(9, 2, 35), 19, bossProjetil.ResetarDisparos));
-                    yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(1f, 17), 18, bossEspinhos.PararEspinhos));
-                    yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(5, 2.0f), 13));
+                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(5, 2.5f, 30), 14));
+                    yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(1f, 17), 15, bossEspinhos.PararEspinhos));
+                    yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(5, 1.6f), 10));
                     break;
             }
 
@@ -102,13 +103,10 @@ public class BossController : MonoBehaviour
 
     private IEnumerator PerformAction(Action action, float waitTime, Action postAction = null)
     {
+        //Invoca o ataque
         action.Invoke();
-        float elapsed = 0f;
-        while (elapsed < waitTime)
-        {
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(waitTime);
+
         postAction?.Invoke();
     }
 
@@ -127,13 +125,16 @@ public class BossController : MonoBehaviour
         }
 
         CancelCurrentActions();
-        bossCollider.enabled = false; 
-        StartCoroutine(DestroyBossAfterDelay(8f));
+        bossCollider.enabled = false;
+        orb.SetBool("buildOrb", false);
+        orb.SetTrigger("disableOrb");
+        StartCoroutine(DestroyBossAfterDelay(5f));
     }
 
     private IEnumerator DestroyBossAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
+        portao.SetTrigger("Open");
         Destroy(gameObject);
     }
 

@@ -26,7 +26,7 @@ public class BossHealth : MonoBehaviour
         currentHealth = maxHealth;
         onHealthChanged?.Invoke(currentHealth);
         spriteRenderer = GetComponent<SpriteRenderer>();
-        separateSpriteRenderer = transform.Find("cabeçaBoss").GetComponent<SpriteRenderer>(); 
+        separateSpriteRenderer = transform.Find("cabecaBoss").GetComponent<SpriteRenderer>(); 
         animator = GetComponent<Animator>();
         separateAnimator = separateSpriteRenderer.GetComponent<Animator>(); 
     }
