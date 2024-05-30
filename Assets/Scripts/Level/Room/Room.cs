@@ -46,6 +46,15 @@ public class Room : MonoBehaviour
                 spawnEnemiesController.gameObject.SetActive(false);
             }
         }
+        else if(type == "Reward")
+        {
+            RandomTilemap(type);
+            if(hasBattle){
+                spawnEnemiesController.SpawnEnemies();
+            }else{
+                spawnEnemiesController.gameObject.SetActive(false);
+            }
+        }
         else{
             RandomTilemap(type);
             spawnEnemiesController.gameObject.SetActive(false);
