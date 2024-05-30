@@ -27,7 +27,8 @@ public class RoomController : MonoBehaviour
     bool updateRooms = false;
 
     public GameObject player;
-    [SerializeField]MinimapController minimapController;
+    [SerializeField] private MinimapController minimapController;
+    [SerializeField] private RoomControllerData roomControllerData;
 
     //**Assim que a sala for iniciada** a sala é considerada uma instancia publica
     void Awake() //Awake é chamado primeiro que todos
@@ -37,6 +38,7 @@ public class RoomController : MonoBehaviour
 
     void Start(){
         currentWorldName = GameController.instance.currentWorldName;
+        roomControllerData = (RoomControllerData)Resources.Load("Data/RoomControllerData/RoomControllerData_"+currentWorldName+GameController.instance.currentLevel);
     }
 
     void Update(){
@@ -260,6 +262,9 @@ public class RoomController : MonoBehaviour
     }
 
     void AfterLoad(){
+        //Gera salas com recompensas
+        GenerateRewardRooms();
+
         //Atualiza todas as Rooms
         foreach(Room room in loadedRooms)
             room.UpdateRoom();
@@ -275,6 +280,22 @@ public class RoomController : MonoBehaviour
         player.transform.position = loadedRooms.Find(item => item.type == "Start").GetRoomCenter();
 
         updateRooms = true;
+    }
+
+    private void GenerateRewardRooms()
+    {
+        //Define salas com recompensas        
+        List<Room> emptyRooms = loadedRooms.FindAll(room => room.type == "Empty");
+        // Cria um HashSet para armazenar números únicos
+        HashSet<int> uniqueNumbers = new HashSet<int>();
+
+        // Gera números aleatórios até que tenhamos 3 números únicos
+        while(uniqueNumbers.Count < roomControllerData.numberOfRewardRooms)
+            uniqueNumbers.Add(Random.Range(0, emptyRooms.Count));
+
+        foreach(int index in uniqueNumbers){
+            emptyRooms[index].type = "Reward";
+        }
     }
 
     public void StartBattle()
