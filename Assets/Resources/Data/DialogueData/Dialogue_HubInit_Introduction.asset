@@ -18,4 +18,22 @@ MonoBehaviour:
   - name: "Criador de M\xE1scaras"
     sentence: "Finalmente, voc\xEA desperta. Meu trabalho foi meticuloso, e agora,
       est\xE1 pronto."
+  - name: Guia
+    sentence: "Eu sou Elara, a guardi\xE3 remanescente deste reino devastado. Estou
+      aqui para orientar aqueles que se ergueram contra a escurid\xE3o."
+  - name: "Criador de M\xE1scaras"
+    sentence: "Eu sou Eldrin, o Criador de M\xE1scaras. Aquele que lhe concedeu esta
+      forma para enfrentar a escurid\xE3o que consome nosso reino."
+  - name: Guia
+    sentence: "Grande guerreiro, o invocamos porque sabemos que tem uma alma forte
+      e valente, e gostar\xEDamos de pedir a sua ajuda."
+  - name: Guia
+    sentence: "Nosso reino enfrentou uma grande cat\xE1strofe, e atualmente somos
+      um dos poucos sobreviventes."
+  - name: Guia
+    sentence: "Floresta adentro se encontro o cora\xE7\xE3o do nosso reino, o grande
+      Castelo Branco, a onde reside a fonte do mal, nosso antigo rei..."
+  - name: Guia
+    sentence: Mesmo que seja demais, pedimos que o grande Guerreiro derrote a raiz
+      do mal e traga paz ao nosso reino.
   loop: 0

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentencesList:
   - name: Guia
-    sentence: Boa sorte.
+    sentence: Boa sorte, Guerreio.
   loop: 1
