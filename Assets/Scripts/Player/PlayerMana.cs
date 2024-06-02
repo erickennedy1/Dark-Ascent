@@ -36,7 +36,7 @@ public class PlayerMana : MonoBehaviour
     private void SetManaAnimation(int mana)
     {
         float normalizedTime = 1f - (float)mana / maxMana;
-        Debug.Log("Normalized time: " + normalizedTime); // Verifique este valor
+        Debug.Log("Normalized time: " + normalizedTime); 
         manaAnimator.Play(manaAnimationStateName, 0, normalizedTime);
     }
 
