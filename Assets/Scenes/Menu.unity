@@ -1329,7 +1329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteEsquerda: {fileID: 21300000, guid: f88b51d06c3c74e448eccf77f8716d3e, type: 3}
   spriteDireita: {fileID: 21300000, guid: 22a4da70966b85d499a8a243f7a34bdf, type: 3}
-  resolutionDetector: {fileID: 827520885}
+  resolutionDetector: {fileID: 714607192}
 --- !u!1 &827520882
 GameObject:
   m_ObjectHideFlags: 0

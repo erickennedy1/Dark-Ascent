@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     private float dashDistance = 3f;
     private float dashDuration = 0.1f;
-    private float dashCooldown = 0.2f;
     public bool canMove = true;
 
     private Vector2 movement;
@@ -20,29 +19,36 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAttack playerAttack;
     private Rigidbody2D rb;
     private Animator animator;
-    private PlayerMana playerMana; 
+    private PlayerMana playerMana;
+    private DashCooldownUI dashCooldownUI;
+    private bool isCooldown = false;
 
     void Start()
     {
         playerAttack = GetComponent<PlayerAttack>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        playerMana = GetComponent<PlayerMana>(); 
+        playerMana = GetComponent<PlayerMana>();
+
+        dashCooldownUI = FindObjectOfType<DashCooldownUI>();
     }
 
     void Update()
     {
+        Debug.Log(isCooldown);
         if (canMove && !isDashing)
         {
             HandleMovementInput();
-            if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
+            if (Input.GetKeyDown(KeyCode.Space) && !isCooldown) // Verifica se não está em cooldown
             {
                 if (playerMana.currentMana >= 10)
                 {
                     TryDash();
                 }
             }
-        }else{
+        }
+        else
+        {
             SetMovementZero();
         }
     }
@@ -101,15 +107,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void TryDash()
     {
-        playerMana.UsarMana(10); 
+        playerMana.UsarMana(10);
         StartCoroutine(Dash());
+        dashCooldownUI.StartCooldown();
+        StartCoroutine(DashCooldown());
     }
 
     IEnumerator Dash()
     {
-        lastDashTime = Time.time;
         isDashing = true;
         animator.SetBool("IsDashing", true);
 
@@ -128,5 +136,12 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsDashing", false);
         animator.SetFloat("DashHorizontal", 0);
         animator.SetFloat("DashVertical", 0);
+    }
+
+    IEnumerator DashCooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(2f); 
+        isCooldown = false;
     }
 }

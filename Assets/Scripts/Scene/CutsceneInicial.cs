@@ -18,15 +18,12 @@ public class CutsceneInicial : MonoBehaviour
     [Header("Video")]
     public GameObject videoScene;
 
-    [Header("Velocidade da digita��o")]
+    [Header("Velocidade da digitação")]
     public float velocidade = 0.1f;
-
-
 
     private void Start()
     {
         TextTMP.text = string.Empty;
-
         StartCoroutine(CutsceneTextos());
     }
 
@@ -37,7 +34,7 @@ public class CutsceneInicial : MonoBehaviour
             SceneManager.LoadScene("Hub_Init");
         }
     }
-    
+
     IEnumerator CutsceneTextos()
     {
         TextTMP.text = string.Empty;
@@ -79,17 +76,17 @@ public class CutsceneInicial : MonoBehaviour
         TextTMP.text = string.Empty;
         StartCoroutine(FadeImage(true, 6));
         StartCoroutine(escritaTexto(6));
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
 
         StartCoroutine(FadeImage(false, 4));
         StartCoroutine(FadeImage(false, 5));
         StartCoroutine(FadeImage(false, 6));
-        yield return new WaitForSeconds(1.5f);
-
         TextTMP.text = string.Empty;
         TextTM.SetActive(false);
+        yield return new WaitForSeconds(1.5f);
+
         videoScene.SetActive(true);
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(3.5f);
         SceneManager.LoadScene("Hub_Init");
     }
 
@@ -97,8 +94,8 @@ public class CutsceneInicial : MonoBehaviour
     {
         foreach (char letter in text[textoAtual])
         {
-            TextTMP.text += letter; 
-            yield return new WaitForSeconds(velocidade); 
+            TextTMP.text += letter;
+            yield return new WaitForSeconds(velocidade);
         }
     }
 
@@ -111,15 +108,16 @@ public class CutsceneInicial : MonoBehaviour
                 image[imageCount].color = new Color(1, 1, 1, i);
                 yield return null;
             }
+            image[imageCount].color = new Color(1, 1, 1, 1);
         }
         else
         {
-
             for (float i = 1; i >= 0; i -= (Time.deltaTime * 0.5f))
             {
                 image[imageCount].color = new Color(1, 1, 1, i);
                 yield return null;
             }
+            image[imageCount].color = new Color(1, 1, 1, 0); 
         }
     }
 }
