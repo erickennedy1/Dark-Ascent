@@ -20,7 +20,7 @@ public class ResolutionNumberChange : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         sprites = new List<Sprite> { sprite1280, sprite1600, sprite1920 };
         resolutions = new List<Vector2Int> { new Vector2Int(1280, 720), new Vector2Int(1600, 900), new Vector2Int(1920, 1080) }; 
-        currentSpriteIndex = 0;
+        currentSpriteIndex = 2;
         spriteRenderer.sprite = sprites[currentSpriteIndex];
         SetResolution(currentSpriteIndex);  
     }
