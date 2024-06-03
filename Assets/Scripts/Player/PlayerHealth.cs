@@ -22,6 +22,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private RadialFadeController fadeController;
 
+    private bool isInvencible = false;
+    private float timeInvencible = 0.3f;
+
     public int contadorMortes = 0;
 
     void Start()
@@ -69,6 +72,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        //Se o player estiver incencivel, não recebe dano
+        if(isInvencible)
+            return;
+        
         Debug.Log("Dano recebido: " + damageAmount);
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -93,7 +100,16 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("Sa�de esgotada, chamando Die()");
             Die();
+        }else{
+            StartCoroutine(InvencibleTime());
         }
+    }
+
+    private IEnumerator InvencibleTime()
+    {
+        isInvencible = true;
+        yield return new WaitForSeconds(timeInvencible);
+        isInvencible = false;
     }
 
 
