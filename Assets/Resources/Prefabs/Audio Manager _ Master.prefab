@@ -72,9 +72,27 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Player_Movement
     clip: {fileID: 8300000, guid: b8912d2d44cfe094cb829e4107bb248f, type: 3}
-    volume: 1
+    volume: 0.55
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Player_Dash
+    clip: {fileID: 8300000, guid: 26187e694be67fe47aa43e3af7d98cb0, type: 3}
+    volume: 0.4
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
+  - name: Player_Collect
+    clip: {fileID: 8300000, guid: 953040e32691d2649861a8d3015aab00, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CutScene_Impact
+    clip: {fileID: 8300000, guid: 78e878c740da4404daeb2ed9c78d38ff, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!1 &4636460245206901420
 GameObject:
@@ -161,6 +179,12 @@ MonoBehaviour:
   - name: End
     clip: {fileID: 8300000, guid: f153f90b462556c429dd5f406018e9cf, type: 3}
     volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: HubInit_Hollow
+    clip: {fileID: 8300000, guid: 434a16f57de58d04797098436e61a396, type: 3}
+    volume: 0.05
     pitch: 1
     loop: 1
     source: {fileID: 0}

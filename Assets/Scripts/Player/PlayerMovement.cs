@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isCooldown);
         if (canMove && !isDashing)
         {
             HandleMovementInput();
@@ -118,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Dash()
     {
+        SoundManager.Instance.PlaySound("Player_Dash");
         isDashing = true;
         animator.SetBool("IsDashing", true);
 
