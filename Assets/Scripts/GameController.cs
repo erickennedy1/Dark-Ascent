@@ -203,6 +203,9 @@ public class GameController : MonoBehaviour
 
     public void EnablePlayerInput()
     {
+        if(player == null)
+            FindPlayer();
+            
         foreach (PlayerMovement playerMovement in player.GetComponentsInChildren<PlayerMovement>())
         {
             playerMovement.canMove = true;
@@ -213,18 +216,4 @@ public class GameController : MonoBehaviour
             playerAttack.canAttack = true;
         }
     }
-
-    public void DisablePlayerInput()
-    {
-        foreach (PlayerMovement playerMovement in player.GetComponentsInChildren<PlayerMovement>())
-        {
-            playerMovement.canMove = false;
-        }
-
-        foreach (PlayerAttack playerAttack in player.GetComponentsInChildren<PlayerAttack>())
-        {
-            playerAttack.canAttack = false;
-        }
-    }
-
 }

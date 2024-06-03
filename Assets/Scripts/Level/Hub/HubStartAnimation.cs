@@ -71,5 +71,11 @@ public class HubStartAnimation : MonoBehaviour
         //Libera o Player
         GameController.instance.EnablePlayerInput();
     }
+
+    private void OnDestroy() {
+        DialogueManager.EventEndDialogue -= Step02;
+        DialogueManager.EventEndDialogue -= Step04;
+        _tutorial.EventEndTutorial -= Step05;
+    }
 }
 
