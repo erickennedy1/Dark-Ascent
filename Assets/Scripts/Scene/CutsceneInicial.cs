@@ -66,7 +66,7 @@ public class CutsceneInicial : MonoBehaviour
 
         StartCoroutine(FadeImage(true, 4));
         StartCoroutine(escritaTexto(4));
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(5);
 
         TextTMP.text = string.Empty;
         StartCoroutine(FadeImage(true, 5));
@@ -86,6 +86,8 @@ public class CutsceneInicial : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         videoScene.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        SoundManager.Instance.PlaySound("CutScene_Impact");
         yield return new WaitForSeconds(3.5f);
         SceneManager.LoadScene("Hub_Init");
     }

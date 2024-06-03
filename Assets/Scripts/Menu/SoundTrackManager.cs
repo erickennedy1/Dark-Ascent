@@ -52,7 +52,7 @@ public class SoundTrackManager : MonoBehaviour
                 PlayMusic("CutScene");
                 break;
             case "Hub_Init":
-                StopMusic();
+                PlayMusic("HubInit_Hollow");
                 break;
             case "Hub":
                 PlayMusic("Hub");

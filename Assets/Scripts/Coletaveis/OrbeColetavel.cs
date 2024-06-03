@@ -8,6 +8,7 @@ public class OrbeColetavel : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SoundManager.Instance.PlaySound("Player_Collect");
             PlayerMana playerMana = collision.GetComponent<PlayerMana>();
             if (playerMana != null)
             {

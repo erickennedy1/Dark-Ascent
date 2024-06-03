@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentencesList:
   - name: "Criador de M\xE1scaras"
-    sentence: Seja fortem Guerreiro.
+    sentence: Seja forte Guerreiro.
   loop: 1

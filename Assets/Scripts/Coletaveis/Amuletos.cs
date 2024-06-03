@@ -47,6 +47,7 @@ public class Amuletos : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SoundManager.Instance.PlaySound("Player_Collect");
             AplicarAmuleto(aleatorio);  
 
             switch (aleatorio) 
