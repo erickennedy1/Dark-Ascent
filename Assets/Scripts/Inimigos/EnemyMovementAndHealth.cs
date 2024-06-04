@@ -3,14 +3,14 @@ using System.Collections;
 
 public class EnemyMovementAndHealth : MonoBehaviour
 {
-    [Header("Configurações de movimento")]
+    [Header("Configuraï¿½ï¿½es de movimento")]
     public float speed = 3f;
     private float followDistance = 10f;
 
-    [Header("Configurações de vida")]
+    [Header("Configuraï¿½ï¿½es de vida")]
     public int maxHealth = 100;
 
-    [Header("Configurações de knockback")]
+    [Header("Configuraï¿½ï¿½es de knockback")]
     private float knockbackDistance = 0.5f;
     private float knockbackDuration = 0.2f;
 
