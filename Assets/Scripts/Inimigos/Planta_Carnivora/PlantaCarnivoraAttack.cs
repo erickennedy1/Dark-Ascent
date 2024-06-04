@@ -18,10 +18,13 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     private bool canAttack = false;
     private bool isVisible = false;
 
+    private ISoundEnemy soundController;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        soundController = GetComponent<ISoundEnemy>();
     }
 
     void Update()
@@ -40,6 +43,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     {
         if (projectileSpawnPoint == null || isDead || !canAttack) return;
 
+        soundController.PlayAttack();
         Vector2 targetDirection = (player.position - transform.position).normalized;
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();

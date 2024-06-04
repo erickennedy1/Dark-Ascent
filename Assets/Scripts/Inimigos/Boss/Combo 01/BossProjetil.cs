@@ -49,7 +49,8 @@ public class BossProjetil : MonoBehaviour
             }
             vezesDisparadas++;
         }
-        else
+        
+        if(vezesDisparadas >= vezesParaDisparar)
         {
             CancelarDisparos();
         }
@@ -84,6 +85,7 @@ public class BossProjetil : MonoBehaviour
     public void PreparacaoAtaque(){
         //Tempo de Preparação
         orb.SetTrigger("onAttack");
+        SoundManager.Instance.PlaySound("Boss_Combo1");
         Invoke(nameof(DispararEmTodasAsDirecoes), 0.5f);
     }
 }
