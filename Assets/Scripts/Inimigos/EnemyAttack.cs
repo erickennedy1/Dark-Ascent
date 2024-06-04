@@ -18,12 +18,14 @@ public class EnemyAttack : MonoBehaviour
     private bool isReadyToAttack = true;
     private Rigidbody2D rb;
     private PlayerHealth playerHealth;
+    private ISoundEnemy soundController;
     private void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         playerHealth = GetComponent<PlayerHealth>();
+        soundController = GetComponent<ISoundEnemy>();
 
         GameObject obj = GameObject.Find("Player");
         if (obj != null)
@@ -75,6 +77,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void DashTowardsPlayer()
     {
+        soundController.PlayAttack();
         Vector2 direction = (player.position - transform.position).normalized;
         rb.velocity = direction * dashSpeed;
         Invoke("StopDash", 0.2f);
@@ -95,13 +98,14 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator EnableAttackWithDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         canAttack = true;
     }
 
     void OnBecameVisible()
     {
         isVisible = true;
+        soundController.PlayIdle();
         StartCoroutine(EnableAttackWithDelay());
     }
 
@@ -109,5 +113,6 @@ public class EnemyAttack : MonoBehaviour
     {
         isVisible = false;
         canAttack = false;
+        // soundController.StopIdle();
     }
 }
