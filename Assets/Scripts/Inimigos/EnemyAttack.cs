@@ -113,6 +113,6 @@ public class EnemyAttack : MonoBehaviour
     {
         isVisible = false;
         canAttack = false;
-        // soundController.StopIdle();
+        StopCoroutine(EnableAttackWithDelay());
     }
 }

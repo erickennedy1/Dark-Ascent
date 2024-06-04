@@ -70,6 +70,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void OnBecameInvisible()
     {
+        StopCoroutine(EnableAttackWithDelay());
         isVisible = false;
         canAttack = false;
     }
