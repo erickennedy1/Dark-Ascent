@@ -16,7 +16,6 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     private Animator animator;
     private bool isDead = false;
     [SerializeField] private bool canAttack = false;
-    private bool isVisible = false;
 
     private ISoundEnemy soundController;
 
@@ -29,7 +28,7 @@ public class PlantaCarnivoraAttack : MonoBehaviour
 
     void Update()
     {
-        if (isVisible && !isDead && canAttack && IsPlayerInRange())
+        if (!isDead && canAttack && IsPlayerInRange())
         {
             if (Time.time >= nextAttackTime)
             {
@@ -66,18 +65,5 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     {
         canAttack = state;
         nextAttackTime = Time.time;
-    }
-
-    void OnBecameVisible()
-    {
-        isVisible = true;
-        // StartCoroutine(EnableAttackWithDelay());
-    }
-
-    void OnBecameInvisible()
-    {
-        // StopCoroutine(EnableAttackWithDelay());
-        isVisible = false;
-        canAttack = false;
     }
 }

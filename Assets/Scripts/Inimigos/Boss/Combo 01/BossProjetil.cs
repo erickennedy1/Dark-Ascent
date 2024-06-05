@@ -63,6 +63,7 @@ public class BossProjetil : MonoBehaviour
 
     public void AtivarCombo(int disparos, float intervalo, int quantidade)
     {
+        ResetarDisparos();
         vezesParaDisparar = disparos;
         intervaloDisparos = intervalo;
         quantidadeProjetis = quantidade;

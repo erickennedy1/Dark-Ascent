@@ -11,7 +11,6 @@ public class EnemyAttack : MonoBehaviour
     private float dashSpeed = 15f;
     public bool isDead = false;
     [SerializeField] private bool canAttack = false;
-    private bool isVisible = false;
 
     private Transform player;
     private Animator animator;
@@ -109,15 +108,11 @@ public class EnemyAttack : MonoBehaviour
 
     void OnBecameVisible()
     {
-        isVisible = true;
         soundController.PlayIdle();
-        // StartCoroutine(EnableAttackWithDelay());
     }
 
     void OnBecameInvisible()
     {
-        isVisible = false;
-        canAttack = false;
-        // StopCoroutine(EnableAttackWithDelay());
+        soundController.StopIdle();
     }
 }

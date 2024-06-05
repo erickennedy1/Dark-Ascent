@@ -78,6 +78,7 @@ public class BossController : MonoBehaviour
             switch (comboNumber)
             {
                 case 1:
+                    Debug.Log("Combo 1");
                     yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(3, 3, 15), 10));
                     yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(1.5f, 9), 10, bossEspinhos.PararEspinhos));
                     yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(3, 2.0f), 10));
@@ -97,7 +98,6 @@ public class BossController : MonoBehaviour
             if (bossHealth.currentHealth <= 0 || GetComboNumber(bossHealth.currentHealth) != comboNumber)
                 yield break;
 
-            yield return null;
         }
     }
 
