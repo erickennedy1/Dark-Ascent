@@ -58,7 +58,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(DialogueData dialogue)
     {
         //Pause Player
-        GameController.instance.PlayerAcao(false);
+        GameController.instance.SetPlayerInput(false);
 
         //Setup Dialogue
         _dialogues.Clear();

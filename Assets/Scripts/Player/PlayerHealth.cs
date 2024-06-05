@@ -133,7 +133,7 @@ public class PlayerHealth : MonoBehaviour
         contadorMortes++;
         playerAttack.danoAtaque = 1;
         animator.SetTrigger("Morrendo");
-        GameController.instance.PlayerAcao(false);
+        GameController.instance.SetPlayerInput(false);
         playerCollider.enabled = false;
         StartCoroutine(Died());
     }
@@ -165,7 +165,7 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(1);
         animator.SetTrigger("Revivendo");
         yield return new WaitForSeconds(2.5f);
-        GameController.instance.PlayerAcao(true);
+        GameController.instance.SetPlayerInput(true);
         playerCollider.enabled = true;
     }
 
