@@ -184,7 +184,7 @@ public class GameController : MonoBehaviour
         if(player == null)
             FindPlayer();
 
-        player.GetComponent<PlayerMovement>().canMove = state;
+        player.GetComponent<PlayerMovement>().SetCanMove(state);
         player.GetComponent<PlayerAttack>().canAttack = state;
     }
 

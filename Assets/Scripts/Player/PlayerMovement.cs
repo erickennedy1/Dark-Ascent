@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -143,5 +144,14 @@ public class PlayerMovement : MonoBehaviour
         isCooldown = true;
         yield return new WaitForSeconds(2f); 
         isCooldown = false;
+    }
+
+    public void SetCanMove(bool state)
+    {
+        canMove =  state;
+        if(!state)
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        else
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

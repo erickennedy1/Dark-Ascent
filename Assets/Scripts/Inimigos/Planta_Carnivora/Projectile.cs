@@ -8,14 +8,14 @@ public class Projectile : MonoBehaviour
     private float lifetime = 1.3f;
     private Animator animator;
     private Rigidbody2D rb;
-    private Collider2D collider2D;
+    [SerializeField] private Collider2D _collider;
+    [SerializeField] private Collider2D _trigger;
     private bool hasCollided = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<Collider2D>();
         Destroy(gameObject, lifetime);
     }
 
@@ -25,8 +25,6 @@ public class Projectile : MonoBehaviour
         if (collision.tag == "Player")
         {
             hasCollided = true;
-            collider2D.enabled = false;
-
             animator.SetTrigger("Colidiu");
 
             PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
@@ -43,7 +41,6 @@ public class Projectile : MonoBehaviour
     {
         if (hasCollided) return;
         hasCollided = true;
-        collider2D.enabled = false;
 
         animator.SetTrigger("Colidiu");
 
@@ -52,10 +49,11 @@ public class Projectile : MonoBehaviour
 
     public void DestroyProjectile()
     {
+        _collider.enabled = false;
+        _trigger.enabled = false;
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0f;
         rb.isKinematic = true;
-        collider2D.enabled = false;
         Invoke("DelayedDestroy", 0.4f); 
     }
 
