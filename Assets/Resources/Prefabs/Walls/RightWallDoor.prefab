@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 651758763890083602}
   - component: {fileID: 4423306888429730948}
   - component: {fileID: 7466103707300517191}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightWallDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,6 +557,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 651758763890083602}
     m_Modifications:
+    - target: {fileID: 774089548907993689, guid: 79b2e4232710356449076191c9dc0a4d, type: 3}
+      propertyPath: m_Size.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 774089548907993689, guid: 79b2e4232710356449076191c9dc0a4d, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8279891623593982795, guid: 79b2e4232710356449076191c9dc0a4d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

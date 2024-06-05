@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8356746886090529782}
   - component: {fileID: 9206338951846363337}
   - component: {fileID: 1031492004074879199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopWallDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1867,6 +1867,14 @@ PrefabInstance:
     - target: {fileID: 183218783037835171, guid: b0ea0518eb2fdf648b5bd24f2154cd3c, type: 3}
       propertyPath: m_Name
       value: TopDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471536194889447481, guid: b0ea0518eb2fdf648b5bd24f2154cd3c, type: 3}
+      propertyPath: m_Size.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471536194889447481, guid: b0ea0518eb2fdf648b5bd24f2154cd3c, type: 3}
+      propertyPath: m_Size.y
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4455251626850656819, guid: b0ea0518eb2fdf648b5bd24f2154cd3c, type: 3}
       propertyPath: m_LocalPosition.x

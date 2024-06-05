@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMana : MonoBehaviour
 {
-    [Header("Configurações de Mana")]
+    [Header("Configuraï¿½ï¿½es de Mana")]
     public int maxMana = 100;
     public int currentMana;
     private Animator manaAnimator;
@@ -36,7 +36,6 @@ public class PlayerMana : MonoBehaviour
     private void SetManaAnimation(int mana)
     {
         float normalizedTime = 1f - (float)mana / maxMana;
-        Debug.Log("Normalized time: " + normalizedTime); 
         manaAnimator.Play(manaAnimationStateName, 0, normalizedTime);
     }
 
@@ -44,7 +43,6 @@ public class PlayerMana : MonoBehaviour
     {
         currentMana = maxMana;
         SetManaAnimation(currentMana);
-        Debug.Log("Mana resetada para o máximo");
     }
 
     void OnEnable()

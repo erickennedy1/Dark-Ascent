@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 2641518718056433178}
   - component: {fileID: 7892966211291796395}
   - component: {fileID: 6322893325751376763}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BottomWallDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,6 +815,14 @@ PrefabInstance:
     - target: {fileID: 892140040353628220, guid: c01cf43c96a09444e9cbc5fffcd5fa7e, type: 3}
       propertyPath: m_Name
       value: BottomDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632691257875505593, guid: c01cf43c96a09444e9cbc5fffcd5fa7e, type: 3}
+      propertyPath: m_Size.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632691257875505593, guid: c01cf43c96a09444e9cbc5fffcd5fa7e, type: 3}
+      propertyPath: m_Size.y
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8618298938530568304, guid: c01cf43c96a09444e9cbc5fffcd5fa7e, type: 3}
       propertyPath: m_LocalPosition.x

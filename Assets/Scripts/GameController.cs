@@ -145,7 +145,6 @@ public class GameController : MonoBehaviour
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         while(!async.isDone){
-            Debug.Log("Loading Scene");
             yield return null;
         }
 
