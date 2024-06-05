@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -15,38 +14,38 @@ public class PlayerHealth : MonoBehaviour
     private PlayerMana playerMana;
     private Animator animator;
     private PlayerAttack playerAttack;
-    private Rigidbody2D rd;
-    private PlayerMovement playerMovement;
-    private PolygonCollider2D playerCollider;
+    private Collider2D playerCollider;
 
-    [SerializeField]
-    private RadialFadeController fadeController;
+    [SerializeField] private RadialFadeController fadeController;
 
     private bool isInvencible = false;
-    private float timeInvencible = 0.3f;
+    private float timeInvencible = 0.5f;
 
     public int contadorMortes = 0;
+
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Material materialDefault;
+    [SerializeField] private Material materialDamage;
 
     void Start()
     {
         healthLayoutGroup = GameObject.Find("Vida_Layout").transform;
         playerMana = GetComponent<PlayerMana>();
         playerAttack = GetComponent<PlayerAttack>();
-        playerMovement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
-        playerCollider = GetComponent<PolygonCollider2D>();
+        playerCollider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (playerMana == null)
         {
-            Debug.LogError("Componente PlayerMana n�o encontrado!");
+            Debug.LogError("Componente PlayerMana nao encontrado!");
         }
         if (healthLayoutGroup == null)
         {
-            Debug.LogError("N�o foi poss�vel encontrar o objeto 'Vida_Layout'!");
+            Debug.LogError("Nao foi poss�vel encontrar o objeto 'Vida_Layout'!");
             return;
         }
         currentHealth = maxHealth;
-        Debug.Log("Reiniciando sa�de no Start");
         ResetHealthIcons();
         InitializeHealthIcons();
     }
@@ -75,11 +74,9 @@ public class PlayerHealth : MonoBehaviour
         //Se o player estiver incencivel, não recebe dano
         if(isInvencible)
             return;
-        
-        Debug.Log("Dano recebido: " + damageAmount);
+
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        Debug.Log("Sa�de atual: " + currentHealth);
 
         for (int i = 0; i < healthIcons.Count; i++)
         {
@@ -98,7 +95,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Sa�de esgotada, chamando Die()");
             Die();
         }else{
             StartCoroutine(InvencibleTime());
@@ -108,7 +104,9 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator InvencibleTime()
     {
         isInvencible = true;
+        spriteRenderer.material = materialDamage;
         yield return new WaitForSeconds(timeInvencible);
+        spriteRenderer.material = materialDefault;
         isInvencible = false;
     }
 
@@ -186,7 +184,6 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = maxHealth;
             ResetHealthIcons();
             InitializeHealthIcons();
-            Debug.Log("Sa�de resetada no carregamento da cena 'Hub'");
         }
     }
 
@@ -196,6 +193,5 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         ResetHealthIcons();
         InitializeHealthIcons();
-        Debug.Log("Sa�de resetada no OnEnable");
     }
 }

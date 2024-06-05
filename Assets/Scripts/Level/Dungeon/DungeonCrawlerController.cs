@@ -32,7 +32,6 @@ public class DungeonCrawlerController
         //Número de interações
         int totalRooms = Random.Range(dungeonData.roomsMin, dungeonData.roomsMax);        
         //Loop que faz os crawlers se moverem e adicionarem novas coordenadas
-        Debug.Log("Total Commom Rooms: "+totalRooms);
         while(positionVisited.Count < totalRooms)
         {
             foreach(DungeonCrawler dungeonCrawler in dungeonCrawlers)
