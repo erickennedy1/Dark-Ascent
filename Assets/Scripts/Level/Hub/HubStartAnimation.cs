@@ -23,10 +23,9 @@ public class HubStartAnimation : MonoBehaviour
     IEnumerator Step01(){
         //Escuridão por um tempo
         yield return new WaitForSeconds(3);
-        //Começa Diálogo ???
-        Debug.Log("Step01");
         //Associa o Step02 ao evento fim do dialogo
         DialogueManager.EventEndDialogue += Step02;
+        //Começa Diálogo ???
         _dialogueTrigger.TriggerDialogue();
     }
 
