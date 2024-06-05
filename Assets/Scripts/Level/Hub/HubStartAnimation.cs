@@ -16,8 +16,6 @@ public class HubStartAnimation : MonoBehaviour
         //Desativa todos os canvas
         _controllUIs.SetStateCanvasList(false);
 
-        //Associa o Step02 ao evento fim do dialogo
-        DialogueManager.EventEndDialogue += Step02;
         //Começa animação inicial
         StartCoroutine(Step01());
     }
@@ -27,13 +25,14 @@ public class HubStartAnimation : MonoBehaviour
         yield return new WaitForSeconds(3);
         //Começa Diálogo ???
         Debug.Log("Step01");
+        //Associa o Step02 ao evento fim do dialogo
+        DialogueManager.EventEndDialogue += Step02;
         _dialogueTrigger.TriggerDialogue();
     }
 
     public void Step02(){
         //Chamado ao terminar o diálogo ???
         DialogueManager.EventEndDialogue -= Step02;
-        DialogueManager.EventEndDialogue += Step04;
         SoundTrackManager.Instance.PlayMusic("Hub");
         StartCoroutine(Step03());
     }
@@ -43,7 +42,8 @@ public class HubStartAnimation : MonoBehaviour
         //Ilumina tudo ao redor
         _animatorDark.SetBool("startTransition", true);
         yield return new WaitForSeconds(5);
-        //Começa o diálogo Introdutório   
+        //Começa o diálogo Introdutório
+        DialogueManager.EventEndDialogue += Step04;
         _dialogueTrigger.TriggerDialogue();
     }
 

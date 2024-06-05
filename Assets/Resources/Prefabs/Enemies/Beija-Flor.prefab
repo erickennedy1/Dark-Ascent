@@ -312,7 +312,7 @@ MonoBehaviour:
   speed: 2
   maxHealth: 2
   knockbackBool: 1
-  canMove: 1
+  canMove: 0
 --- !u!114 &466962755468487649
 MonoBehaviour:
   m_ObjectHideFlags: 0

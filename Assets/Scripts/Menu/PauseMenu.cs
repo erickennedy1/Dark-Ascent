@@ -86,7 +86,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
 
-        GameController.instance.PlayerAcao(true);
+        GameController.instance.SetPlayerInput(true);
     }
 
     public void Quit()
@@ -101,7 +101,7 @@ public class PauseMenu : MonoBehaviour
         {
             UpdateUI();
             pauseMenuUI.SetActive(true);
-            GameController.instance.PlayerAcao(false);
+            GameController.instance.SetPlayerInput(false);
         }
         Time.timeScale = 0f;
         isPaused = true;
@@ -110,12 +110,14 @@ public class PauseMenu : MonoBehaviour
     public void mainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
         startTime = Time.time; 
         playerAttack.danoAtaque = 1;
         playerHealth.contadorMortes = 0;
         playerHealth.maxHealth = 5;
         playerMana.maxMana = 100;
+
+        DialogueManager.EventEndDialogue -= GameController.instance.EnablePlayerInput;
+        GameController.instance.LoadScene("Menu");
     }
 
 

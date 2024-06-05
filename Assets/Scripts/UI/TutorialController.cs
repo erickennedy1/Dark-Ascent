@@ -12,16 +12,6 @@ public class TutorialController : MonoBehaviour
 
     private int currentSprite;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(isTutorialOn){
-            if(Input.GetKeyDown(KeyCode.F)){
-                NextTutorial();
-            }
-        }
-    }
-
     public void StartTutorial()
     {
         render = GetComponent<SpriteRenderer>();

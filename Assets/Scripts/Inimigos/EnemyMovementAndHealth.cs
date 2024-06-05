@@ -19,12 +19,10 @@ public class EnemyMovementAndHealth : MonoBehaviour
     private bool isKnockedBack = false;
     public bool knockbackBool = true;
     private bool morreu = false;
-    public bool canMove = true;
+    [SerializeField] private bool canMove = false;
 
     private Animator animator;
     private DamageFeedback damageFeedback;
-    private PlantaCarnivoraAttack plantaAtaque;
-    private EnemyAttack enemyAttack;
     private EnemyDrop enemyDrop;
 
     void Start()
@@ -33,8 +31,6 @@ public class EnemyMovementAndHealth : MonoBehaviour
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         damageFeedback = GetComponent<DamageFeedback>();
-        plantaAtaque = GetComponent<PlantaCarnivoraAttack>();
-        enemyAttack = GetComponent<EnemyAttack>();
         enemyDrop = GetComponent<EnemyDrop>();
     }
 
@@ -110,12 +106,16 @@ public class EnemyMovementAndHealth : MonoBehaviour
 
     private void Die()
     {
-        //enemyAttack.EnemyDie();
         animator.SetTrigger("Morrendo");
         morreu = true;
         Collider2D collider = GetComponent<Collider2D>();
         collider.enabled = false;
         enemyDrop.DropItem();
         Destroy(gameObject, 1f);
+    }
+
+    public void SetCanMove(bool state)
+    {
+        canMove = state;
     }
 }

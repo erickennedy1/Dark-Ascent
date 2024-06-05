@@ -56,7 +56,7 @@ public class InvocacaoChefe : MonoBehaviour
         Color cor = renderizadorMonstro.color;
         float tempoDecorrido = 0f;
 
-        movimentoMonstro.canMove = false;
+        movimentoMonstro.SetCanMove(false);
         //enemyAtacck.canAttack = false;
 
         while (tempoDecorrido < duracaoDesvanecimento)
@@ -70,7 +70,7 @@ public class InvocacaoChefe : MonoBehaviour
         cor.a = 1f;
         renderizadorMonstro.color = cor;
 
-        movimentoMonstro.canMove = true;
+        movimentoMonstro.SetCanMove(true);
         //enemyAtacck.canAttack = true;
     }
 }

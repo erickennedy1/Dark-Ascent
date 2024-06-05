@@ -60,7 +60,8 @@ public class GameController : MonoBehaviour
             return;
         
         isGamePaused = true;
-        PlayerAcao(false);
+        SetPlayerInput(false);
+        SetEnemiesState(false);
     }
 
     public void UnpauseGame(){
@@ -69,7 +70,8 @@ public class GameController : MonoBehaviour
             return;
         
         isGamePaused = false;
-        PlayerAcao(true);
+        SetPlayerInput(true);
+        SetEnemiesState(true);
     }
 
     [ContextMenu("Next Level")]
@@ -170,7 +172,6 @@ public class GameController : MonoBehaviour
         //Reseta o Player
         player.ResetPlayer();
         player.SetLightState(false);
-        UnpauseGame();
     }
 
     private void FindPlayer()
@@ -178,26 +179,20 @@ public class GameController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    public void PlayerAcao(bool estado)
+    public void SetPlayerInput(bool state)
     {
-        foreach (PlayerMovement playerMovement in player.GetComponentsInChildren<PlayerMovement>())
-        {
-            playerMovement.canMove = estado;
-        }
+        if(player == null)
+            FindPlayer();
 
-        foreach (PlayerAttack playerAttack in player.GetComponentsInChildren<PlayerAttack>())
-        {
-            playerAttack.canAttack = estado;
-        }
+        player.GetComponent<PlayerMovement>().canMove = state;
+        player.GetComponent<PlayerAttack>().canAttack = state;
+    }
 
-        foreach (var enemy in FindObjectsOfType<EnemyMovementAndHealth>())
+    public void SetEnemiesState(bool state)
+    {
+        if(RoomController.instance.currentRoom.hasBattle && !RoomController.instance.currentRoom.isClear)
         {
-            enemy.canMove = estado;
-        }
-
-        foreach (var enemy in FindObjectsOfType<EnemyAttack>())
-        {
-            enemy.canAttack = estado;
+            RoomController.instance.currentRoom.GetComponentInChildren<SpawnEnemiesController>().SetEnemiesState(state);
         }
     }
 
@@ -205,15 +200,8 @@ public class GameController : MonoBehaviour
     {
         if(player == null)
             FindPlayer();
-            
-        foreach (PlayerMovement playerMovement in player.GetComponentsInChildren<PlayerMovement>())
-        {
-            playerMovement.canMove = true;
-        }
 
-        foreach (PlayerAttack playerAttack in player.GetComponentsInChildren<PlayerAttack>())
-        {
-            playerAttack.canAttack = true;
-        }
+        player.GetComponent<PlayerMovement>().canMove = true;
+        player.GetComponent<PlayerAttack>().canAttack = true;
     }
 }

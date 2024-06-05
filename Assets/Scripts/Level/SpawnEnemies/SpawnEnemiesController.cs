@@ -66,6 +66,23 @@ public class SpawnEnemiesController : MonoBehaviour
         return Physics2D.OverlapCircle(position, 1f, forbiddenAreaLayer) != null;
     }
 
+    public void SetEnemiesState(bool state){
+        foreach (EnemyMovementAndHealth enemy in GetComponentsInChildren<EnemyMovementAndHealth>())
+        {
+            enemy.SetCanMove(state);
+        }
+
+        foreach (EnemyAttack enemy in GetComponentsInChildren<EnemyAttack>())
+        {
+            enemy.SetAttack(state);
+        }
+
+        foreach (PlantaCarnivoraAttack enemy in GetComponentsInChildren<PlantaCarnivoraAttack>())
+        {
+            enemy.SetAttack(state);
+        }
+    }
+
     void OnDrawGizmos(){
         Room room = GetComponentInParent<Room>();
         Gizmos.color = Color.blue;

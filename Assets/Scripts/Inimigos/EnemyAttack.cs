@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
     private float AttackRange = 2.5f;
     private float dashSpeed = 15f;
     public bool isDead = false;
-    public bool canAttack = false;
+    [SerializeField] private bool canAttack = false;
     private bool isVisible = false;
 
     private Transform player;
@@ -35,7 +35,7 @@ public class EnemyAttack : MonoBehaviour
     }
     private void Update()
     {
-        if (!isDead && canAttack)  
+        if (!isDead && canAttack)
         {
 
             if (isReadyToAttack && Vector2.Distance(transform.position, player.position) <= RangeAttackStart)
@@ -102,17 +102,22 @@ public class EnemyAttack : MonoBehaviour
         canAttack = true;
     }
 
+    public void SetAttack(bool state)
+    {
+        canAttack = state;
+    }
+
     void OnBecameVisible()
     {
         isVisible = true;
         soundController.PlayIdle();
-        StartCoroutine(EnableAttackWithDelay());
+        // StartCoroutine(EnableAttackWithDelay());
     }
 
     void OnBecameInvisible()
     {
         isVisible = false;
         canAttack = false;
-        StopCoroutine(EnableAttackWithDelay());
+        // StopCoroutine(EnableAttackWithDelay());
     }
 }

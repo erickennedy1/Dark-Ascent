@@ -316,6 +316,7 @@ MonoBehaviour:
   ataqueDelay: 3
   projectilePrefab: {fileID: 8520883754821663664, guid: a4cfc2c79d4c19e4ba10cae087aba969, type: 3}
   projectileSpawnPoint: {fileID: 798390207991093544}
+  canAttack: 0
 --- !u!114 &5757412178967290802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +346,7 @@ MonoBehaviour:
   speed: 0
   maxHealth: 3
   knockbackBool: 0
-  canMove: 1
+  canMove: 0
 --- !u!114 &5808822072842595448
 MonoBehaviour:
   m_ObjectHideFlags: 0
