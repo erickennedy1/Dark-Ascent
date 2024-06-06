@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf7fdd99454789b4fa06c82c00f52aa9, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -579,7 +579,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Tempo de jogo:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf7fdd99454789b4fa06c82c00f52aa9, type: 2}
   m_sharedMaterial: {fileID: -8115810070448887857, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -643,7 +643,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 18.21634, w: 21.80048}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7678103843770551917
@@ -859,7 +859,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf7fdd99454789b4fa06c82c00f52aa9, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

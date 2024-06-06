@@ -14,6 +14,8 @@ public class PlayerAttack : MonoBehaviour
     private bool podeAtacar = true;
     private Coroutine ataqueCouldown;
 
+    private GameObject powerUPDemage;
+
     [HideInInspector] public bool acabouDeAtacar = false;
     [HideInInspector] public float ultimoAtaqueHorizontal = 0f;
     [HideInInspector] public float ultimoAtaqueVertical = -1f;
@@ -21,7 +23,12 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        particulasAtaque = GetComponent<ParticulasAtaque>();  
+        particulasAtaque = GetComponent<ParticulasAtaque>();
+        //powerUPDemage = GameObject.Find("UI_PowerUPAttack");
+        //if (powerUPDemage == null)
+       // {
+        //    Debug.LogError("PowerUPDemage GameObject not found!");
+        //}
     }
 
     void Update()
@@ -43,6 +50,15 @@ public class PlayerAttack : MonoBehaviour
             ataqueCouldown = StartCoroutine(AttackCooldown());
 
             PerformAttack(direction);
+        }
+
+        if (danoAtaque >= 2)
+        {
+            powerUPDemage.SetActive(true);
+        }
+        else
+        {
+            powerUPDemage.SetActive(false);
         }
     }
 

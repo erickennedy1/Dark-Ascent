@@ -81,25 +81,28 @@ public class Amuletos : MonoBehaviour
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
+            bool maxHealthIncreased = false;
+
             if (playerHealth.maxHealth < 6)
             {
                 playerHealth.maxHealth++;
+                maxHealthIncreased = true;
+            }
+
+            if (playerHealth.currentHealth < playerHealth.maxHealth)
+            {
                 playerHealth.currentHealth = playerHealth.maxHealth;
+                maxHealthIncreased = true;
+            }
+
+            if (maxHealthIncreased)
+            {
                 playerHealth.ResetHealthIcons();
                 playerHealth.InitializeHealthIcons();
             }
             else
             {
-                if(playerHealth.currentHealth < 6)
-                {
-                    playerHealth.currentHealth++;
-                    playerHealth.ResetHealthIcons();
-                    playerHealth.InitializeHealthIcons();
-                }
-                else
-                {
-                    StartCoroutine(Aviso());
-                }
+                StartCoroutine(Aviso());
             }
         }
     }
