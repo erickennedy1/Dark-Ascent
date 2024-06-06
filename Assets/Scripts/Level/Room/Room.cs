@@ -37,6 +37,8 @@ public class Room : MonoBehaviour
     }
 
     private void UpdateByType(){
+        minimapIcon.SetDefaultIcon(type);
+
         if(type == "Empty")
         {
             RandomTilemapEmpty();

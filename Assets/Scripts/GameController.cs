@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
 
     public bool isGamePaused = false;
 
+    public bool canSetPlayerInput = true;
+
     //Função chamada antes do Start, Caso já exista um GameController na Scene, o novo GameController se auto Destroy
     //Caso contrário ele não é destruído ao carregar uma nova Scene
     void Awake(){
@@ -180,6 +182,9 @@ public class GameController : MonoBehaviour
 
     public void SetPlayerInput(bool state)
     {
+        if(!canSetPlayerInput)
+            return;
+
         if(player == null)
             FindPlayer();
 

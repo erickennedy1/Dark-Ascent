@@ -1391,6 +1391,7 @@ MonoBehaviour:
   currentLevel: 0
   player: {fileID: 0}
   isGamePaused: 0
+  canSetPlayerInput: 1
 --- !u!4 &228072500
 Transform:
   m_ObjectHideFlags: 0
@@ -14820,8 +14821,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0007505417, y: 0.00014972687, z: 0}
-    m_Extent: {x: 20.000149, y: 16.000149, z: 0}
+    m_Center: {x: 0.0008497238, y: 0.0001001358, z: 0}
+    m_Extent: {x: 19.99995, y: 16.0001, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -18086,6 +18087,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2478444963847583075, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
+      propertyPath: canAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237238524658403088, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
+      propertyPath: canMove
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8010347466936256562, guid: 8857b3d07a4bffa46bce4dfc763e71fd, type: 3}
       propertyPath: m_Name
       value: Player

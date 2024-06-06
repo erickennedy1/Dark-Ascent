@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HubStartAnimation : MonoBehaviour
@@ -13,6 +11,7 @@ public class HubStartAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameController.instance.canSetPlayerInput = false;
         //Desativa todos os canvas
         _controllUIs.SetStateCanvasList(false);
 
@@ -68,7 +67,9 @@ public class HubStartAnimation : MonoBehaviour
         _controllUIs.SetStateCanvasList(true);
 
         //Libera o Player
+        GameController.instance.canSetPlayerInput = true;
         GameController.instance.EnablePlayerInput();
+        
     }
 
     private void OnDestroy() {
