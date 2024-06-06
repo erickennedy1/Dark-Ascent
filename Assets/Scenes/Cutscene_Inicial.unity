@@ -879,7 +879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 417, y: -302}
+  m_AnchoredPosition: {x: 451.9, y: -299}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1378688798
@@ -904,15 +904,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pressione ESC para pular
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
-  m_sharedMaterial: {fileID: -8115810070448887857, guid: c1e9ee170feb3234eb42e51f3bc17d74, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf7fdd99454789b4fa06c82c00f52aa9, type: 2}
+  m_sharedMaterial: {fileID: -6176006748207218069, guid: bf7fdd99454789b4fa06c82c00f52aa9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4286611584
+  m_fontColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1239,15 +1239,15 @@ MonoBehaviour:
   m_text: "H\xE1 muito tempo, nas profundezas de uma antiga floresta, havia um reino
     m\xE1gico e pr\xF3spero. "
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d56367bcadffed4e9766abff8b795e3, type: 2}
-  m_sharedMaterial: {fileID: 6042164794570011665, guid: 9d56367bcadffed4e9766abff8b795e3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf7fdd99454789b4fa06c82c00f52aa9, type: 2}
+  m_sharedMaterial: {fileID: -6176006748207218069, guid: bf7fdd99454789b4fa06c82c00f52aa9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282748819
-  m_fontColor: {r: 0.5754717, g: 0.56054145, b: 0.26873443, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1264,8 +1264,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1330,8 +1330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.3401, y: -6.0285}
-  m_SizeDelta: {x: 771.4155, y: 133.1539}
+  m_AnchoredPosition: {x: -5.287, y: -7.8604}
+  m_SizeDelta: {x: 735.9993, y: 119.7201}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -18,6 +18,8 @@ public class EnemyAttack : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerHealth playerHealth;
     private ISoundEnemy soundController;
+    private Vector2 dashTargetPosition;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -32,11 +34,11 @@ public class EnemyAttack : MonoBehaviour
             playerHealth = obj.GetComponent<PlayerHealth>();
         }
     }
+
     private void Update()
     {
         if (!isDead && canAttack)
         {
-
             if (isReadyToAttack && Vector2.Distance(transform.position, player.position) <= RangeAttackStart)
             {
                 if (playerHealth.currentHealth > 0)
@@ -47,11 +49,12 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-
     private IEnumerator PerformAttack()
     {
         isReadyToAttack = false;
         animator.SetTrigger("Ataque");
+
+        dashTargetPosition = player.position;
 
         yield return new WaitForSeconds(attackCooldown);
 
@@ -68,7 +71,6 @@ public class EnemyAttack : MonoBehaviour
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(damageAmount);
-
                 }
             }
         }
@@ -77,7 +79,7 @@ public class EnemyAttack : MonoBehaviour
     public void DashTowardsPlayer()
     {
         soundController.PlayAttack();
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 direction = (dashTargetPosition - (Vector2)transform.position).normalized;
         rb.velocity = direction * dashSpeed;
         Invoke("StopDash", 0.2f);
     }
@@ -87,11 +89,9 @@ public class EnemyAttack : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
 
-
     public void EnemyDie()
     {
-        isDead = true;  
-        //animator.SetTrigger("Die");
+        isDead = true;
         Destroy(gameObject);
     }
 
