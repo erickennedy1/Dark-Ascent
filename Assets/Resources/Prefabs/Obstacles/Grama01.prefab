@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 402658953528011061}
   - component: {fileID: 3456270619712362957}
   m_Layer: 0
-  m_Name: Grama
+  m_Name: Grama01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

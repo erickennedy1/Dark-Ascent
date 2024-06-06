@@ -41,7 +41,7 @@ Material:
     - _BorderSizeH: 0.2
     - _BorderSizeV: 0.1
     m_Colors:
-    - _Color: {r: 0.32547167, g: 0.7962715, b: 1, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &994541951468350160
 MonoBehaviour:
