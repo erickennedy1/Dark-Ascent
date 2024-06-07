@@ -55,7 +55,7 @@ public class CutsceneInicial : MonoBehaviour
         TextTMP.text = string.Empty;
         StartCoroutine(FadeImage(true, 3));
         StartCoroutine(escritaTexto(3));
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(7.5f);
 
         TextTMP.text = string.Empty;
         StartCoroutine(FadeImage(false, 0));
@@ -71,19 +71,13 @@ public class CutsceneInicial : MonoBehaviour
         TextTMP.text = string.Empty;
         StartCoroutine(FadeImage(true, 5));
         StartCoroutine(escritaTexto(5));
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(7f);
 
-        TextTMP.text = string.Empty;
-        StartCoroutine(FadeImage(true, 6));
-        StartCoroutine(escritaTexto(6));
-        yield return new WaitForSeconds(1);
-
+        TextTM.SetActive(false);
         StartCoroutine(FadeImage(false, 4));
         StartCoroutine(FadeImage(false, 5));
-        StartCoroutine(FadeImage(false, 6));
-        TextTMP.text = string.Empty;
-        TextTM.SetActive(false);
-        yield return new WaitForSeconds(1.5f);
+        
+        yield return new WaitForSeconds(2.5f);
 
         videoScene.SetActive(true);
         yield return new WaitForSeconds(1.2f);

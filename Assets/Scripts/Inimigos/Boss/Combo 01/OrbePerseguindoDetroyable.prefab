@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -2584599314847700488}
   - component: {fileID: 9222707583394696855}
   m_Layer: 7
-  m_Name: OrbePerseguindoDestrutive
-  m_TagString: Projectile
+  m_Name: OrbePerseguindoDetroyable
+  m_TagString: Projectile_Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

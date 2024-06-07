@@ -18,6 +18,7 @@ public class ButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         imageComponent.sprite = novoSprite;
+        SoundManager.Instance.PlaySound("UI_MouseEnter");
     }
 
     public void OnPointerExit(PointerEventData eventData)

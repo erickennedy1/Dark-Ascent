@@ -13,6 +13,7 @@ TagManager:
   - HealthIcon
   - Boss
   - ManaUI
+  - Projectile_Destroyable
   layers:
   - Default
   - TransparentFX

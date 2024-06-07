@@ -3,23 +3,23 @@ using System.Collections;
 
 public class EnemyMovementAndHealth : MonoBehaviour
 {
-    [Header("Configura��es de movimento")]
+    [Header("Configuracoes de movimento")]
     public float speed = 3f;
     private float followDistance = 10f;
+    [SerializeField] private bool canMove = false;
 
-    [Header("Configura��es de vida")]
+    [Header("Configuracoes de vida")]
     public int maxHealth = 100;
 
-    [Header("Configura��es de knockback")]
-    private float knockbackDistance = 0.5f;
-    private float knockbackDuration = 0.2f;
+    [Header("Configuracoes de knockback")]
+    [SerializeField] private float knockbackDistance = 0.5f;
+    [SerializeField] private float knockbackDuration = 0.2f;
+    [SerializeField] private bool knockbackBool;
 
     private Transform player;
     private int currentHealth;
     private bool isKnockedBack = false;
-    public bool knockbackBool = true;
     private bool morreu = false;
-    [SerializeField] private bool canMove = false;
 
     private Animator animator;
     private DamageFeedback damageFeedback;

@@ -113,7 +113,7 @@ public class RoomController : MonoBehaviour
         room.transform.parent = transform;
 
         //Defini se a Room tem batalha
-        if(room.type == "Empty" && Random.Range(0,100) <= 80)
+        if(room.type == "Empty" && Random.Range(0,100) <= 85)
             room.hasBattle = true;
         else
             room.hasBattle = false;
@@ -242,7 +242,7 @@ public class RoomController : MonoBehaviour
                 break;
             case Door.DoorType.bottom:
                 nextRoom = FindRoom(room.x, room.y-1);
-                position = new Vector3(0,nextRoom.height/2-offset,0);
+                position = new Vector3(0,nextRoom.height/2-(offset+0.50f),0);
                 break;
             case Door.DoorType.left:
                 nextRoom = FindRoom(room.x-1, room.y);

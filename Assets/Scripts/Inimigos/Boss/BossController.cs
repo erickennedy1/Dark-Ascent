@@ -4,14 +4,16 @@ using System;
 
 public class BossController : MonoBehaviour
 {
+    [Header("Scripts")]
     [SerializeField] private BossHealth bossHealth;
     [SerializeField] private BossProjetil bossProjetil;
     [SerializeField] private BossEspinhos bossEspinhos;
     [SerializeField] private InvocacaoChefe invocacaoChefe;
 
-    public Animator cabecaBoss;
-    public Animator orb;
-    public Animator portao;
+    [Header("Animators")]
+    [SerializeField] private Animator cabecaBoss;
+    [SerializeField] private Animator orb;
+    [SerializeField] private Animator portao;
 
     private Coroutine currentComboRoutine;
     private int currentComboNumber;
@@ -88,7 +90,7 @@ public class BossController : MonoBehaviour
                     yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(4, 1.8f), 10));
                     break;
                 case 3:
-                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(5, 2.5f, 30), 14));
+                    yield return StartCoroutine(PerformAction(() => bossProjetil.AtivarCombo(5, 2f, 30), 14));
                     yield return StartCoroutine(PerformAction(() => bossEspinhos.IniciarEspinhos(1f, 17), 15, bossEspinhos.PararEspinhos));
                     yield return StartCoroutine(PerformAction(() => invocacaoChefe.IniciarInvocacao(5, 1.6f), 10));
                     break;

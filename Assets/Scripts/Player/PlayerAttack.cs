@@ -79,12 +79,13 @@ public class PlayerAttack : MonoBehaviour
                     particulasAtaque.SpawnParticles(enemy.transform.position);
                 }
             }
-            else if (hit.CompareTag("Projectile"))
+            else if (hit.CompareTag("Projectile_Destroyable"))
             {
                 Destroy(hit.gameObject);
             }
             else if (hit.CompareTag("Boss"))  
             {
+                SoundManager.Instance.PlaySound("Player_Attack_Hit");
                 BossHealth boss = hit.GetComponent<BossHealth>();
                 if (boss != null)
                 {
