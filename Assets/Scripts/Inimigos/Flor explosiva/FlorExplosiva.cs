@@ -3,7 +3,7 @@ using UnityEngine;
 public class FlorExplosiva : MonoBehaviour
 {
     [SerializeField] private float distancia = 10.0f;
-    [SerializeField] private int danoExplosao = 3;
+    [SerializeField] private int danoExplosao = 2;
     [SerializeField] private float tempoParaExplodir = 3.5f;
 
     private Animator animator;
@@ -11,11 +11,14 @@ public class FlorExplosiva : MonoBehaviour
     private bool dentroDoTrigger;
     private float tempoInicial;
 
+    private ISoundEnemy soundController;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         dentroDoTrigger = false;
+        soundController = GetComponent<ISoundEnemy>();
     }
 
     void Update()
@@ -25,7 +28,8 @@ public class FlorExplosiva : MonoBehaviour
             if (Time.time - tempoInicial > tempoParaExplodir)
             {
                 animator.SetBool("Explodindo", true);
-                dentroDoTrigger = false;  
+                soundController.PlayAttack();
+                dentroDoTrigger = false;
             }
         }
     }
@@ -35,6 +39,7 @@ public class FlorExplosiva : MonoBehaviour
         if (collision.CompareTag("Player") && !dentroDoTrigger)
         {
             animator.SetBool("Carregando", true);
+            soundController.PlayIdle();
             dentroDoTrigger = true;
             tempoInicial = Time.time; 
         }
