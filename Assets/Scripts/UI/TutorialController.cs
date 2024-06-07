@@ -8,7 +8,6 @@ public class TutorialController : MonoBehaviour
     public event Action EventEndTutorial;
     public Sprite[] sprites;
     public SpriteRenderer render;
-    private bool isTutorialOn = false;
 
     private int currentSprite;
 
@@ -17,12 +16,12 @@ public class TutorialController : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         currentSprite = 0;
 
-        isTutorialOn = true;
         render.sprite = sprites[currentSprite];
         currentSprite++;
     }
 
     public void NextTutorial(){
+        SoundManager.Instance.PlaySound("UI_MouseClick");
         if(currentSprite >= sprites.Length){
             EndTutorial();
             return;
@@ -33,7 +32,6 @@ public class TutorialController : MonoBehaviour
 
     public void EndTutorial()
     {
-        isTutorialOn = false;
         EventEndTutorial?.Invoke();
         gameObject.SetActive(false);
     }

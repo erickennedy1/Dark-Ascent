@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class FlorExplosiva : MonoBehaviour
 {
-    [SerializeField] private float distancia = 10.0f;
-    [SerializeField] private int danoExplosao = 2;
-    [SerializeField] private float tempoParaExplodir = 3.5f;
+    [SerializeField] private float distancia;
+    [SerializeField] private int danoExplosao;
+    [SerializeField] private float tempoParaExplodir;
 
     private Animator animator;
     private Transform player;

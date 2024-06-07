@@ -9,7 +9,7 @@ public class EnemyAttack : MonoBehaviour
     private float RangeAttackStart = 4f;
     private float AttackRange = 2.5f;
     private float dashSpeed = 15f;
-    public bool isDead = false;
+    private bool isDead = false;
     [SerializeField] private bool canAttack = false;
 
     private Transform player;
@@ -23,14 +23,13 @@ public class EnemyAttack : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
-        playerHealth = GetComponent<PlayerHealth>();
         soundController = GetComponent<ISoundEnemy>();
 
-        GameObject obj = GameObject.Find("Player");
+        GameObject obj = GameObject.FindGameObjectWithTag("Player");
         if (obj != null)
         {
+            player = obj.transform;
             playerHealth = obj.GetComponent<PlayerHealth>();
         }
     }
@@ -54,8 +53,6 @@ public class EnemyAttack : MonoBehaviour
         isReadyToAttack = false;
         animator.SetTrigger("Ataque");
 
-        dashTargetPosition = player.position;
-
         yield return new WaitForSeconds(attackCooldown);
 
         isReadyToAttack = true;
@@ -78,6 +75,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void DashTowardsPlayer()
     {
+        dashTargetPosition = player.position;
         soundController.PlayAttack();
         Vector2 direction = (dashTargetPosition - (Vector2)transform.position).normalized;
         rb.velocity = direction * dashSpeed;
@@ -93,12 +91,6 @@ public class EnemyAttack : MonoBehaviour
     {
         isDead = true;
         Destroy(gameObject);
-    }
-
-    IEnumerator EnableAttackWithDelay()
-    {
-        yield return new WaitForSeconds(1.5f);
-        canAttack = true;
     }
 
     public void SetAttack(bool state)

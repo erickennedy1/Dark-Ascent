@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distancia: 3
-  danoExplosao: 3
+  danoExplosao: 2
   tempoParaExplodir: 2
 --- !u!114 &7770602713660380209
 MonoBehaviour:

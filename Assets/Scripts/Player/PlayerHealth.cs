@@ -75,6 +75,7 @@ public class PlayerHealth : MonoBehaviour
         if(isInvencible)
             return;
 
+        isInvencible = true;
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -95,6 +96,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            isInvencible = false;
             Die();
         }else{
             StartCoroutine(InvencibleTime());

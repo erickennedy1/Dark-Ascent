@@ -1,21 +1,20 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlantaCarnivoraAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
-    public float distanciaAtaque = 10f;
-    public float ataqueDelay = 1.0f;
+    [SerializeField] private float distanciaAtaque = 10f;
+    [SerializeField] private float ataqueDelay = 1.0f;
+    [SerializeField] private bool canAttack = false;
 
     [Header("Components")]
-    public GameObject projectilePrefab;
-    public Transform projectileSpawnPoint;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform projectileSpawnPoint;
 
     private float nextAttackTime = 0f;
     private Transform player;
     private Animator animator;
     private bool isDead = false;
-    [SerializeField] private bool canAttack = false;
 
     private ISoundEnemy soundController;
 
@@ -52,13 +51,6 @@ public class PlantaCarnivoraAttack : MonoBehaviour
     bool IsPlayerInRange()
     {
         return (transform.position - player.position).sqrMagnitude <= distanciaAtaque * distanciaAtaque;
-    }
-
-    IEnumerator EnableAttackWithDelay()
-    {
-        yield return new WaitForSeconds(1.5f);
-        canAttack = true;
-        nextAttackTime = Time.time; 
     }
 
     public void SetAttack(bool state)

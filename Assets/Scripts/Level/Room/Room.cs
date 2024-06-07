@@ -81,7 +81,7 @@ public class Room : MonoBehaviour
     private void RandomTilemapEmpty(){
         //25% de chance de ser uma sala específica
         //75% de chance de ser uma sala Genérica
-        int chanceOfGeneric = 75;
+        int chanceOfGeneric = 85;
         int randomType = Random.Range(0,100);
         randomType = randomType < chanceOfGeneric ? 0 : 1;
 
