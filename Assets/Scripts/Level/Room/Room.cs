@@ -69,7 +69,7 @@ public class Room : MonoBehaviour
                     break;
                 case "Gate":
                     //Adiciona o Gate
-                    Instantiate(Resources.Load("Prefabs/Gate", typeof(GameObject)), transform);
+                    Instantiate(Resources.Load("Prefabs/Portal", typeof(GameObject)), transform);
                     break;
                 default:
                     Debug.LogError("Type of Room invalid!");

@@ -52,14 +52,14 @@ public class PlayerAttack : MonoBehaviour
             PerformAttack(direction);
         }
 
-        if (danoAtaque >= 2)
-        {
-            powerUPDemage.SetActive(true);
-        }
-        else
-        {
-            powerUPDemage.SetActive(false);
-        }
+        // if (danoAtaque >= 2)
+        // {
+        //     powerUPDemage.SetActive(true);
+        // }
+        // else
+        // {
+        //     powerUPDemage.SetActive(false);
+        // }
     }
 
     private void PerformAttack(Vector2 direction)
