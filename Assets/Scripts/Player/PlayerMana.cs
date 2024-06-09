@@ -3,17 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMana : MonoBehaviour
 {
-    [Header("Configura��es de Mana")]
+    [Header("Configurações de Mana")]
     public int maxMana = 100;
     public int currentMana;
     private Animator manaAnimator;
-    private string manaAnimationStateName = "Mana_animacao"; 
+    private string manaAnimationStateName = "Mana_animacao";
+    private GameObject manaPowerUP;
 
     void Start()
     {
         manaAnimator = GameObject.Find("UI_vida_e_mana").GetComponent<Animator>();
         currentMana = maxMana;
         SetManaAnimation(currentMana);
+
+        manaPowerUP = GameObject.Find("ManaPowerUP");
+        if (manaPowerUP != null)
+        {
+            manaPowerUP.SetActive(false); 
+        }
 
         //DontDestroyOnLoad(manaAnimator);
     }
@@ -24,6 +31,7 @@ public class PlayerMana : MonoBehaviour
         {
             currentMana -= amount;
             SetManaAnimation(currentMana);
+            UpdateManaPowerUPState();
         }
     }
 
@@ -31,6 +39,7 @@ public class PlayerMana : MonoBehaviour
     {
         currentMana = Mathf.Min(currentMana + quantidade, maxMana);
         SetManaAnimation(currentMana);
+        UpdateManaPowerUPState();
     }
 
     private void SetManaAnimation(int mana)
@@ -41,13 +50,30 @@ public class PlayerMana : MonoBehaviour
 
     public void ResetMana()
     {
+        maxMana = 100;
         currentMana = maxMana;
         SetManaAnimation(currentMana);
+        UpdateManaPowerUPState();
     }
 
     void OnEnable()
     {
         SetManaAnimation(currentMana);
+        UpdateManaPowerUPState();
     }
 
+    public void UpdateManaPowerUPState()
+    {
+        if (manaPowerUP != null)
+        {
+            if (maxMana > 110)
+            {
+                manaPowerUP.SetActive(true);
+            }
+            else
+            {
+                manaPowerUP.SetActive(false);
+            }
+        }
+    }
 }

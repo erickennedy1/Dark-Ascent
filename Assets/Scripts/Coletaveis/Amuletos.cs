@@ -121,6 +121,7 @@ public class Amuletos : MonoBehaviour
         {
             playerMana.maxMana += 50;
             playerMana.currentMana = playerMana.maxMana;
+            playerMana.UpdateManaPowerUPState();
         }
     }
 
