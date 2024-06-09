@@ -1516,6 +1516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1010726344}
   - component: {fileID: 1010726345}
+  - component: {fileID: 1010726346}
   m_Layer: 0
   m_Name: UI_Resolucao
   m_TagString: Untagged
@@ -1593,6 +1594,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1010726346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010726343}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef886167fc5cd0499e8a898c649ce23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconFull: {fileID: 1819199253}
+  spriteEsquerda: {fileID: 21300000, guid: f88b51d06c3c74e448eccf77f8716d3e, type: 3}
+  spriteDireita: {fileID: 21300000, guid: 22a4da70966b85d499a8a243f7a34bdf, type: 3}
+  sprite1280: {fileID: 21300000, guid: a1c297c951ab5a848afb0c5dca7ece5a, type: 3}
+  sprite1600: {fileID: 21300000, guid: fd8b1768a973146479acc5b0b6ab3e0a, type: 3}
+  sprite1920: {fileID: 21300000, guid: 1a581c42205369c4fbfc01c4b7b3453b, type: 3}
 --- !u!1 &1095513353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,7 +3221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1819199254
 Transform:
   m_ObjectHideFlags: 0
@@ -3770,6 +3789,7 @@ GameObject:
   - component: {fileID: 1989392316}
   - component: {fileID: 1989392317}
   - component: {fileID: 1989392318}
+  - component: {fileID: 1989392319}
   m_Layer: 0
   m_Name: UI_ResolucaoX
   m_TagString: Untagged
@@ -3856,6 +3876,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cf6d1ded2f54749ad99bb392138454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite1280: {fileID: 21300000, guid: a1c297c951ab5a848afb0c5dca7ece5a, type: 3}
+  sprite1600: {fileID: 21300000, guid: fd8b1768a973146479acc5b0b6ab3e0a, type: 3}
+  sprite1920: {fileID: 21300000, guid: 1a581c42205369c4fbfc01c4b7b3453b, type: 3}
+--- !u!114 &1989392319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989392315}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef886167fc5cd0499e8a898c649ce23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconFull: {fileID: 1819199253}
+  spriteEsquerda: {fileID: 21300000, guid: f88b51d06c3c74e448eccf77f8716d3e, type: 3}
+  spriteDireita: {fileID: 21300000, guid: 22a4da70966b85d499a8a243f7a34bdf, type: 3}
   sprite1280: {fileID: 21300000, guid: a1c297c951ab5a848afb0c5dca7ece5a, type: 3}
   sprite1600: {fileID: 21300000, guid: fd8b1768a973146479acc5b0b6ab3e0a, type: 3}
   sprite1920: {fileID: 21300000, guid: 1a581c42205369c4fbfc01c4b7b3453b, type: 3}

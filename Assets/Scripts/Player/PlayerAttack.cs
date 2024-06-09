@@ -6,14 +6,13 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
     private ParticulasAtaque particulasAtaque;
 
-    [Header("Configura��es de ataque")]
+    [Header("Configurações de ataque")]
     public int danoAtaque = 10;
     public float distanciaAtaque = 2f;
     public bool canAttack = true;
 
     private bool podeAtacar = true;
     private Coroutine ataqueCouldown;
-
     private GameObject powerUPDemage;
 
     [HideInInspector] public bool acabouDeAtacar = false;
@@ -24,11 +23,11 @@ public class PlayerAttack : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         particulasAtaque = GetComponent<ParticulasAtaque>();
-        //powerUPDemage = GameObject.Find("UI_PowerUPAttack");
-        //if (powerUPDemage == null)
-       // {
-        //    Debug.LogError("PowerUPDemage GameObject not found!");
-        //}
+        powerUPDemage = GameObject.Find("PowerUPDamage"); 
+        if (powerUPDemage != null)
+        {
+            powerUPDemage.SetActive(false); 
+        }
     }
 
     void Update()
@@ -40,8 +39,8 @@ public class PlayerAttack : MonoBehaviour
             Vector2 direction = (mousePosition - playerPosition).normalized;
 
             SetAttackAnimationParameters(direction);
-            
-            //Animação e Som
+
+            // Animação e Som
             animator.SetTrigger("Attack");
             SoundManager.Instance.PlaySound("Player_Attack");
 
@@ -52,20 +51,13 @@ public class PlayerAttack : MonoBehaviour
             PerformAttack(direction);
         }
 
-        // if (danoAtaque >= 2)
-        // {
-        //     powerUPDemage.SetActive(true);
-        // }
-        // else
-        // {
-        //     powerUPDemage.SetActive(false);
-        // }
+        UpdatePowerUPDamageState();
     }
 
     private void PerformAttack(Vector2 direction)
     {
         Vector2 attackPoint = (Vector2)transform.position + direction.normalized * distanciaAtaque / 2;
-        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, distanciaAtaque, LayerMask.GetMask("Enemy", "Projectile", "Boss")); 
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint, distanciaAtaque, LayerMask.GetMask("Enemy", "Projectile", "Boss"));
 
         foreach (var hit in hitObjects)
         {
@@ -83,19 +75,18 @@ public class PlayerAttack : MonoBehaviour
             {
                 Destroy(hit.gameObject);
             }
-            else if (hit.CompareTag("Boss"))  
+            else if (hit.CompareTag("Boss"))
             {
                 SoundManager.Instance.PlaySound("Player_Attack_Hit");
                 BossHealth boss = hit.GetComponent<BossHealth>();
                 if (boss != null)
                 {
                     boss.TakeDamage(danoAtaque);
-                    particulasAtaque.SpawnParticles(hit.transform.position); 
+                    particulasAtaque.SpawnParticles(hit.transform.position);
                 }
             }
         }
     }
-
 
     void SetAttackAnimationParameters(Vector2 direction)
     {
@@ -121,6 +112,7 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         podeAtacar = true;
     }
+
     void OnDestroy()
     {
         if (ataqueCouldown != null)
@@ -132,5 +124,21 @@ public class PlayerAttack : MonoBehaviour
     public void IncreaseDamage(int amount)
     {
         danoAtaque += amount;
+        UpdatePowerUPDamageState(); 
+    }
+
+    private void UpdatePowerUPDamageState()
+    {
+        if (powerUPDemage != null)
+        {
+            if (danoAtaque > 1)
+            {
+                powerUPDemage.SetActive(true);
+            }
+            else
+            {
+                powerUPDemage.SetActive(false);
+            }
+        }
     }
 }
