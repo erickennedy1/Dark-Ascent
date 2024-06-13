@@ -21,15 +21,12 @@ public class DungeonGeneration : MonoBehaviour
         //Organiza a lista pela distancia em realação a coordenada (0,0), de forma decrescente.
         dungeonRooms.Sort((v1,v2) => (v2-Vector2Int.zero).sqrMagnitude.CompareTo((v1-Vector2Int.zero).sqrMagnitude));
         //gateRoom já foi criada?
-        bool gateRoom = false; 
-        //Crawler usado para cria a sala gate
-        DungeonCrawler dungeonCrawler;
-
+        bool gateRoom = false;
         //--------Carrega as Rooms
         //Start Rooms
         RoomController.instance.LoadRoom("Start",0,0);
 
-        //Empty and Gate Rooms
+        //Empty & Gate Rooms
         foreach(Vector2Int roomLocation in rooms)
         {
             //Empty Room
@@ -37,22 +34,30 @@ public class DungeonGeneration : MonoBehaviour
 
             //Gate Room
             if(!gateRoom)
-            {
-                dungeonCrawler = new DungeonCrawler(roomLocation);
-                List<Vector2Int> gatePosition = dungeonCrawler.GetNearPositions(DungeonCrawlerController.directionMovementMap);
-                while(gatePosition.Count > 0 && !gateRoom){
-                    if(CanBeGateRoom(gatePosition[0]))
-                    {
-                        //Gate Room
-                        gateRoom = true;
-                            RoomController.instance.LoadRoom("Gate", gatePosition[0].x, gatePosition[0].y);
-                    }else{
-                        gatePosition.RemoveAt(0);
-                    }
-                }
-            }  
+                gateRoom = TryGenerateGateRoom(roomLocation);
         }
-    
+
+        RoomController.instance.UpdateRoomQueue();
+    }
+
+    //Tenta gerar a Room Gate
+    private bool TryGenerateGateRoom(Vector2Int roomLocation)
+    {
+        //Crawler usado para cria a sala gate
+        DungeonCrawler dungeonCrawler;
+        dungeonCrawler = new DungeonCrawler(roomLocation);
+        List<Vector2Int> gatePosition = dungeonCrawler.GetNearPositions(DungeonCrawlerController.directionMovementMap);
+        while(gatePosition.Count > 0){
+            if(CanBeGateRoom(gatePosition[0]))
+            {
+                //Gate Room
+                RoomController.instance.LoadRoom("Gate", gatePosition[0].x, gatePosition[0].y);
+                return true;
+            }else{
+                gatePosition.RemoveAt(0);
+            }
+        }
+        return false;
     }
 
     //Função que verifica se aquela posição pode ser a Sala com Portão

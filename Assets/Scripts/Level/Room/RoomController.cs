@@ -11,27 +11,23 @@ public class RoomInfo
 
 public class RoomController : MonoBehaviour
 {
-    //Váriavel para que esta sala possa ser encontrada de forma pública
-    //Chamada pela função Awake
     public static RoomController instance;
-    string currentWorldName;
-    RoomInfo currentLoadRoomData;
+
+    [Header("Setup")]
+    [SerializeField] private RoomControllerData roomControllerData;
+    private List<Room> loadedRooms = new List<Room>();
+    private Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
+    private string currentWorldName;
+    private RoomInfo currentLoadRoomData;
+    bool isLoadingRoom = false;
+    bool updateRooms = false; // Indica se todas as salas foram atualizadas
+
+    [Header("Realtime")]
+    [SerializeField] private MinimapController minimapController;
+    private GameObject player;
     public Room currentRoom;
 
-    Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
-    public List<Room> loadedRooms = new List<Room>();
-
-    bool isLoadingRoom = false;
-
-    //Depois de carregar todas as Rooms retira as portas
-    bool updateRooms = false;
-
-    public GameObject player;
-    [SerializeField] private MinimapController minimapController;
-    [SerializeField] private RoomControllerData roomControllerData;
-
-    //**Assim que a sala for iniciada** a sala é considerada uma instancia publica
-    void Awake() //Awake é chamado primeiro que todos
+    void Awake()
     {
         instance = this;
     }
@@ -41,11 +37,9 @@ public class RoomController : MonoBehaviour
         roomControllerData = (RoomControllerData)Resources.Load("Data/RoomControllerData/RoomControllerData_"+currentWorldName+GameController.instance.currentLevel);
     }
 
-    void Update(){
-        UpdateRoomQueue();
-    }
+    #region Rooms Setup
 
-    void UpdateRoomQueue ()
+    public void UpdateRoomQueue()
     {
         if(updateRooms || isLoadingRoom)
             return;
@@ -59,7 +53,7 @@ public class RoomController : MonoBehaviour
             isLoadingRoom = true;
 
             StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
-        }        
+        }
     }
 
     //Função que carrega uma sala em paralelo
@@ -69,8 +63,12 @@ public class RoomController : MonoBehaviour
 
         while(loadingRoom.isDone == false)
             yield return null;
+
+        //Depois de carregar, volta para UpdateRoomQueue
+        UpdateRoomQueue();
     }
 
+    //Registra a Room gerada pelo DungeonGeneration na fila
     public void LoadRoom (string name, int x, int y)
     {
         if(DoesRoomExist(x, y))
@@ -88,6 +86,7 @@ public class RoomController : MonoBehaviour
     //Função chamada no momento que uma sala é carregada (Pela própria Room no Start())
     public void RegisterRoom(Room room)
     {
+        //-----Exceptions
         //Verifica se a Room já existe
         if(DoesRoomExist(currentLoadRoomData.x, currentLoadRoomData.y))
         {
@@ -96,6 +95,7 @@ public class RoomController : MonoBehaviour
             isLoadingRoom = false;
             return;
         }
+        //-----
 
         //Nome, x e y, adicionados a RoomInfo da fila (currentLoadRoomData)
         room.name = currentWorldName + "-" + currentLoadRoomData.name + " " + room.x + ", " + room.y;
@@ -118,27 +118,15 @@ public class RoomController : MonoBehaviour
         else
             room.hasBattle = false;
 
-        //Termina de carregar
-        isLoadingRoom = false;
-
         //Posiciona a camera na sala Start (A primeira)
         if(loadedRooms.Count == 0)
             CameraController.instance.currentRoom = room;
 
         //Adiciona a lista de salas carregadas
         loadedRooms.Add(room);
-    }
-    
-    //Verifica se uma sala existe, baseado na posição
-    public bool DoesRoomExist ( int x, int y)
-    {
-        return loadedRooms.Exists( item => item.x == x && item.y == y);
-    }
 
-    //Encontra e retorna uma sala, baseado na posição
-    public Room FindRoom (int x, int y)
-    {
-        return loadedRooms.Find( item => item.x == x && item.y == y);
+        //Termina de carregar
+        isLoadingRoom = false;
     }
 
     //Função que Retorna a direção que possuem portas
@@ -166,6 +154,59 @@ public class RoomController : MonoBehaviour
             doorsDirection += "0";
 
         return doorsDirection;
+    }
+
+    void AfterLoad(){
+        //Gera salas com recompensas
+        GenerateRewardRooms();
+
+        //Atualiza todas as Rooms
+        foreach(Room room in loadedRooms)
+            room.UpdateRoom();
+
+        //Tudo que precisa ser feito depois de atualizar todas as salas
+        //Carrega Minimap_Camera
+        minimapController = GameObject.Find("MinimapController").GetComponent<MinimapController>();
+        minimapController.InitCamera();
+
+        //Identifica o player
+        player = GameObject.FindGameObjectWithTag("Player");
+        //Posiciona o player no centro da sala Start
+        player.transform.position = loadedRooms.Find(item => item.type == "Start").GetRoomCenter();
+
+        updateRooms = true;
+    }
+
+    private void GenerateRewardRooms()
+    {
+        //Define salas com recompensas        
+        List<Room> emptyRooms = loadedRooms.FindAll(room => room.type == "Empty");
+        // Cria um HashSet para armazenar números únicos
+        HashSet<int> uniqueNumbers = new HashSet<int>();
+
+        // Gera números aleatórios até que tenhamos 3 números únicos
+        while(uniqueNumbers.Count < roomControllerData.numberOfRewardRooms)
+            uniqueNumbers.Add(Random.Range(0, emptyRooms.Count));
+
+        foreach(int index in uniqueNumbers){
+            emptyRooms[index].type = "Reward";
+        }
+    }
+
+    #endregion
+
+    #region Realtime Updates
+
+    //Verifica se uma sala existe, baseado na posição
+    public bool DoesRoomExist ( int x, int y)
+    {
+        return loadedRooms.Exists( item => item.x == x && item.y == y);
+    }
+
+    //Encontra e retorna uma sala, baseado na posição
+    public Room FindRoom (int x, int y)
+    {
+        return loadedRooms.Find( item => item.x == x && item.y == y);
     }
 
     //Função chamada quando o player entra na sala
@@ -259,44 +300,7 @@ public class RoomController : MonoBehaviour
 
         //Transfere o player de position
         player.transform.position = nextRoom.transform.position + position;
-    }
-
-    void AfterLoad(){
-        //Gera salas com recompensas
-        GenerateRewardRooms();
-
-        //Atualiza todas as Rooms
-        foreach(Room room in loadedRooms)
-            room.UpdateRoom();
-
-        //Tudo que precisa ser feito depois de atualizar todas as salas
-        //Carrega Minimap_Camera
-        minimapController = GameObject.Find("MinimapController").GetComponent<MinimapController>();
-        minimapController.InitCamera();
-
-        //Identifica o player
-        player = GameObject.FindGameObjectWithTag("Player");
-        //Posiciona o player no centro da sala Start
-        player.transform.position = loadedRooms.Find(item => item.type == "Start").GetRoomCenter();
-
-        updateRooms = true;
-    }
-
-    private void GenerateRewardRooms()
-    {
-        //Define salas com recompensas        
-        List<Room> emptyRooms = loadedRooms.FindAll(room => room.type == "Empty");
-        // Cria um HashSet para armazenar números únicos
-        HashSet<int> uniqueNumbers = new HashSet<int>();
-
-        // Gera números aleatórios até que tenhamos 3 números únicos
-        while(uniqueNumbers.Count < roomControllerData.numberOfRewardRooms)
-            uniqueNumbers.Add(Random.Range(0, emptyRooms.Count));
-
-        foreach(int index in uniqueNumbers){
-            emptyRooms[index].type = "Reward";
-        }
-    }
+    }    
 
     public void StartBattle()
     {
@@ -310,4 +314,6 @@ public class RoomController : MonoBehaviour
         currentRoom.OpenDoors();
         currentRoom.isClear = true;
     }
+
+    #endregion
 }

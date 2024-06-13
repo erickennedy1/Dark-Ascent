@@ -8,15 +8,13 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     
     [Tooltip("Lista de Nomes dos níveis - Começando pelo Hub")]
-    public List<string> worldNames = new();
-    public string currentWorldName;
-    public int currentWorldLevel;
-    public int currentLevel;
+    [SerializeField] private List<string> worldNames = new();
+    public string currentWorldName {get; private set;}
+    public int currentWorldLevel {get; private set;}
+    public int currentLevel {get; private set;}
 
-    public Player player;
-
-    public bool isGamePaused = false;
-
+    private Player player;
+    private bool isGamePaused = false;
     public bool canSetPlayerInput = true;
 
     //Função chamada antes do Start, Caso já exista um GameController na Scene, o novo GameController se auto Destroy
@@ -153,6 +151,7 @@ public class GameController : MonoBehaviour
         Invoke(methodName, 0.1f);
     }
 
+    //Essa função é usada! Cuidado!
     private void EnableBoss()
     {
         player.ResetPlayer();
@@ -191,6 +190,15 @@ public class GameController : MonoBehaviour
         player.GetComponent<PlayerMovement>().SetCanMove(state);
         player.GetComponent<PlayerAttack>().canAttack = state;
     }
+    
+    public void EnablePlayerInput()
+    {
+        if(player == null)
+            FindPlayer();
+
+        player.GetComponent<PlayerMovement>().SetCanMove(true);
+        player.GetComponent<PlayerAttack>().canAttack = true;
+    }
 
     public void SetEnemiesState(bool state)
     {
@@ -200,12 +208,4 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void EnablePlayerInput()
-    {
-        if(player == null)
-            FindPlayer();
-
-        player.GetComponent<PlayerMovement>().SetCanMove(true);
-        player.GetComponent<PlayerAttack>().canAttack = true;
-    }
 }
